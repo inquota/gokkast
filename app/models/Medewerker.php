@@ -1,0 +1,31 @@
+<?php
+
+use Illuminate\Database\Eloquent\Model;
+use LaravelBook\Ardent\Ardent;
+
+class Medewerker extends Ardent {
+
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'medewerker';
+
+    protected $guarded = array('id');
+
+    protected $fillable = array('naam', 'nummer', 'created_at', 'updated_at');
+
+    public static $rules = array(
+        'naam'                 => 'required',
+        'nummer'              => 'required',
+        'created_at'           => 'required',
+        'updated_at'           => 'required'
+    );
+
+    public static $relationsData = array(
+        'klant'      => array(self::HASMANY, 'Klant'),
+        'user'      => array(self::BELONGS_TO, 'User'),
+    );
+
+}
