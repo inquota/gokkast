@@ -11,7 +11,18 @@
 |
 */
 
+
+/**
+ * Standen
+ */
+Route::get('/admin/standen/list/', array('as' => 'list-stand', 'uses' => 'StandenController@getAdminList'));
+Route::get('/admin/standen/new/', array('as' => 'new-stand', 'uses' => 'StandenController@getNew'));
+Route::get('/admin/standen/edit/{stand_id}', array('as' => 'edit-stand', 'uses' => 'StandenController@getAdminEdit'));
+Route::post('/admin/standen/edit/{stand_id}', 'StandenController@doEdit');
+Route::post('/admin/standen/new/', 'StandenController@doNew');
+
+
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('admin.dashboard');
 });
