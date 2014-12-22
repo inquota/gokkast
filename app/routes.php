@@ -34,3 +34,4 @@ Route::get('/', function()
 {
 	return View::make('admin.dashboard');
 });
+Route::get('/', array('as' => 'login', 'uses' => 'HomeController@showWelcome'));
