@@ -112,7 +112,7 @@ class AuthenticationController extends BaseController {
 
     public function doForgotPassword() {
 
-        $username = Input::get('email');
+        $username = Input::get('username');
 
         // check if username is set or else just go back
         if((isset($username) && $username == '') || (!isset($username))){

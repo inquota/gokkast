@@ -25,7 +25,7 @@ class Machine extends Ardent {
 
     public static $relationsData = array(
         'user'      => array(self::BELONGS_TO, 'User'),
-        'machinetype'      => array(self::HASONE, 'MachineType'),
+        'machinetype'      => array(self::HAS_ONE, 'MachineType'),
     );
 
 }
