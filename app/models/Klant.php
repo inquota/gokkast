@@ -50,8 +50,8 @@ class Klant extends Ardent {
 
     public static $relationsData = array(
         'medewerker'      => array(self::BELONGS_TO, 'Medewerker'),
-        'machine'      => array(self::HASMANY, 'Machine'),
-        'bon'           => array(self::HASMANY, 'Bon'),
+        'machine'      => array(self::HAS_MANY, 'Machine'),
+        'bon'           => array(self::HAS_MANY, 'Bon'),
     );
 
 }

@@ -1,48 +1,46 @@
 @extends('layouts.nodashboard')
 
 @section('content')
-<div class="verticalcenter">
-
-    <div class="panel panel-primary">
-        <div class="panel-body">
-            <a href="http://www.wom-marketing.nl" target="_blank"><img src="/images/Logo-Amiz-200x189.png" alt="Logo" class="brand"></a>
-                {{ Form::open(array('url' => '/user/login/')) }}
-                @if($errors->has())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach($errors->all() AS $error)
-                        <li>{{  $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            {{ Form::text('username', Input::old('username'),  array('class' => 'form-control', 'placeholder'=>'E-mail')) }}
+<div class="row">
+			<div class="main-login col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+				<div class="box-login">
+					<h3>Login met uw account</h3>
+                    {{ Form::open(array('url' => '/user/login/', 'class' => 'form-login')) }}
+                        @if($errors->has())
+                        <div class="errorHandler alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() AS $error)
+                                <li class="fa fa-remove-sign">{{  $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                            {{ Form::password(Input::old('password'),  array('name' => 'password', 'class' => 'form-control', 'placeholder'=>'Uw wachtwoord')) }}
-                        </div>
-                    </div>
-                </div>
-
-
-        </div>
-        <div class="panel-footer">
-            <a href="/user/forgot-password" class="pull-left btn btn-link" style="padding-left:0">Wachtwoord vergeten?</a>
-
-            <div class="pull-right">
-                {{ Form::submit('Inloggen', array('class' => 'btn btn-primary form-control')) }}
-            </div>
-        </div>
-        {{ Form::close() }}
-    </div>
+                        @endif
+						<fieldset>
+							<div class="form-group">
+								<span class="input-icon">
+                                    {{ Form::text('username', Input::old('username'),  array('class' => 'form-control', 'placeholder'=>'E-mail')) }}
+									<i class="fa fa-user"></i> </span>
+							</div>
+							<div class="form-group form-actions">
+								<span class="input-icon">
+                                    {{ Form::password(Input::old('password'),  array('name' => 'password', 'class' => 'form-control password', 'placeholder'=>'Uw wachtwoord')) }}
+									<i class="fa fa-lock"></i>
+										<a href="/user/forgot-password" class="forgot">Ik ben mijn wachtwoord vergeten</a>
+										</span>
+							</div>
+							<div class="form-actions">
+								<button type="submit" class="btn btn-green pull-right">
+									Inloggen <i class="fa fa-arrow-circle-right"></i>
+								</button>
+							</div>
+						</fieldset>
+                    {{ Form::close() }}
+					<!-- start: COPYRIGHT -->
+					<div class="copyright">
+						2014 &copy; <a href="http://www.inquota.nl/" target="_blank">Inquota</a> &amp; <a href="http://www.exdeliver.nl/" target="_blank">EXdeliver V.O.F.</a>
+					</div>
+					<!-- end: COPYRIGHT -->
+				</div>
+				<!-- end: LOGIN BOX -->
 </div>
 @stop

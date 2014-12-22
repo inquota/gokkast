@@ -150,8 +150,8 @@ return array(
 	*/
 
 	'aliases' => array(
-        'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
-        'Debugbar'        => 'Barryvdh\Debugbar\Facade',
+        'Sentry'            => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+        'Debugbar'          => 'Barryvdh\Debugbar\Facade',
 		'App'               => 'Illuminate\Support\Facades\App',
 		'Artisan'           => 'Illuminate\Support\Facades\Artisan',
 		'Auth'              =>  'Illuminate\Support\Facades\Auth',
