@@ -46,7 +46,8 @@
 													<th class="hidden-xs">Machine type</th>
 													<th>Thr nummer</th>
 													<th class="hidden-xs">Tb nummer</th>
-													<th></th>
+													<th>Locatie</th>
+													<th>Acties</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -57,11 +58,12 @@
 													<td>{{$machine->machine_type}}</td>
 													<td>{{$machine->th_nr}}</td>
 													<td>{{$machine->tb_nr}}</td>
+													<td>{{$machine->locatie}}</td>
 													<td class="center">
 													<div class="visible-md visible-lg hidden-sm hidden-xs">
-														<a data-original-title="Edit" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/machines/edit/{{$machine->id}}"><i class="fa fa-edit"></i></a>
-														<a data-original-title="Share" data-placement="top" class="btn btn-xs btn-green tooltips" href="#"><i class="fa fa-share"></i></a>
-														<a data-original-title="Remove" data-placement="top" class="btn btn-xs btn-red tooltips" href="#"><i class="fa fa-times fa fa-white"></i></a>
+														<a data-original-title="Bekijk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/machines/view/{{$machine->id}}"><i class="fa fa-file-o"></i></a>
+														<a data-original-title="Bewerk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/machines/edit/{{$machine->id}}"><i class="fa fa-edit"></i></a>
+														<a data-original-title="Verwijder" data-placement="top" class="btn btn-xs btn-red tooltips" href="#"><i class="fa fa-times fa fa-white"></i></a>
 													</div>
 													<div class="visible-xs visible-sm hidden-md hidden-lg">
 														<div class="btn-group">
@@ -70,13 +72,13 @@
 															</a>
 															<ul class="dropdown-menu pull-right dropdown-dark" role="menu">
 																<li>
-																	<a href="/admin/machines/edit/{{$machine->id}}" tabindex="-1" role="menuitem">
-																		<i class="fa fa-edit"></i> Edit
+																	<a href="/admin/machines/view/{{$machine->id}}" tabindex="-1" role="menuitem">
+																		<i class="fa fa-edit"></i> View
 																	</a>
 																</li>
 																<li>
-																	<a href="#" tabindex="-1" role="menuitem">
-																		<i class="fa fa-share"></i> Share
+																	<a href="/admin/machines/edit/{{$machine->id}}" tabindex="-1" role="menuitem">
+																		<i class="fa fa-edit"></i> Edit
 																	</a>
 																</li>
 																<li>
