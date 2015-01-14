@@ -16,7 +16,7 @@ class MachineType extends Ardent {
 
     protected $fillable = array('type');
 
-    protected $timestamps = false;
+    public $timestamps = false;
 
     public static $rules = array(
         'type'                     => 'required'

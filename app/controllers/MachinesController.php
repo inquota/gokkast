@@ -2,6 +2,7 @@
 
 class MachinesController extends BaseController {
 
+	/* Get functions */
 	public function getAdminList()
 	{
 		$machines = Machine::all();
@@ -16,17 +17,35 @@ class MachinesController extends BaseController {
 		return View::make('admin.machines.edit')->with('machine', $machine);
 	}
 	
+	public function getAdminView($machine_id)
+	{
+		$machine = Machine::find($machine_id);
+		$standen = Stand::where('m_id', '=', $machine->id)->get();
+		return View::make('admin.machines.view')->with('machine', $machine)->with('standen', $standen);
+	}
+	
 	public function getNew() {
-
-       return View::make('admin.machines.new');
+		$machine_types = MachineType::all();
+       return View::make('admin.machines.new')->with('machine_types', $machine_types);
     }
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/* Do functions */
 	public function doNew() {
         $rules = array(
             'machine_type'   => 'required',
             'machinenr'   => 'required',
             'th_nr'   => 'required',
             'tb_nr'   => 'required',
+            'locatie'   => 'required',
         );
 
         // Create a new validator instance from our validation rules
@@ -108,5 +127,4 @@ class MachinesController extends BaseController {
                 ->withErrors($validator);
         }
     }
-
 }
