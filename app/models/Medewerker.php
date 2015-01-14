@@ -24,7 +24,7 @@ class Medewerker extends Ardent {
     );
 
     public static $relationsData = array(
-        'klant'      => array(self::HASMANY, 'Klant'),
+        'klant'      => array(self::HAS_MANY, 'Klant'),
         'user'      => array(self::BELONGS_TO, 'User'),
     );
 
