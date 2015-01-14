@@ -113,5 +113,10 @@ class StandenController extends BaseController {
                 ->withErrors($validator);
         }
     }
-
+	
+	public function doRemove($stand_id){
+		$stand = Stand::find($stand_id);
+		print_r($stand);
+		//$stand->delete();
+	}
 }
