@@ -45,10 +45,18 @@
 											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => '/admin/machines/new/')) }}
 											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
-													machine_type
+													Machine Types
 												</label>
 												<div class="col-sm-9">
-													{{ Form::text('machine_type', '',  array('id' => 'machine_type', 'class' => 'form-control', 'value'=> 1)) }} drop down?
+													@if($machine_types) 
+														<select name="machine_type">
+														@foreach($machine_types as $machine_type)
+															<option value="{{$machine_type->id}}">{{$machine_type->type}}</option>
+														@endforeach
+														</select>
+													@else
+														Er zijn nog geen Machine Types aangemaakt
+													@endif
 												</div>
 											</div>
 											
@@ -78,6 +86,23 @@
 													{{ Form::text('tb_nr', '',  array('id' => 'tb_nr', 'class' => 'form-control')) }}
 												</div>
 											</div>
+											
+												<div class="form-group">
+												<label for="form-field-1" class="col-sm-2 control-label">
+													Locatie
+												</label>
+												<div class="col-sm-9">
+													<select name="locatie">
+														<option value="Magazijn">Magazijn</option>
+														<option value="Sloop">Sloop</option>
+														<option value="Verkocht">Verkocht</option>
+													</select>
+												</div>
+											</div>
+											
+											
+											
+									
 											
 
 									</div>
