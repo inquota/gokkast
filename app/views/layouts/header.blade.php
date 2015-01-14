@@ -7,8 +7,8 @@
 							<i class="fa fa-bars"></i>
 						</a>
 						<!-- start: LOGO -->
-						<a class="navbar-brand" href="index.html">
-							<img src="/images/logo.png" alt="Rapido"/>
+						<a class="navbar-brand" href="/users/dashboard/">
+							CRM
 						</a>
 						<!-- end: LOGO -->
 					</div>
@@ -27,33 +27,13 @@
 										</a>
 									</li>
 									<li>
-										<a href="pages_calendar.html">
-											My Calendar
-										</a>
-									</li>
-									<li>
-										<a href="pages_messages.html">
-											My Messages (3)
-										</a>
-									</li>
-									<li>
-										<a href="login_lock_screen.html">
-											Lock Screen
-										</a>
-									</li>
-									<li>
 										<a href="login_login.html">
-											Log Out
+											Uitloggen
 										</a>
 									</li>
 								</ul>
 							</li>
-							<!-- end: USER DROPDOWN -->
-							<li class="right-menu-toggle">
-								<a href="#" class="sb-toggle-right">
-									<i class="fa fa-globe toggle-icon"></i> <i class="fa fa-caret-right"></i> <span class="notifications-count badge badge-default hide"> 3</span>
-								</a>
-							</li>
+							<!-- end: USER DROPDOWN -->	
 						</ul>
 						<!-- end: TOP NAVIGATION MENU -->
 					</div>
