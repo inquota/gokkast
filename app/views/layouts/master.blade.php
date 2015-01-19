@@ -100,8 +100,8 @@
 				<!-- end: PAGE -->
 			</div>
 			<!-- end: MAIN CONTAINER -->
+        </div>
 
-			@include('layouts.footer')
 		</div>
 		<!-- start: MAIN JAVASCRIPTS -->
 		<!--[if lt IE 9]>
