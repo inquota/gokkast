@@ -9,7 +9,7 @@
 								<!-- start: TEXT FIELDS PANEL -->
 								<div class="panel panel-white">
 									<div class="panel-heading">
-										<h4 class="panel-title">Nieuwe machine</h4>
+										<h4 class="panel-title">Nieuwe medewerker</h4>
 										<div class="panel-tools">
 											<div class="dropdown">
 												<a class="btn btn-xs dropdown-toggle btn-transparent-grey" data-toggle="dropdown">
@@ -42,67 +42,26 @@
 										</div>
 									</div>
 									<div class="panel-body">
-											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => '/admin/machines/new/')) }}
+											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => '/admin/medewerkers/new/')) }}
 											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
-													Machine Types
+													Naam
 												</label>
 												<div class="col-sm-9">
-													@if($machine_types) 
-														<select name="machine_type">
-														@foreach($machine_types as $machine_type)
-															<option value="{{$machine_type->id}}">{{$machine_type->type}}</option>
-														@endforeach
-														</select>
-													@else
-														Er zijn nog geen Machine Types aangemaakt
-													@endif
+													{{ Form::text('naam', '',  array('id' => 'naam', 'class' => 'form-control')) }} 
 												</div>
 											</div>
 											
 											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
-													Machine nummer
+													Nummer
 												</label>
 												<div class="col-sm-9">
-													{{ Form::text('machinenr', '',  array('id' => 'machinenr', 'class' => 'form-control')) }}
+													{{ Form::text('nummer', '',  array('id' => 'nummer', 'class' => 'form-control')) }}
 												</div>
 											</div>
 											
-											<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Th nummer
-												</label>
-												<div class="col-sm-9">
-													{{ Form::text('th_nr', '',  array('id' => 'th_nr', 'class' => 'form-control')) }}
-												</div>
-											</div>
-											
-											<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Tb nummer
-												</label>
-												<div class="col-sm-9">
-													{{ Form::text('tb_nr', '',  array('id' => 'tb_nr', 'class' => 'form-control')) }}
-												</div>
-											</div>
-											
-												<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Locatie
-												</label>
-												<div class="col-sm-9">
-													<select name="locatie">
-														<option value="Magazijn">Magazijn</option>
-														<option value="Sloop">Sloop</option>
-														<option value="Verkocht">Verkocht</option>
-													</select>
-												</div>
-											</div>
-											
-											
-											
-									
+	
 											
 
 									</div>

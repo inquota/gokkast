@@ -46,6 +46,7 @@
 													<th class="hidden-xs">Begin stand</th>
 													<th>Eind stand</th>
 													<th class="hidden-xs">Verschil</th>
+													<th>Kansspelbelasting</th>
 													<th></th>
 												</tr>
 											</thead>
@@ -56,11 +57,11 @@
 													<td class="hidden-xs">{{$stand->m_id}}</td>
 													<td>&euro; {{$stand->b_stand}}</td>
 													<td>&euro; {{$stand->e_stand}}</td>
-													<td class="hidden-xs">&euro; <?php echo $stand->e_stand - $stand->b_stand ?></td>
+													<td class="hidden-xs">&euro; <?php $difference=$stand->e_stand - $stand->b_stand; echo $difference; ?></td>
+													<td>&euro; <?php echo number_format( ($difference * 100 / 71) / 100* 29, 2 ); ?></td>
 													<td class="center">
 													<div class="visible-md visible-lg hidden-sm hidden-xs">
 														<a data-original-title="Edit" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/standen/edit/{{$stand->id}}"><i class="fa fa-edit"></i></a>
-														<a data-original-title="Share" data-placement="top" class="btn btn-xs btn-green tooltips" href="#"><i class="fa fa-share"></i></a>
 														<a data-original-title="Remove" data-placement="top" class="btn btn-xs btn-red tooltips" href="#"><i class="fa fa-times fa fa-white"></i></a>
 													</div>
 													<div class="visible-xs visible-sm hidden-md hidden-lg">
@@ -72,11 +73,6 @@
 																<li>
 																	<a href="/admin/standen/edit/{{$stand->id}}" tabindex="-1" role="menuitem">
 																		<i class="fa fa-edit"></i> Edit
-																	</a>
-																</li>
-																<li>
-																	<a href="#" tabindex="-1" role="menuitem">
-																		<i class="fa fa-share"></i> Share
 																	</a>
 																</li>
 																<li>

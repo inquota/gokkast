@@ -9,7 +9,7 @@
 								<!-- start: TEXT FIELDS PANEL -->
 								<div class="panel panel-white">
 									<div class="panel-heading">
-										<h4 class="panel-title">Nieuwe machine</h4>
+										<h4 class="panel-title">Bewerk medewerker #<span class="text-bold">{{$machine->id}}</span></h4>
 										<div class="panel-tools">
 											<div class="dropdown">
 												<a class="btn btn-xs dropdown-toggle btn-transparent-grey" data-toggle="dropdown">
@@ -42,21 +42,13 @@
 										</div>
 									</div>
 									<div class="panel-body">
-											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => '/admin/machines/new/')) }}
+											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => '/admin/machines/edit/'.$machine->id)) }}
 											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
-													Machine Types
+													Machine id
 												</label>
 												<div class="col-sm-9">
-													@if($machine_types) 
-														<select name="machine_type">
-														@foreach($machine_types as $machine_type)
-															<option value="{{$machine_type->id}}">{{$machine_type->type}}</option>
-														@endforeach
-														</select>
-													@else
-														Er zijn nog geen Machine Types aangemaakt
-													@endif
+													{{$machine->m_id}}
 												</div>
 											</div>
 											
@@ -65,46 +57,28 @@
 													Machine nummer
 												</label>
 												<div class="col-sm-9">
-													{{ Form::text('machinenr', '',  array('id' => 'machinenr', 'class' => 'form-control')) }}
+													{{ Form::text('machinenr', (isset($machine->machinenr)) ? $machine->machinenr : Input::old('machinenr'),  array('id' => 'machinenr', 'class' => 'form-control')) }}
 												</div>
 											</div>
 											
-											<div class="form-group">
+															<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
 													Th nummer
 												</label>
 												<div class="col-sm-9">
-													{{ Form::text('th_nr', '',  array('id' => 'th_nr', 'class' => 'form-control')) }}
+													{{ Form::text('th_nr', (isset($machine->th_nr)) ? $machine->th_nr : Input::old('th_nr'),  array('id' => 'th_nr', 'class' => 'form-control')) }}
 												</div>
 											</div>
 											
-											<div class="form-group">
+															<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
 													Tb nummer
 												</label>
 												<div class="col-sm-9">
-													{{ Form::text('tb_nr', '',  array('id' => 'tb_nr', 'class' => 'form-control')) }}
+													{{ Form::text('tb_nr', (isset($machine->tb_nr)) ? $machine->tb_nr : Input::old('tb_nr'),  array('id' => 'tb_nr', 'class' => 'form-control')) }}
 												</div>
 											</div>
 											
-												<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Locatie
-												</label>
-												<div class="col-sm-9">
-													<select name="locatie">
-														<option value="Magazijn">Magazijn</option>
-														<option value="Sloop">Sloop</option>
-														<option value="Verkocht">Verkocht</option>
-													</select>
-												</div>
-											</div>
-											
-											
-											
-									
-											
-
 									</div>
 									            <div class="panel-footer">
                 <div class="pull-left">
