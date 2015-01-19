@@ -119,7 +119,7 @@
 		{{ HTML::script('/plugins/moment/min/moment.min.js') }}
 		{{ HTML::script('/plugins/perfect-scrollbar/src/jquery.mousewheel.js') }}
 		{{ HTML::script('/plugins/perfect-scrollbar/src/perfect-scrollbar.js') }}
-		{{ HTML::script('/plugins/bootbox/bootbox.min.js') }}
+		{{ HTML::script('/plugins/bootbox/bootbox.js') }}
 		{{ HTML::script('/plugins/jquery.scrollTo/jquery.scrollTo.min.js') }}
 		{{ HTML::script('/plugins/ScrollToFixed/jquery-scrolltofixed-min.js') }}
 		{{ HTML::script('/plugins/jquery.appear/jquery.appear.js') }}
