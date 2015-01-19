@@ -10,6 +10,15 @@
 								<div class="panel panel-white">
 									<div class="panel-heading">
 										<h4 class="panel-title">Nieuwe klant</h4>
+										    @if($errors->has())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                            @foreach($errors->all() AS $error)
+                                            <li>{{  $error }}</li>
+                                            @endforeach
+                                                </ul>
+                                            </div>
+                                            @endif
 										<div class="panel-tools">
 											<div class="dropdown">
 												<a class="btn btn-xs dropdown-toggle btn-transparent-grey" data-toggle="dropdown">
