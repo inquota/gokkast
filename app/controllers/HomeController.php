@@ -17,7 +17,18 @@ class HomeController extends BaseController {
 
 	public function showWelcome()
 	{
-		return View::make('hello');
+		return View::make('admin.dashboard');
 	}
+
+    public function showIndex()
+    {
+        return ( ! Sentry::check()) ? Redirect::to('user/login') : Redirect::to('user/dashboard');
+    }
+
+    public function showLogin()
+    {
+
+        return ( ! Sentry::check()) ? View::make('home.login') : Redirect::to('/');
+    }
 
 }
