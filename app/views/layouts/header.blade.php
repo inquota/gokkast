@@ -1,4 +1,5 @@
-<!-- start: TOPBAR -->
+		<div class="main-wrapper">
+			<!-- start: TOPBAR -->
 			<header class="topbar navbar navbar-inverse navbar-fixed-top inner">
 				<!-- start: TOPBAR CONTAINER -->
 				<div class="container">
@@ -7,8 +8,8 @@
 							<i class="fa fa-bars"></i>
 						</a>
 						<!-- start: LOGO -->
-						<a class="navbar-brand" href="/users/dashboard/">
-							CRM
+						<a class="navbar-brand" href="index.html">
+							<img src="assets/images/logo.png" alt="Rapido"/>
 						</a>
 						<!-- end: LOGO -->
 					</div>
@@ -18,7 +19,7 @@
 							<!-- start: USER DROPDOWN -->
 							<li class="dropdown current-user">
 								<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
-									<img src="/images/avatar-1-small.jpg" class="img-circle" alt=""> <span class="username hidden-xs">Peter Clark</span> <i class="fa fa-caret-down "></i>
+									<img src="assets/images/avatar-1-small.jpg" class="img-circle" alt=""> <span class="username hidden-xs">Peter Clark</span> <i class="fa fa-caret-down "></i>
 								</a>
 								<ul class="dropdown-menu dropdown-dark">
 									<li>
@@ -27,17 +28,37 @@
 										</a>
 									</li>
 									<li>
+										<a href="pages_calendar.html">
+											My Calendar
+										</a>
+									</li>
+									<li>
+										<a href="pages_messages.html">
+											My Messages (3)
+										</a>
+									</li>
+									<li>
+										<a href="login_lock_screen.html">
+											Lock Screen
+										</a>
+									</li>
+									<li>
 										<a href="login_login.html">
-											Uitloggen
+											Log Out
 										</a>
 									</li>
 								</ul>
 							</li>
-							<!-- end: USER DROPDOWN -->	
+							<!-- end: USER DROPDOWN -->
+							<li class="right-menu-toggle">
+								<a href="#" class="sb-toggle-right">
+									<i class="fa fa-globe toggle-icon"></i> <i class="fa fa-caret-right"></i> <span class="notifications-count badge badge-default hide"> 3</span>
+								</a>
+							</li>
 						</ul>
 						<!-- end: TOP NAVIGATION MENU -->
 					</div>
 				</div>
 				<!-- end: TOPBAR CONTAINER -->
 			</header>
-			<!-- end: TOPBAR -->
+						<!-- end: TOPBAR -->
