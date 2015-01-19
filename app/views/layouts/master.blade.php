@@ -18,25 +18,25 @@
 		<!-- end: META -->
 		<!-- start: MAIN CSS -->
 		<link href='http://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700,200,100,800' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="/plugins/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/plugins/iCheck/skins/all.css">
-		<link rel="stylesheet" href="/plugins/perfect-scrollbar/src/perfect-scrollbar.css">
-		<link rel="stylesheet" href="/plugins/animate.css/animate.min.css">
+		{{ HTML::style('/plugins/bootstrap/css/bootstrap.min.css') }}
+		{{ HTML::style('/plugins/font-awesome/css/font-awesome.min.css') }}
+		{{ HTML::style('/plugins/iCheck/skins/all.css') }}
+		{{ HTML::style('/plugins/perfect-scrollbar/src/perfect-scrollbar.css') }}
+		{{ HTML::style('/plugins/animate.css/animate.min.css') }}
 		<!-- end: MAIN CSS -->
 		<!-- start: CSS REQUIRED FOR SUBVIEW CONTENTS -->
 		
 		<!-- end: CSS REQUIRED FOR THIS SUBVIEW CONTENTS-->
 		<!-- start: CSS REQUIRED FOR THIS PAGE ONLY -->
-		<link rel="stylesheet" href="/plugins/weather-icons/css/weather-icons.min.css">
-		<link rel="stylesheet" href="/plugins/nvd3/nv.d3.min.css">
+		{{ HTML::style('/plugins/weather-icons/css/weather-icons.min.css') }}
+		{{ HTML::style('/plugins/nvd3/nv.d3.min.css') }}
 		<!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
 		<!-- start: CORE CSS -->
-		<link rel="stylesheet" href="/css/styles.css">
-		<link rel="stylesheet" href="/css/styles-responsive.css">
-		<link rel="stylesheet" href="/css/plugins.css">
-		<link rel="stylesheet" href="/css/themes/theme-default.css" type="text/css" id="skin_color">
-		<link rel="stylesheet" href="/css/print.css" type="text/css" media="print"/>
+		{{ HTML::style('/css/styles.css') }}
+		{{ HTML::style('/css/styles-responsive.css') }}
+		{{ HTML::style('/css/plugins.css') }}
+		{{ HTML::style('/css/themes/theme-default.css') }}
+		{{ HTML::style('/css/print.css') }}
 		<!-- end: CORE CSS -->
 		<link rel="shortcut icon" href="favicon.ico" />
 	</head>
@@ -105,38 +105,37 @@
 		</div>
 		<!-- start: MAIN JAVASCRIPTS -->
 		<!--[if lt IE 9]>
-		<script src="/plugins/respond.min.js"></script>
-		<script src="/plugins/excanvas.min.js"></script>
-		<script type="text/javascript" src="/plugins/jQuery/jquery-1.11.1.min.js"></script>
+		{{ HTML::script('/plugins/respond.min.js') }}
+		{{ HTML::script('/plugins/excanvas.min.js') }}
+		{{ HTML::script('/plugins/jQuery/jquery-1.11.1.min.js') }}
 		<![endif]-->
 		<!--[if gte IE 9]><!-->
 		{{ HTML::script('/plugins/jQuery/jquery-2.1.1.min.js') }}
 		<!--<![endif]-->
-		<script src="/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js"></script>
-		<script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
-		<script src="/plugins/blockUI/jquery.blockUI.js"></script>
-		<script src="/plugins/iCheck/jquery.icheck.min.js"></script>
-		<script src="/plugins/moment/min/moment.min.js"></script>
-		<script src="/plugins/perfect-scrollbar/src/jquery.mousewheel.js"></script>
-		<script src="/plugins/perfect-scrollbar/src/perfect-scrollbar.js"></script>
-		<script src="/plugins/bootbox/bootbox.min.js"></script>
-		<script src="/plugins/jquery.scrollTo/jquery.scrollTo.min.js"></script>
-		<script src="/plugins/ScrollToFixed/jquery-scrolltofixed-min.js"></script>
-		<script src="/plugins/jquery.appear/jquery.appear.js"></script>
-		<script src="/plugins/jquery-cookie/jquery.cookie.js"></script>
-		<script src="/plugins/velocity/jquery.velocity.min.js"></script>
-		<script src="/plugins/TouchSwipe/jquery.touchSwipe.min.js"></script>
-		<script src="/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		{{ HTML::script('/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js') }}
+		{{ HTML::script('/plugins/bootstrap/js/bootstrap.min.js') }}
+		{{ HTML::script('/plugins/blockUI/jquery.blockUI.js') }}
+		{{ HTML::script('/plugins/iCheck/jquery.icheck.min.js') }}
+		{{ HTML::script('/plugins/moment/min/moment.min.js') }}
+		{{ HTML::script('/plugins/perfect-scrollbar/src/jquery.mousewheel.js') }}
+		{{ HTML::script('/plugins/perfect-scrollbar/src/perfect-scrollbar.js') }}
+		{{ HTML::script('/plugins/bootbox/bootbox.min.js') }}
+		{{ HTML::script('/plugins/jquery.scrollTo/jquery.scrollTo.min.js') }}
+		{{ HTML::script('/plugins/ScrollToFixed/jquery-scrolltofixed-min.js') }}
+		{{ HTML::script('/plugins/jquery.appear/jquery.appear.js') }}
+		{{ HTML::script('/plugins/jquery-cookie/jquery.cookie.js') }}
+		{{ HTML::script('/plugins/velocity/jquery.velocity.min.js') }}
+		{{ HTML::script('/plugins/TouchSwipe/jquery.touchSwipe.min.js') }}
 		<!-- end: MAIN JAVASCRIPTS -->
 		<!-- start: JAVASCRIPTS REQUIRED FOR SUBVIEW CONTENTS -->
 		
-		<script src="/js/subview.js"></script>
-		<script src="/js/subview-examples.js"></script>
+		{{ HTML::script('/js/subview.js') }}
+		{{ HTML::script('/js/subview-examples.js') }}
 		<!-- end: JAVASCRIPTS REQUIRED FOR SUBVIEW CONTENTS -->
 		<!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 
 		{{ HTML::script('/js/index.js') }}
-		{{ HTML::script('plugins/easy-pie-chart/dist/jquery.easypiechart.min.js') }}
+		{{ HTML::script('/plugins/easy-pie-chart/dist/jquery.easypiechart.min.js') }}
 		<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 		<!-- start: CORE JAVASCRIPTS  -->
 		{{ HTML::script('/js/main.js') }}
