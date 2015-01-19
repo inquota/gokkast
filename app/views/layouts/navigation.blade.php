@@ -108,7 +108,7 @@
 									<li class="media">
 										<a href="#">
 											<i class="fa fa-circle status-online"></i>
-											<img alt="..." src="assets/images/avatar-2.jpg" class="media-object">
+											<img alt="..." src="/images/avatar-2.jpg" class="media-object">
 											<div class="media-body">
 												<h4 class="media-heading">Nicole Bell</h4>
 												<span> Content Designer </span>
@@ -121,7 +121,7 @@
 												<span class="label label-default">3</span>
 											</div>
 											<i class="fa fa-circle status-online"></i>
-											<img alt="..." src="assets/images/avatar-3.jpg" class="media-object">
+											<img alt="..." src="/images/avatar-3.jpg" class="media-object">
 											<div class="media-body">
 												<h4 class="media-heading">Steven Thompson</h4>
 												<span> Visual Designer </span>
@@ -131,7 +131,7 @@
 									<li class="media">
 										<a href="#">
 											<i class="fa fa-circle status-online"></i>
-											<img alt="..." src="assets/images/avatar-4.jpg" class="media-object">
+											<img alt="..." src="/images/avatar-4.jpg" class="media-object">
 											<div class="media-body">
 												<h4 class="media-heading">Ella Patterson</h4>
 												<span> Web Editor </span>
@@ -141,7 +141,7 @@
 									<li class="media">
 										<a href="#">
 											<i class="fa fa-circle status-online"></i>
-											<img alt="..." src="assets/images/avatar-5.jpg" class="media-object">
+											<img alt="..." src="/images/avatar-5.jpg" class="media-object">
 											<div class="media-body">
 												<h4 class="media-heading">Kenneth Ross</h4>
 												<span> Senior Designer </span>
@@ -153,7 +153,7 @@
 								<ul class="media-list">
 									<li class="media">
 										<a href="#">
-											<img alt="..." src="assets/images/avatar-6.jpg" class="media-object">
+											<img alt="..." src="/images/avatar-6.jpg" class="media-object">
 											<div class="media-body">
 												<h4 class="media-heading">Nicole Bell</h4>
 												<span> Content Designer </span>
@@ -165,7 +165,7 @@
 											<div class="user-label">
 												<span class="label label-default">3</span>
 											</div>
-											<img alt="..." src="assets/images/avatar-7.jpg" class="media-object">
+											<img alt="..." src="/images/avatar-7.jpg" class="media-object">
 											<div class="media-body">
 												<h4 class="media-heading">Steven Thompson</h4>
 												<span> Visual Designer </span>
@@ -174,7 +174,7 @@
 									</li>
 									<li class="media">
 										<a href="#">
-											<img alt="..." src="assets/images/avatar-8.jpg" class="media-object">
+											<img alt="..." src="/images/avatar-8.jpg" class="media-object">
 											<div class="media-body">
 												<h4 class="media-heading">Ella Patterson</h4>
 												<span> Web Editor </span>
@@ -183,7 +183,7 @@
 									</li>
 									<li class="media">
 										<a href="#">
-											<img alt="..." src="assets/images/avatar-9.jpg" class="media-object">
+											<img alt="..." src="/images/avatar-9.jpg" class="media-object">
 											<div class="media-body">
 												<h4 class="media-heading">Kenneth Ross</h4>
 												<span> Senior Designer </span>
@@ -192,7 +192,7 @@
 									</li>
 									<li class="media">
 										<a href="#">
-											<img alt="..." src="assets/images/avatar-10.jpg" class="media-object">
+											<img alt="..." src="/images/avatar-10.jpg" class="media-object">
 											<div class="media-body">
 												<h4 class="media-heading">Ella Patterson</h4>
 												<span> Web Editor </span>
@@ -201,7 +201,7 @@
 									</li>
 									<li class="media">
 										<a href="#">
-											<img alt="..." src="assets/images/avatar-5.jpg" class="media-object">
+											<img alt="..." src="/images/avatar-5.jpg" class="media-object">
 											<div class="media-body">
 												<h4 class="media-heading">Kenneth Ross</h4>
 												<span> Senior Designer </span>
@@ -227,7 +227,7 @@
 								<ol class="discussion sidebar-content">
 									<li class="other">
 										<div class="avatar">
-											<img src="assets/images/avatar-4.jpg" alt="">
+											<img src="/images/avatar-4.jpg" alt="">
 										</div>
 										<div class="messages">
 											<p>
@@ -238,7 +238,7 @@
 									</li>
 									<li class="self">
 										<div class="avatar">
-											<img src="assets/images/avatar-1.jpg" alt="">
+											<img src="/images/avatar-1.jpg" alt="">
 										</div>
 										<div class="messages">
 											<p>
@@ -249,7 +249,7 @@
 									</li>
 									<li class="other">
 										<div class="avatar">
-											<img src="assets/images/avatar-4.jpg" alt="">
+											<img src="/images/avatar-4.jpg" alt="">
 										</div>
 										<div class="messages">
 											<p>
@@ -409,26 +409,26 @@
 								10 Predefined Color Schemes
 							</div>
 							<div class="images icons-color">
-								<a href="#" id="default"><img src="assets/images/color-1.png" alt="" class="active"></a>
-								<a href="#" id="style2"><img src="assets/images/color-2.png" alt=""></a>
-								<a href="#" id="style3"><img src="assets/images/color-3.png" alt=""></a>
-								<a href="#" id="style4"><img src="assets/images/color-4.png" alt=""></a>
-								<a href="#" id="style5"><img src="assets/images/color-5.png" alt=""></a>
-								<a href="#" id="style6"><img src="assets/images/color-6.png" alt=""></a>
-								<a href="#" id="style7"><img src="assets/images/color-7.png" alt=""></a>
-								<a href="#" id="style8"><img src="assets/images/color-8.png" alt=""></a>
-								<a href="#" id="style9"><img src="assets/images/color-9.png" alt=""></a>
-								<a href="#" id="style10"><img src="assets/images/color-10.png" alt=""></a>
+								<a href="#" id="default"><img src="/images/color-1.png" alt="" class="active"></a>
+								<a href="#" id="style2"><img src="/images/color-2.png" alt=""></a>
+								<a href="#" id="style3"><img src="/images/color-3.png" alt=""></a>
+								<a href="#" id="style4"><img src="/images/color-4.png" alt=""></a>
+								<a href="#" id="style5"><img src="/images/color-5.png" alt=""></a>
+								<a href="#" id="style6"><img src="/images/color-6.png" alt=""></a>
+								<a href="#" id="style7"><img src="/images/color-7.png" alt=""></a>
+								<a href="#" id="style8"><img src="/images/color-8.png" alt=""></a>
+								<a href="#" id="style9"><img src="/images/color-9.png" alt=""></a>
+								<a href="#" id="style10"><img src="/images/color-10.png" alt=""></a>
 							</div>
 							<div class="box-title">
 								Backgrounds for Boxed Version
 							</div>
 							<div class="images boxed-patterns">
-								<a href="#" id="bg_style_1"><img src="assets/images/bg.png" alt=""></a>
-								<a href="#" id="bg_style_2"><img src="assets/images/bg_2.png" alt=""></a>
-								<a href="#" id="bg_style_3"><img src="assets/images/bg_3.png" alt=""></a>
-								<a href="#" id="bg_style_4"><img src="assets/images/bg_4.png" alt=""></a>
-								<a href="#" id="bg_style_5"><img src="assets/images/bg_5.png" alt=""></a>
+								<a href="#" id="bg_style_1"><img src="/images/bg.png" alt=""></a>
+								<a href="#" id="bg_style_2"><img src="/images/bg_2.png" alt=""></a>
+								<a href="#" id="bg_style_3"><img src="/images/bg_3.png" alt=""></a>
+								<a href="#" id="bg_style_4"><img src="/images/bg_4.png" alt=""></a>
+								<a href="#" id="bg_style_5"><img src="/images/bg_5.png" alt=""></a>
 							</div>
 							<div class="style-options">
 								<a href="#" class="clear_style">
