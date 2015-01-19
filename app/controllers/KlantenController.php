@@ -23,55 +23,50 @@ class KlantenController extends BaseController {
 	
 	public function doNew() {
 
-        try{
-
             /**
              * Create new shop
              */
 
-            $info = array(
-                'bedrijf'      => Input::get('bedrijf'),
-                'naam'      => Input::get('naam'),
-                'adres'      => Input::get('adres'),
-                'postcode'      => Input::get('postcode'),
-                'woonplaats'      => Input::get('woonplaats'),
-                'telefoon_vast'      => Input::get('telefoon_vast'),
-                'telefoon_mobiel'      => Input::get('telefoon_mobiel'),
-                'email'      => Input::get('email'),
-                'website'      => Input::get('website'),
-                'medewerker_id'      => Input::get('medewerker_id'),
-                'bedrag_lening'      => Input::get('bedrag_lening'),
-                'bedrag_plaatsing_geld'      => Input::get('bedrag_plaatsing_geld'),
-                'geldwisselaar'      => Input::get('geldwisselaar'),
-                'vulling_machines'      => Input::get('vulling_machines'),
-                'bedrag_vulling_machines'      => Input::get('bedrag_vulling_machines'),
-                'vulling_geldwisselaar'      => Input::get('vulling_geldwisselaar'),
-                'bedrag_vulling_geldwisselaar'      => Input::get('bedrag_vulling_geldwisselaar'),
-                'vergunning_nummer'      => Input::get('vergunning_nummer'),
-                'vergunning_verl_door'      => Input::get('vergunning_verl_door'),
-                'verg_geldig_vanaf'      => Input::get('verg_geldig_vanaf'),
-                'verg_geldig_tot'      => Input::get('verg_geldig_tot'),
-                'contract'      => Input::get('contract'),
-                'contr_geldig_vanaf'      => Input::get('contr_geldig_vanaf'),
-                'contr_geldig_tot'      => Input::get('contr_geldig_tot'),
-                'nettowinst_verdeling'      => Input::get('nettowinst_verdeling'),
-                'afr_freq'      => Input::get('afr_freq'),
-                'datum_laatste_verr'      => Input::get('datum_laatste_verr'),
-                'created_at'  => date('Y-m-d H:i:s'),
-                'updated_at'  => '0000-00-00 00:00:00',
-            );
+        $klant = new Klant();
 
-            Klant::create($info);
+        $klant->bedrijf = Input::get('bedrijf');
+        $klant->naam = Input::get('naam');
+        $klant->adres = Input::get('adres');
+        $klant->postcode = Input::get('postcode');
+        $klant->woonplaats = Input::get('woonplaats');
+        $klant->telefoon_vast = Input::get('telefoon_vast');
+        $klant->telefoon_mobiel = Input::get('telefoon_mobiel');
+        $klant->email = Input::get('email');
+        $klant->website = Input::get('website');
+        $klant->medewerker_id = Input::get('medewerker_id');
+        $klant->bedrag_lening = Input::get('bedrag_lening');
+        $klant->bedrag_plaatsing_geld = Input::get('bedrag_plaatsing_geld');
+        $klant->geldwisselaar = Input::get('geldwisselaar');
+        $klant->vulling_machines = Input::get('vulling_machines');
+        $klant->bedrag_vulling_machines = Input::get('bedrag_vulling_machines');
+        $klant->vulling_geldwisselaar = Input::get('vulling_geldwisselaar');
+        $klant->bedrag_vulling_geldwisselaar = Input::get('bedrag_vulling_geldwisselaar');
+        $klant->vergunning_nummer = Input::get('vergunning_nummer');
+        $klant->vergunning_verl_door = Input::get('vergunning_verl_door');
+        $klant->verg_geldig_vanaf = Input::get('verg_geldig_vanaf');
+        $klant->verg_geldig_tot = Input::get('verg_geldig_tot');
+        $klant->contract = Input::get('contract');
+        $klant->contr_geldig_vanaf = Input::get('contr_geldig_vanaf');
+        $klant->contr_geldig_tot = Input::get('contr_geldig_tot');
+        $klant->nettowinst_verdeling = Input::get('nettowinst_verdeling');
+        $klant->afr_freq = Input::get('afr_freq');
+        $klant->datum_laatste_verr = Input::get('datum_laatste_verr');
+        $klant->created_at = date('Y-m-d H:i:s');
+        $klant->updated_at = '0000-00-00 00:00:00';
 
-            return Redirect::to('/admin/klanten/list')
-                ->with('status', 'Klant opgeslagen');
-        }
-        catch(Exception $e){
-            $validator = 'Bij het opslaan is er iets misgegaan.';
-            return Redirect::back()
-                ->withInput()
-                ->withErrors($validator);
-        }
+            if($klant->save() == true) {
+                return Redirect::to('/admin/klanten/list')
+                    ->with('status', 'Klant opgeslagen');
+            }else{
+                return Redirect::back()
+                    ->withInput()
+                    ->withErrors($klant->errors());
+            }
     }
 	
 	public function doEdit($klant_id) {
