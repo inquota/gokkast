@@ -2,7 +2,7 @@
 	display: none;
 }
 .main-navigation{
-	display: none;
+	display: block;
 }
 .hidden-print {
 	display: none;
