@@ -51,18 +51,18 @@
 												</tr>
 											</thead>
 											<tbody>
-												@foreach($machines as $machine)
+												@foreach($klanten as $klant)
 												<tr>
-													<td class="center">{{$machine->id}}</td>
-													<td class="hidden-xs">{{$machine->bedrijf}}</td>
-													<td class="hidden-xs">{{$machine->email}}</td>
-													<td>{{$machine->naam}}</td>
-													<td>{{$machine->medewerker_id}}</td>
-													<td>{{$machine->created_at}}</td>
+													<td class="center">{{$klant->id}}</td>
+													<td class="hidden-xs">{{$klant->bedrijf}}</td>
+													<td class="hidden-xs">{{$klant->naam}}</td>
+													<td>{{$klant->email}}</td>
+													<td>{{$klant->medewerker_id}}</td>
+													<td>{{$klant->created_at}}</td>
 													<td class="center">
 													<div class="visible-md visible-lg hidden-sm hidden-xs">
-														<a data-original-title="Edit" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/machines/edit/{{$machine->id}}"><i class="fa fa-edit"></i></a>
-														<a data-original-title="Remove" data-placement="top" class="btn btn-xs btn-red tooltips" href="#"><i class="fa fa-times fa fa-white"></i></a>
+														<a data-original-title="Edit" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/klanten/edit/{{$klant->id}}"><i class="fa fa-edit"></i></a>
+														<a data-original-title="Remove" data-placement="top" class="btn btn-xs btn-red tooltips" href="/admin/klanten/delete/{{$klant->id}}" onclick="confirm('Weet u zeker dat u de klant {{ $klant->naam }} wilt verwijderden?')"><i class="fa fa-times fa fa-white"></i></a>
 													</div>
 													<div class="visible-xs visible-sm hidden-md hidden-lg">
 														<div class="btn-group">
@@ -71,7 +71,7 @@
 															</a>
 															<ul class="dropdown-menu pull-right dropdown-dark" role="menu">
 																<li>
-																	<a href="/admin/klanten/edit/{{$machine->id}}" tabindex="-1" role="menuitem">
+																	<a href="/admin/klanten/edit/{{$klant->id}}" tabindex="-1" role="menuitem">
 																		<i class="fa fa-edit"></i> Bewerken
 																	</a>
 																</li>

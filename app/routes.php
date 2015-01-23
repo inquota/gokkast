@@ -49,26 +49,35 @@ Route::group(array('before' => "sentryAuth"), function () {
     Route::get('/admin/machines/view/{machine_id}', array('as' => 'view-machine', 'uses' => 'MachinesController@getAdminView'));
     Route::post('/admin/machines/edit/{machine_id}', 'MachinesController@doEdit');
     Route::post('/admin/machines/new/', 'MachinesController@doNew');
-
-    /**
+	
+	/**
      * Medewerkers
      */
-    Route::get('/admin/medewerkers/list/', array('as' => 'list-medewerker', 'uses' => 'MedewerkersController@getAdminList'));
-    Route::get('/admin/medewerkers/new/', array('as' => 'new-medewerker', 'uses' => 'MedewerkersController@getNew'));
-    Route::get('/admin/medewerkers/edit/{medewerker_id}', array('as' => 'edit-medewerker', 'uses' => 'MedewerkersController@getAdminEdit'));
-    Route::post('/admin/medewerkers/edit/{medewerker_id}', 'MedewerkersController@doEdit');
-    Route::post('/admin/medewerkers/new/', 'MedewerkersController@doNew');
+    Route::get('/admin/medewerkers/list/', array('as' => 'list-medewerker', 'uses' => 'MedewerkersController@getList'));
 
-    /**
+    Route::get('/admin/medewerkers/new/', array('as' => 'new-medewerker', 'uses' => 'MedewerkersController@getSave'));
+    Route::post('/admin/medewerkers/new/', 'MedewerkersController@doSave');
+
+    Route::get('/admin/medewerkers/edit/{medewerker_id}', array('as' => 'edit-medewerker', 'uses' => 'MedewerkersController@getSave'));
+    Route::post('/admin/medewerkers/edit/{medewerker_id}', 'MedewerkersController@doSave');
+
+    Route::get('/admin/medewerkers/delete/{medewerker_id}', array('as' => 'delete-medewerker', 'uses' => 'MedewerkersController@getDelete'));
+
+	
+	/**
      * Klanten
      */
-    Route::get('/admin/klanten/list/', array('as' => 'list-klant', 'uses' => 'KlantenController@getAdminList'));
-    Route::get('/admin/klanten/new/', array('as' => 'new-klant', 'uses' => 'KlantenController@getNew'));
-    Route::get('/admin/klanten/edit/{klant_id}', array('as' => 'edit-klant', 'uses' => 'KlantenController@getAdminEdit'));
-    Route::post('/admin/klanten/edit/{klant_id}', 'KlantenController@doEdit');
-    Route::post('/admin/klanten/new/', 'KlantenController@doNew');
+    Route::get('/admin/klanten/list/', array('as' => 'list-klant', 'uses' => 'KlantenController@getList'));
+    Route::get('/admin/klanten/new/', array('as' => 'new-klant', 'uses' => 'KlantenController@getSave'));
 
-    /**
+    Route::get('/admin/klanten/edit/{klant_id}', array('as' => 'edit-klant', 'uses' => 'KlantenController@getSave'));
+    Route::post('/admin/klanten/edit/{klant_id}', 'KlantenController@doSave');
+
+    Route::post('/admin/klanten/new/', 'KlantenController@doSave');
+    Route::get('/admin/klanten/delete/{klant_id}', array('as' => 'delete-klant', 'uses' => 'KlantenController@getDelete'));
+
+	
+	/**
      * Bonnen
      */
     Route::get('/admin/bonnen/list/', array('as' => 'list-bon', 'uses' => 'BonnenController@getAdminList'));
@@ -76,5 +85,5 @@ Route::group(array('before' => "sentryAuth"), function () {
     Route::get('/admin/bonnen/edit/{bon_id}', array('as' => 'edit-bon', 'uses' => 'BonnenController@getAdminEdit'));
     Route::post('/admin/bonnen/edit/{bon_id}', 'BonnenController@doEdit');
     Route::post('/admin/bonnen/new/', 'BonnenController@doNew');
-
+	
 });

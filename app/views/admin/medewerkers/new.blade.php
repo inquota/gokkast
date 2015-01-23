@@ -10,6 +10,15 @@
 								<div class="panel panel-white">
 									<div class="panel-heading">
 										<h4 class="panel-title">Nieuwe medewerker</h4>
+										    @if($errors->has())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                            @foreach($errors->all() AS $error)
+                                            <li>{{  $error }}</li>
+                                            @endforeach
+                                                </ul>
+                                            </div>
+                                            @endif
 										<div class="panel-tools">
 											<div class="dropdown">
 												<a class="btn btn-xs dropdown-toggle btn-transparent-grey" data-toggle="dropdown">
@@ -42,13 +51,13 @@
 										</div>
 									</div>
 									<div class="panel-body">
-											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => '/admin/medewerkers/new/')) }}
+											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => Request::path())) }}
 											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
 													Naam
 												</label>
 												<div class="col-sm-9">
-													{{ Form::text('naam', '',  array('id' => 'naam', 'class' => 'form-control')) }} 
+													{{ Form::text('naam', (isset($medewerker->naam)) ? $medewerker->naam : '',  array('id' => 'naam', 'class' => 'form-control')) }}
 												</div>
 											</div>
 											
@@ -57,7 +66,7 @@
 													Nummer
 												</label>
 												<div class="col-sm-9">
-													{{ Form::text('nummer', '',  array('id' => 'nummer', 'class' => 'form-control')) }}
+													{{ Form::text('nummer', (isset($medewerker->nummer)) ? $medewerker->nummer : '',  array('id' => 'nummer', 'class' => 'form-control')) }}
 												</div>
 											</div>
 											

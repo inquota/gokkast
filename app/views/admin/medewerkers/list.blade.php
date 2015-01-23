@@ -10,6 +10,7 @@
 								<div class="panel panel-white">
 									<div class="panel-heading">
 										<h4 class="panel-title">Medewerkers</h4>
+
 										<div class="panel-tools">										
 											<div class="dropdown">
 											<a class="btn btn-xs dropdown-toggle btn-transparent-grey" data-toggle="dropdown">
@@ -48,15 +49,15 @@
 												</tr>
 											</thead>
 											<tbody>
-												@foreach($machines as $machine)
+												@foreach($medewerkers as $medewerker)
 												<tr>
-													<td class="hidden-xs">{{$machine->nummer}}</td>
-													<td>{{$machine->naam}}</td>
-													<td>{{$machine->created_at}}</td>
+													<td class="hidden-xs">{{$medewerker->nummer}}</td>
+													<td>{{$medewerker->naam}}</td>
+													<td>{{ date('d-m-Y', strtotime($medewerker->created_at)) }}</td>
 													<td class="center">
 													<div class="visible-md visible-lg hidden-sm hidden-xs">
-														<a data-original-title="Edit" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/medewerkers/edit/{{$machine->id}}"><i class="fa fa-edit"></i></a>
-														<a data-original-title="Remove" data-placement="top" class="btn btn-xs btn-red tooltips" href="#"><i class="fa fa-times fa fa-white"></i></a>
+														<a data-original-title="Edit" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/medewerkers/edit/{{$medewerker->id}}"><i class="fa fa-edit"></i></a>
+														<a data-original-title="Remove" data-placement="top" class="btn btn-xs btn-red tooltips" href="/admin/medewerkers/delete/{{$medewerker->id}}" onclick="confirm('Weet u zeker dat u de medewerker {{ $medewerker->naam }} wilt verwijderden?')"><i class="fa fa-times fa fa-white"></i></a>
 													</div>
 													<div class="visible-xs visible-sm hidden-md hidden-lg">
 														<div class="btn-group">
@@ -65,12 +66,12 @@
 															</a>
 															<ul class="dropdown-menu pull-right dropdown-dark" role="menu">
 																<li>
-																	<a href="/admin/machines/edit/{{$machine->id}}" tabindex="-1" role="menuitem">
+																	<a href="/admin/medewerkers/edit/{{$medewerker->id}}" tabindex="-1" role="menuitem">
 																		<i class="fa fa-edit"></i> Edit
 																	</a>
 																</li>
 																<li>
-																	<a href="#" tabindex="-1" role="menuitem">
+																	<a href="/admin/medewerkers/delete/{{$medewerker->id}}" tabindex="-1" role="menuitem" onclick="confirm('Weet u zeker dat u de medewerker {{ $medewerker->naam }} wilt verwijderden?')">
 																		<i class="fa fa-times"></i> Remove
 																	</a>
 																</li>
