@@ -2,44 +2,57 @@
 
 class MedewerkersController extends BaseController {
 
-	public function getAdminList()
+	public function getList()
 	{
-		$machines = Medewerker::all();
+		$medewerkers = Medewerker::all();
 		
-		return View::make('admin.medewerkers.list')->with('machines', $machines);
+		return View::make('admin.medewerkers.list')->with('medewerkers', $medewerkers);
 	}
+
 	
-	public function getAdminEdit($medeweker_id)
-	{
-		$machine = Medewerker::find($medeweker_id);
-		
-		return View::make('admin.medewerkers.edit')->with('machine', $machine);
-	}
-	
-	public function getNew() {
+	public function getSave($medewerker_id = null) {
+
+        if(isset($medewerker_id)) {
+            $medewerker = Medewerker::find($medewerker_id);
+
+            return View::make('admin.medewerkers.new')
+                ->with('medewerker', $medewerker);
+        }
 
        return View::make('admin.medewerkers.new');
     }
 	
-	public function doNew() {
+	public function doSave($medewerker_id = null) {
 
         try{
 
             /**
-             * Create new shop
+             * Create new medewerker
              */
 
-            $info = array(
-                'naam'      => Input::get('naam'),
-                'nummer'      => Input::get('nummer'),
-                'created_at'  => date('Y-m-d H:i:s'),
-                'updated_at'  => date('Y-m-d H:i:s'),
-            );
+            if(isset($medewerker_id)){
+                $medewerker = Medewerker::find($medewerker_id)->firstOrFail();
+            }else {
+                $medewerker = new Medewerker();
+            }
 
-            Medewerker::create($info);
+            $medewerker->naam = Input::get('naam');
+            $medewerker->nummer = Input::get('nummer');
+            $medewerker->created_at = date('Y-m-d H:i:s');
+            $medewerker->updated_at = date('Y-m-d H:i:s');
 
-            return Redirect::to('/admin/medewerkers/list')
-                ->with('status', 'Medewerker opgeslagen');
+            $medewerker->save();
+
+            if($medewerker->save() == true){
+                return Redirect::to('/admin/medewerkers/list')
+                    ->with('status', 'Medewerker opgeslagen');
+            }else{
+                return Redirect::back()
+                    ->withInput()
+                    ->withErrors($medewerker->errors());
+            }
+
+
        }
         catch(Exception $e){
             $validator = 'Bij het opslaan is er iets misgegaan.';
@@ -48,44 +61,20 @@ class MedewerkersController extends BaseController {
                 ->withErrors($validator);
         }
     }
-	
-	public function doEdit($medeweker_id) {
-        $rules = array(
-            'naam'   => 'required',
-            'nummer'   => 'required',
-        );
 
-        // Create a new validator instance from our validation rules
-        $validator = Validator::make(Input::all(), $rules);
+    public function getDelete($medewerker_id = null) {
 
-        // If validation fails, we'll exit the operation now.
-        if ($validator->fails()) {
+        if(!isset($medewerker_id)){
             return Redirect::back()
-                ->withInput()
-                ->withErrors($validator);
+                ->withInput();
         }
 
-        try{
+        $medewerker = Medewerker::find($medewerker_id)->firstOrFail();
+        $medewerker->delete();
 
-            /**
-             * Update Medewerker
-             */
+        return Redirect::to('/admin/medewerkers/list')
+            ->with('status', 'Medewerker verwijderd');
 
-            $medewerker = Medewerker::where('id', '=', $medeweker_id)->firstOrFail();
-			
-            $medewerker->naam = Input::get('naam');
-            $medewerker->nummer = Input::get('nummer');
-            $medewerker->save();
-
-            return Redirect::to('/admin/medewerkers/list')
-                ->with('status', 'Medewerker opgeslagen');
-        }
-        catch(Exception $e){
-            $validator = 'Bij het opslaan is er iets misgegaan.';
-            return Redirect::back()
-                ->withInput()
-                ->withErrors($validator);
-        }
     }
 
 }
