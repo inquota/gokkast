@@ -78,6 +78,7 @@
                 <div class="pull-left">
                     {{ Form::submit('Opslaan', array('class' => 'btn btn-primary form-control')) }}
                 </div>
+                <div style="clear:both;"></div>
             </div>
             {{ Form::close() }}
 								</div>

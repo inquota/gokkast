@@ -2,7 +2,7 @@
 	display: none;
 }
 .main-navigation{
-	display: block;
+	display: none;
 }
 .hidden-print {
 	display: none;
@@ -19,6 +19,7 @@
 .footer {
 	display: none;
 }
+
 .main-content .container{
 	min-height: 0 !important;
 	border: none !important;
