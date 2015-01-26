@@ -6,7 +6,7 @@
 	<!--<![endif]-->
 	<!-- start: HEAD -->
 	<head>
-		<title>Rapido - Responsive Admin Template</title>
+		<title>CRM</title>
 		<!-- start: META -->
 		<meta charset="utf-8" />
 		<!--[if IE]><meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" /><![endif]-->
@@ -93,9 +93,6 @@
 						@yield('content')
 						<!-- end: PAGE CONTENT-->
 					</div>
-					<div class="subviews">
-						<div class="subviews-container"></div>
-					</div>
 				</div>
 				<!-- end: PAGE -->
 			</div>
@@ -129,13 +126,11 @@
 		<!-- end: MAIN JAVASCRIPTS -->
 		<!-- start: JAVASCRIPTS REQUIRED FOR SUBVIEW CONTENTS -->
 		
-		{{ HTML::script('/js/subview.js') }}
-		{{ HTML::script('/js/subview-examples.js') }}
 		<!-- end: JAVASCRIPTS REQUIRED FOR SUBVIEW CONTENTS -->
 		<!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 
 		{{ HTML::script('/js/index.js') }}
-		{{ HTML::script('/plugins/easy-pie-chart/dist/jquery.easypiechart.min.js') }}
+		
 		<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 		<!-- start: CORE JAVASCRIPTS  -->
 		{{ HTML::script('/js/main.js') }}
@@ -143,7 +138,6 @@
 		<script>
 			jQuery(document).ready(function() {
 				Main.init();
-				SVExamples.init();
 				Index.init();
 			});
 		</script>
