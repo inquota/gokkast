@@ -42,7 +42,7 @@
 										</div>
 									</div>
 									<div class="panel-body">
-											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => '/admin/standen/edit/'.$stand->id)) }}
+											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => Request::path() )) }}
 											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
 													Machine id

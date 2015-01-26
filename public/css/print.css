@@ -2,7 +2,7 @@
 	display: none;
 }
 .main-navigation{
-	display: none;
+	display: block;
 }
 .hidden-print {
 	display: none;
@@ -18,10 +18,6 @@
 }
 .footer {
 	display: none;
-}
-.main-container {
-	margin: 0 !important;
-	padding: 0 !important;
 }
 .main-content .container{
 	min-height: 0 !important;
