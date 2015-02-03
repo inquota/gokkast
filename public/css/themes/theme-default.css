@@ -24,6 +24,10 @@ body.layout-boxed {
   background: #5f8295;
 }
 
+.main-navigation {
+    display: block !important;
+}
+
 .topbar {
   background: #5f8295;
   background-color: #7c9bab 0px;

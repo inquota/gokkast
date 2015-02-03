@@ -2,32 +2,41 @@
 
 class KlantenController extends BaseController {
 
-	public function getAdminList()
+	public function getList()
 	{
-		$machines = Klant::all();
-		
-		return View::make('admin.klanten.list')->with('machines', $machines);
-	}
-	
-	public function getAdminEdit($klant_id)
-	{
-		$machine = Klant::find($klant_id);
-		
-		return View::make('admin.klanten.edit')->with('machine', $machine);
-	}
-	
-	public function getNew() {
 		$klanten = Klant::all();
-       return View::make('admin.klanten.new')->with('medewerkers', $klanten);
+		
+		return View::make('admin.klanten.list')
+            ->with('klanten', $klanten);
+	}
+
+	public function getSave($klant_id = null) {
+
+        $medewerkers = Medewerker::get();
+
+        if(isset($klant_id)){
+
+            $klant = Klant::find($klant_id)->firstOrFail();
+
+            return View::make('admin.klanten.new')
+                ->with('klant', $klant)
+                ->with('medewerkers', $medewerkers);
+        }
+
+       return View::make('admin.klanten.new')->with('medewerkers', $medewerkers);
     }
 	
-	public function doNew() {
+	public function doSave($klant_id = null) {
 
             /**
              * Create new shop
              */
 
-        $klant = new Klant();
+        if(isset($klant_id)){
+            $klant = Klant::find($klant_id)->firstOrFail();
+        }else {
+            $klant = new Klant();
+        }
 
         $klant->bedrijf = Input::get('bedrijf');
         $klant->naam = Input::get('naam');
@@ -68,47 +77,20 @@ class KlantenController extends BaseController {
                     ->withErrors($klant->errors());
             }
     }
-	
-	public function doEdit($klant_id) {
-        $rules = array(
-            'machine_type'   => 'required',
-            'machinenr'   => 'required',
-            'th_nr'   => 'required',
-            'tb_nr'   => 'required',
-        );
 
-        // Create a new validator instance from our validation rules
-        $validator = Validator::make(Input::all(), $rules);
+    public function getDelete($klanten_id = null) {
 
-        // If validation fails, we'll exit the operation now.
-        if ($validator->fails()) {
+        if(!isset($klanten_id)){
             return Redirect::back()
-                ->withInput()
-                ->withErrors($validator);
+                ->withInput();
         }
 
-        try{
+        $klant = Klant::find($klanten_id)->firstOrFail();
+        $klant->delete();
 
-            /**
-             * Update Klant
-             */
+        return Redirect::to('/admin/klanten/list')
+            ->with('status', 'Medewerker verwijderd');
 
-            $machine = Klant::where('id', '=', $machine_id)->firstOrFail();
-			
-            $machine->machinenr = Input::get('machinenr');
-            $machine->th_nr = Input::get('th_nr');
-			$machine->tb_nr = Input::get('tb_nr');
-            $machine->save();
-
-            return Redirect::to('/admin/machines/list')
-                ->with('status', 'Machine opgeslagen');
-        }
-        catch(Exception $e){
-            $validator = 'Bij het opslaan is er iets misgegaan.';
-            return Redirect::back()
-                ->withInput()
-                ->withErrors($validator);
-        }
     }
 
 }

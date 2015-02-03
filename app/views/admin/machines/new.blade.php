@@ -42,7 +42,16 @@
 										</div>
 									</div>
 									<div class="panel-body">
-											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => '/admin/machines/new/')) }}
+											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => Request::path()  )) }}
+																						<div class="form-group">
+												<label for="form-field-1" class="col-sm-2 control-label">
+													Machine nummer
+												</label>
+												<div class="col-sm-9">
+													{{ Form::text('machinenr', '',  array('id' => 'machinenr', 'class' => 'form-control')) }}
+												</div>
+											</div>
+											
 											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
 													Machine Types
@@ -59,31 +68,22 @@
 													@endif
 												</div>
 											</div>
-											
+																						
 											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
-													Machine nummer
+													Type nummer
 												</label>
 												<div class="col-sm-9">
-													{{ Form::text('machinenr', '',  array('id' => 'machinenr', 'class' => 'form-control')) }}
-												</div>
-											</div>
-											
-											<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Th nummer
+												
+												<label class="radio-inline">
+													<input type="radio" class="square-green" value="TH nummer" name="type_nummer">
+													TH nummer
 												</label>
-												<div class="col-sm-9">
-													{{ Form::text('th_nr', '',  array('id' => 'th_nr', 'class' => 'form-control')) }}
-												</div>
-											</div>
-											
-											<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Tb nummer
+												
+												<label class="radio-inline">
+													<input type="radio" class="square-green" value="TB nummer" name="type_nummer">
+													TB nummer
 												</label>
-												<div class="col-sm-9">
-													{{ Form::text('tb_nr', '',  array('id' => 'tb_nr', 'class' => 'form-control')) }}
 												</div>
 											</div>
 											
@@ -96,6 +96,7 @@
 														<option value="Magazijn">Magazijn</option>
 														<option value="Sloop">Sloop</option>
 														<option value="Verkocht">Verkocht</option>
+														<option value="Klant">Klant</option>
 													</select>
 												</div>
 											</div>

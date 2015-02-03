@@ -30,8 +30,10 @@ class StandenController extends BaseController {
     }
 
     public function getNew($machine_id) {
-
-        return View::make('admin.standen.new')->with('machine_id', $machine_id);
+    	
+		$last_stand = Stand::where('m_id','=',$machine_id)->orderBy('id', 'DESC')->first();
+	
+        return View::make('admin.standen.new')->with('machine_id', $machine_id)->with('last_stand', $last_stand);
     }
 
     public function doSave($machine_id, $stand_id = null) {
@@ -43,6 +45,7 @@ class StandenController extends BaseController {
         }
 
         $stand->b_stand = Input::get('b_stand');
+		$stand->e_stand = Input::get('e_stand');
         $stand->m_id = $machine_id;
         $stand->created_at = date('Y-m-d H:i:s');
 
