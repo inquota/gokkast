@@ -57,14 +57,26 @@
                         Begin stand
                     </label>
                     <div class="col-sm-9">
-                        {{ Form::text('b_stand', '',  array('id' => 'b_stand', 'class' => 'form-control')) }}
+                        {{ Form::text('b_stand', $last_stand->e_stand,  array('id' => 'b_stand', 'class' => 'form-control', 'readonly'=>'readonly')) }}
                     </div>
                 </div>
+                
+				<div class="form-group">
+                    <label for="form-field-1" class="col-sm-2 control-label">
+                        Eind stand
+                    </label>
+                    <div class="col-sm-9">
+                        {{ Form::text('e_stand', '',  array('id' => 'e_stand', 'class' => 'form-control')) }}
+                    </div>
+                </div>
+                
+                
             </div>
             <div class="panel-footer">
                 <div class="pull-left">
                     {{ Form::submit('Opslaan', array('class' => 'btn btn-primary form-control')) }}
                 </div>
+                <div style="clear: both;"></div>
             </div>
             {{ Form::close() }}
         </div>

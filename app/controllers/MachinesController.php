@@ -29,69 +29,38 @@ class MachinesController extends BaseController {
        return View::make('admin.machines.new')->with('machine_types', $machine_types);
     }
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	/* Do functions */
-	public function doNew() {
-        $rules = array(
-            'machine_type'   => 'required',
-            'machinenr'   => 'required',
-            'th_nr'   => 'required',
-            'tb_nr'   => 'required',
-            'locatie'   => 'required',
-        );
-
-        // Create a new validator instance from our validation rules
-        $validator = Validator::make(Input::all(), $rules);
-
-        // If validation fails, we'll exit the operation now.
-        if ($validator->fails()) {
-            return Redirect::back()
-                ->withInput()
-                ->withErrors($validator);
+	public function doSave($machine_id = null) {
+		
+		if(isset($machine_id)){
+            $machine = Machine::find($machine_id)->firstOrFail();
+        }else {
+            $machine = new Machine();
         }
 
-        try{
+        $machine->machine_type = Input::get('machine_type');
+        $machine->machinenr = Input::get('machinenr');
+        $machine->type_nummer = Input::get('type_nummer');
+		$machine->locatie = Input::get('locatie');
+        $machine->created_at = date('Y-m-d H:i:s');
+        $machine->updated_at = '0000-00-00 00:00:00';
 
-            /**
-             * Create new shop
-             */
-
-            $info = array(
-                'machine_type'      => Input::get('machine_type'),
-                'machinenr'      => Input::get('machinenr'),
-                'th_nr'      => Input::get('th_nr'),
-                'tb_nr'      => Input::get('tb_nr'),
-                'b_stand'      => Input::get('b_stand'),
-                'created_at'  => date('Y-m-d H:i:s'),
-            );
-
-            Machine::create($info);
-
+        if($machine->save() == true) {
             return Redirect::to('/admin/machines/list')
                 ->with('status', 'Machine opgeslagen');
-        }
-        catch(Exception $e){
-            $validator = 'Bij het opslaan is er iets misgegaan.';
+        }else{
             return Redirect::back()
                 ->withInput()
-                ->withErrors($validator);
-        }
+                ->withErrors($machine->errors());
+		}
     }
 	
 	public function doEdit($machine_id) {
         $rules = array(
             'machine_type'   => 'required',
             'machinenr'   => 'required',
-            'th_nr'   => 'required',
-            'tb_nr'   => 'required',
+            'type_nummer'   => 'required',
+            'nummer'   => 'required',
         );
 
         // Create a new validator instance from our validation rules
@@ -113,8 +82,8 @@ class MachinesController extends BaseController {
             $machine = Machine::where('id', '=', $machine_id)->firstOrFail();
 			
             $machine->machinenr = Input::get('machinenr');
-            $machine->th_nr = Input::get('th_nr');
-			$machine->tb_nr = Input::get('tb_nr');
+            $machine->type_nummer = Input::get('type_nummer');
+			$machine->locatie = Input::get('locatie');
             $machine->save();
 
             return Redirect::to('/admin/machines/list')
