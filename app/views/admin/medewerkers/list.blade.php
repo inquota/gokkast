@@ -36,8 +36,7 @@
 									</div>
 									<div class="panel-body">
 										<p>
-											<a href="/admin/medewerkers/new/">Nieuw</a>
-											Hier vind je alle medewerkers.
+											<a href="/admin/medewerkers/new/" class="btn btn-green"><i class="glyphicon glyphicon-plus"></i> Nieuw</a>
 										</p>
 										<table id="sample-table-1" class="table table-hover">
 											<thead>
@@ -45,7 +44,7 @@
 													<th>Medewerker nummer</th>
 													<th class="hidden-xs">Naam</th>
 													<th>Aangemaakt op</th>
-													<th>Acties</th>
+													<th>Beheer</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -56,8 +55,8 @@
 													<td>{{ date('d-m-Y', strtotime($medewerker->created_at)) }}</td>
 													<td class="center">
 													<div class="visible-md visible-lg hidden-sm hidden-xs">
-														<a data-original-title="Edit" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/medewerkers/edit/{{$medewerker->id}}"><i class="fa fa-edit"></i></a>
-														<a data-original-title="Remove" data-placement="top" class="btn btn-xs btn-red tooltips" href="/admin/medewerkers/delete/{{$medewerker->id}}" onclick="confirm('Weet u zeker dat u de medewerker {{ $medewerker->naam }} wilt verwijderden?')"><i class="fa fa-times fa fa-white"></i></a>
+														<a data-original-title="Edit" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/medewerkers/edit/{{$medewerker->id}}"><i class="fa fa-edit"></i> Bewerken</a>
+														<a data-original-title="Remove" data-placement="top" class="btn btn-xs btn-red tooltips" href="/admin/medewerkers/delete/{{$medewerker->id}}" onclick="confirm('Weet u zeker dat u de medewerker {{ $medewerker->naam }} wilt verwijderden?')"><i class="fa fa-times fa fa-white"></i> Verwijderen</a>
 													</div>
 													<div class="visible-xs visible-sm hidden-md hidden-lg">
 														<div class="btn-group">

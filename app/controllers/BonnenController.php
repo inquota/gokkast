@@ -24,9 +24,14 @@ class BonnenController extends BaseController {
 		return View::make('admin.machines.view')->with('machine', $machine)->with('standen', $standen);
 	}
 	
-	public function getNew($stand_id) {
-		$stand = Stand::find($stand_id);
-       return View::make('admin.bonnen.new')->with('machine_types', $stand);
+	public function getNew($klant_id) {
+			
+		$klant = Klant::find($klant_id);
+		$machines = Machine::where('klant_id', '=', $klant->id)->get();
+		
+       return View::make('admin.bonnen.new')
+       		->with('klant', $klant)
+			->with('machines', $machines);
     }
 	
 	

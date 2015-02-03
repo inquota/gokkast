@@ -35,11 +35,7 @@
 							</div>
 						</fieldset>
                     {{ Form::close() }}
-					<!-- start: COPYRIGHT -->
-					<div class="copyright">
-						2014 &copy; <a href="http://www.inquota.nl/" target="_blank">Inquota</a> &amp; <a href="http://www.exdeliver.nl/" target="_blank">EXdeliver V.O.F.</a>
-					</div>
-					<!-- end: COPYRIGHT -->
+				
 				</div>
 				<!-- end: LOGIN BOX -->
 </div>

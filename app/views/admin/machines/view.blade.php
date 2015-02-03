@@ -99,7 +99,7 @@
                 <h4 class="panel-title">Standen van deze machine</h4>
             </div>
             <div class="panel-body">
-                <a href="/admin/standen/save/{{ $machine->id }}">Nieuwe stand invoeren</a>
+                <a href="/admin/standen/save/{{ $machine->id }}" class="btn btn-green"><i class="glyphicon glyphicon-plus"></i> Nieuw</a>
                 <table id="sample-table-1" class="table table-hover">
                     <thead>
                     <tr>
@@ -107,7 +107,7 @@
                         <th>Begin stand</th>
                         <th>Eind stand</th>
                         <th>Aangemaakt op</th>
-                        <th>Acties</th>
+                        <th>Beheer</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -124,10 +124,9 @@
                         <td>&euro; {{$stand->e_stand}}</td>
                         <td>{{ date('d-m-Y', strtotime($stand->created_at) ) }}</td>
                         <td class="center">
-                            <div class="visible-md visible-lg hidden-sm hidden-xs">
-                                <a data-original-title="Bon aanmaken" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/bonnen/new/{{$machine->id}}/{{ $stand->id }}"><i class="fa fa-money"></i></a>
-                                <a data-original-title="Bewerk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/standen/save/{{$machine->id}}/{{ $stand->id }}"><i class="fa fa-edit"></i></a>
-                                <a data-original-title="Verwijder" data-placement="top" class="btn btn-xs btn-red tooltips" href="/admin/standen/remove/{{$machine->id}}" onclick="confirm('Weet je zeker dat je stand nummer {{$machine->id}} wilt verwijderen? LET OP: Deze actie kan niet meer ongedaan gemaakt worden');"><i class="fa fa-times fa fa-white"></i></a>
+                            <div class="visible-md visible-lg hidden-sm hidden-xs">                                
+                                <a data-original-title="Bewerk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/standen/save/{{$machine->id}}/{{ $stand->id }}"><i class="fa fa-edit"></i> Bewerken</a>
+                                <a data-original-title="Verwijder" data-placement="top" class="btn btn-xs btn-red tooltips" href="/admin/standen/remove/{{$machine->id}}" onclick="confirm('Weet je zeker dat je stand nummer {{$machine->id}} wilt verwijderen? LET OP: Deze actie kan niet meer ongedaan gemaakt worden');"><i class="fa fa-times fa fa-white"></i> Verwijderen</a>
                             </div>
                             <div class="visible-xs visible-sm hidden-md hidden-lg">
                                 <div class="btn-group">

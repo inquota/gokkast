@@ -4,136 +4,142 @@
 
 @section('content')
 
+
+@if(isset($klant))
+	<h1>Bewerk klant</h1>
+@else
+	<h1>Nieuwe klant</h1>
+@endif
+
+
+@if($errors->has())
+	<div class="alert alert-danger">
+	    <ul>
+	@foreach($errors->all() AS $error)
+	<li>{{  $error }}</li>
+	@endforeach
+	    </ul>
+	</div>
+@endif
+
+{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => Request::path())) }}
 <div class="row">
-							<div class="col-sm-12">
-								<!-- start: TEXT FIELDS PANEL -->
-								<div class="panel panel-white">
-									<div class="panel-heading">
-										<h4 class="panel-title">Nieuwe klant</h4>
-										    @if($errors->has())
-                                            <div class="alert alert-danger">
-                                                <ul>
-                                            @foreach($errors->all() AS $error)
-                                            <li>{{  $error }}</li>
-                                            @endforeach
-                                                </ul>
-                                            </div>
-                                            @endif
-										<div class="panel-tools">
-											<div class="dropdown">
-												<a class="btn btn-xs dropdown-toggle btn-transparent-grey" data-toggle="dropdown">
-													<i class="fa fa-cog"></i>
-												</a>
-												<ul role="menu" class="dropdown-menu dropdown-light pull-right">
-													<li>
-														<a href="#" class="panel-collapse collapses"><i class="fa fa-angle-up"></i> <span>Collapse</span> </a>
-													</li>
-													<li>
-														<a href="#" class="panel-refresh">
-															<i class="fa fa-refresh"></i> <span>Refresh</span>
-														</a>
-													</li>
-													<li>
-														<a data-toggle="modal" href="#panel-config" class="panel-config">
-															<i class="fa fa-wrench"></i> <span>Configurations</span>
-														</a>
-													</li>
-													<li>
-														<a href="#" class="panel-expand">
-															<i class="fa fa-expand"></i> <span>Fullscreen</span>
-														</a>
-													</li>
-												</ul>
-											</div>
-											<a href="#" class="btn btn-xs btn-link panel-close">
-												<i class="fa fa-times"></i>
-											</a>
-										</div>
-									</div>
-									<div class="panel-body">
-											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => Request::path())) }}
-											<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Bedrijf
-												</label>
-												<div class="col-sm-9">
-													{{ Form::text('bedrijf', (isset($klant->bedrijf)) ? $klant->bedrijf : '',  array('id' => 'bedrijf', 'class' => 'form-control')) }}
-												</div>
-											</div>
-											
-											<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Naam
-												</label>
-												<div class="col-sm-9">
-													{{ Form::text('naam', (isset($klant->naam)) ? $klant->naam : '',  array('id' => 'naam', 'class' => 'form-control')) }}
-												</div>
-											</div>
-											
-											<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Adres
-												</label>
-												<div class="col-sm-9">
-													{{ Form::text('adres', (isset($klant->adres)) ? $klant->adres : '',  array('id' => 'adres', 'class' => 'form-control')) }}
-												</div>
-											</div>
-											
-											<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Postcode
-												</label>
-												<div class="col-sm-9">
-													{{ Form::text('postcode', (isset($klant->postcode)) ? $klant->postcode : '',  array('id' => 'postcode', 'class' => 'form-control')) }}
-												</div>
-											</div>
-											
-															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Woonplaats
-												</label>
-												<div class="col-sm-9">
-													{{ Form::text('woonplaats', (isset($klant->woonplaats)) ? $klant->woonplaats : '',  array('id' => 'woonplaats', 'class' => 'form-control')) }}
-												</div>
-											</div>	
-											
-															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Telefoon
-												</label>
-												<div class="col-sm-9">
-													{{ Form::text('telefoon_vast', (isset($klant->telefoon_vast)) ? $klant->telefoon_vast : '',  array('id' => 'telefoon_vast', 'class' => 'form-control')) }}
-												</div>
-											</div>
-											
-															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Mobiel
-												</label>
-												<div class="col-sm-9">
-													{{ Form::text('telefoon_mobiel', (isset($klant->telefoon_mobiel)) ? $klant->telefoon_mobiel : '',  array('id' => 'telefoon_mobiel', 'class' => 'form-control')) }}
-												</div>
-											</div>
-											
-															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													E-mail
-												</label>
-												<div class="col-sm-9">
-													{{ Form::text('email', (isset($klant->email)) ? $klant->email : '',  array('id' => 'email', 'class' => 'form-control')) }}
-												</div>
-											</div>
-											
-															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Website
-												</label>
-												<div class="col-sm-9">
-													{{ Form::text('website', (isset($klant->website)) ? $klant->website : '',  array('id' => 'website', 'class' => 'form-control')) }}
-												</div>
-											</div>
-											
-															<div class="form-group">
+	
+<div class="col-md-6">
+<div class="panel panel-white">
+	<div class="panel-heading border-light">
+		<h4 class="panel-title">NAW</h4>
+	</div>
+	<div class="panel-body">
+<div class="form-group">
+		<label for="form-field-1" class="col-sm-2 control-label">
+			Bedrijf
+		</label>
+		<div class="col-sm-9">
+			{{ Form::text('bedrijf', (isset($klant->bedrijf)) ? $klant->bedrijf : '',  array('id' => 'bedrijf', 'class' => 'form-control')) }}
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label for="form-field-1" class="col-sm-2 control-label">
+			Naam
+		</label>
+		<div class="col-sm-9">
+			{{ Form::text('naam', (isset($klant->naam)) ? $klant->naam : '',  array('id' => 'naam', 'class' => 'form-control')) }}
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label for="form-field-1" class="col-sm-2 control-label">
+			Adres
+		</label>
+		<div class="col-sm-9">
+			{{ Form::text('adres', (isset($klant->adres)) ? $klant->adres : '',  array('id' => 'adres', 'class' => 'form-control')) }}
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label for="form-field-1" class="col-sm-2 control-label">
+			Postcode
+		</label>
+		<div class="col-sm-9">
+			{{ Form::text('postcode', (isset($klant->postcode)) ? $klant->postcode : '',  array('id' => 'postcode', 'class' => 'form-control')) }}
+		</div>
+	</div>
+	
+					<div class="form-group">
+		<label for="form-field-1" class="col-sm-2 control-label">
+			Woonplaats
+		</label>
+		<div class="col-sm-9">
+			{{ Form::text('woonplaats', (isset($klant->woonplaats)) ? $klant->woonplaats : '',  array('id' => 'woonplaats', 'class' => 'form-control')) }}
+		</div>
+	</div>	
+	</div>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="panel panel-white">
+	<div class="panel-heading border-light">
+		<h4 class="panel-title">Contact</h4>
+	</div>
+	<div class="panel-body">
+<div class="form-group">
+		<label for="form-field-1" class="col-sm-2 control-label">
+			Telefoon
+		</label>
+		<div class="col-sm-9">
+			{{ Form::text('telefoon_vast', (isset($klant->telefoon_vast)) ? $klant->telefoon_vast : '',  array('id' => 'telefoon_vast', 'class' => 'form-control')) }}
+		</div>
+	</div>
+	
+					<div class="form-group">
+		<label for="form-field-1" class="col-sm-2 control-label">
+			Mobiel
+		</label>
+		<div class="col-sm-9">
+			{{ Form::text('telefoon_mobiel', (isset($klant->telefoon_mobiel)) ? $klant->telefoon_mobiel : '',  array('id' => 'telefoon_mobiel', 'class' => 'form-control')) }}
+		</div>
+	</div>
+	
+					<div class="form-group">
+		<label for="form-field-1" class="col-sm-2 control-label">
+			E-mail
+		</label>
+		<div class="col-sm-9">
+			{{ Form::text('email', (isset($klant->email)) ? $klant->email : '',  array('id' => 'email', 'class' => 'form-control')) }}
+		</div>
+	</div>
+	
+					<div class="form-group">
+		<label for="form-field-1" class="col-sm-2 control-label">
+			Website
+		</label>
+		<div class="col-sm-9">
+			{{ Form::text('website', (isset($klant->website)) ? $klant->website : '',  array('id' => 'website', 'class' => 'form-control')) }}
+		</div>
+		</div>	
+	</div>
+</div>
+</div>
+
+</div>
+	
+	
+	
+	
+	
+	
+<div class="row">
+	
+<div class="col-md-6">
+<div class="panel panel-white">
+	<div class="panel-heading border-light">
+		<h4 class="panel-title">NAW Gegevens</h4>
+	</div>
+	<div class="panel-body">
+<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
 													Medewerker
 												</label>
@@ -249,9 +255,19 @@
 													{{ Form::text('bedrag_vulling_geldwisselaar', (isset($klant->bedrag_vulling_geldwisselaar)) ? $klant->bedrag_vulling_geldwisselaar : '',  array('id' => 'bedrag_vulling_geldwisselaar', 'class' => 'form-control')) }}
 												</div>
 											</div>
-											
+	</div>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="panel panel-white">
+	<div class="panel-heading border-light">
+		<h4 class="panel-title">Vergunning en contract</h4>
+	</div>
+	<div class="panel-body">
+						
 															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
+												<label for="form-field-1" class="col-sm-3 control-label">
 													Vergunning nummer
 												</label>
 												<div class="col-sm-9">
@@ -260,7 +276,7 @@
 											</div>
 											
 															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
+												<label for="form-field-1" class="col-sm-3 control-label">
 													Vergunning verleend door
 												</label>
 												<div class="col-sm-9">
@@ -269,7 +285,7 @@
 											</div>
 											
 															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
+												<label for="form-field-1" class="col-sm-3 control-label">
 													Vergunning geldig vanaf
 												</label>
 												<div class="col-sm-9">
@@ -281,7 +297,7 @@
 											</div>
 											
 															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
+												<label for="form-field-1" class="col-sm-3 control-label">
 													Vergunning geldig tot
 												</label>
 												<div class="col-sm-9">
@@ -293,7 +309,7 @@
 											</div>
 											
 															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
+												<label for="form-field-1" class="col-sm-3 control-label">
 													Contract
 												</label>
 												<div class="col-sm-9">
@@ -313,7 +329,7 @@
 											</div>
 											
 															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
+												<label for="form-field-1" class="col-sm-3 control-label">
 													Contract geldig vanaf
 												</label>
 												<div class="col-sm-9">
@@ -325,7 +341,7 @@
 											</div>
 											
 															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
+												<label for="form-field-1" class="col-sm-3 control-label">
 													Contract geldig tot
 												</label>
 												<div class="col-sm-9">
@@ -337,25 +353,53 @@
 											</div>
 											
 															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
+												<label for="form-field-1" class="col-sm-3 control-label">
 													Netto winst verdeling
 												</label>
 												<div class="col-sm-9">
-													{{ Form::text('nettowinst_verdeling', (isset($klant->nettowinst_verdeling)) ? $klant->nettowinst_verdeling : '',  array('id' => 'nettowinst_verdeling', 'class' => 'form-control')) }}
+													<select name="nettowinst_verdeling">
+														@if( isset($klant->nettowinst_verdeling) )
+															<option value="{{ $klant->nettowinst_verdeling }}">{{ $klant->nettowinst_verdeling }}</option>
+																				@for ($i = 1; $i <= 100; $i++)
+															<option value="{{ $i }}">{{ $i }}%</option>
+															@endfor
+														@else
+															@for ($i = 1; $i <= 100; $i++)
+															<option value="{{ $i }}">{{ $i }}%</option>
+															@endfor
+														@endif
+													</select>
+												in %. (het percentage wat u hier invoert is voor het bedrijf)
+													
+													
+													
+													
 												</div>
 											</div>
 											
 															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
+												<label for="form-field-1" class="col-sm-3 control-label">
 													Afreken frequentie
 												</label>
 												<div class="col-sm-9">
-													{{ Form::text('afr_freq', (isset($klant->afr_freq)) ? $klant->afr_freq : '',  array('id' => 'afr_freq', 'class' => 'form-control')) }}
+													<select name="afr_freq">
+														@if( isset($klant->afr_freq) )
+															<option value="{{ $klant->afr_freq }}">{{ $klant->afr_freq }}</option>
+																				@for ($i = 1; $i <= 52; $i++)
+															<option value="{{ $i }}">{{ $i }}</option>
+															@endfor
+														@else
+															@for ($i = 1; $i <= 52; $i++)
+															<option value="{{ $i }}">{{ $i }}</option>
+															@endfor
+														@endif
+													</select>
+													in weken
 												</div>
 											</div>
 											
 															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
+												<label for="form-field-1" class="col-sm-3 control-label">
 													Datum laatste verrekening
 												</label>
 												<div class="col-sm-9">
@@ -366,17 +410,20 @@
 												</div>
 											</div>	
 											
+	</div>
+</div>
+</div>
 
-									</div>
-									            <div class="panel-footer">
-                <div class="pull-left">
-                    {{ Form::submit('Opslaan', array('class' => 'btn btn-primary form-control')) }}
-                </div>
-            </div>
-            {{ Form::close() }}
-								</div>
-								<!-- end: TEXT FIELDS PANEL -->
-							</div>
-						</div>
-						
+</div>	
+
+
+
+<div class="row">
+	<div class="col-sm-2">
+		{{ Form::submit('Opslaan', array('class' => 'btn btn-primary form-control')) }}
+	</div>
+</div>
+{{ Form::close() }}
+
+   
 @stop
