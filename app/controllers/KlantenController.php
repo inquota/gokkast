@@ -15,12 +15,15 @@ class KlantenController extends BaseController {
         $medewerkers = Medewerker::get();
 
         if(isset($klant_id)){
-
+			$machine_types = MachineType::all();
             $klant = Klant::find($klant_id)->firstOrFail();
+			$machines = Machine::where('klant_id', '=', $klant_id)->get();
 
             return View::make('admin.klanten.new')
                 ->with('klant', $klant)
-                ->with('medewerkers', $medewerkers);
+                ->with('medewerkers', $medewerkers)
+				->with('machines', $machines)
+				->with('machine_types', $machine_types);
         }
 
        return View::make('admin.klanten.new')->with('medewerkers', $medewerkers);

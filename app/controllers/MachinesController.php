@@ -10,11 +10,17 @@ class MachinesController extends BaseController {
 		return View::make('admin.machines.list')->with('machines', $machines);
 	}
 	
-	public function getAdminEdit($machine_id)
+	public function getSave($klant_id, $machine_id = null)
 	{
-		$machine = Machine::find($machine_id);
+		$machine_types = MachineType::all();
 		
-		return View::make('admin.machines.edit')->with('machine', $machine);
+		if(isset($machine_id)){
+			$machine = Machine::find($machine_id);
+			$current_machinetype = MachineType::find($machine->machine_type);
+		
+			return View::make('admin.machines.edit')->with('machine', $machine)->with('machine_types', $machine_types)->with('current_machinetype', $current_machinetype);
+		}
+		return View::make('admin.machines.edit')->with('machine_types', $machine_types);
 	}
 	
 	public function getAdminView($machine_id)
@@ -43,10 +49,13 @@ class MachinesController extends BaseController {
         $machine->type_nummer = Input::get('type_nummer');
 		$machine->locatie = Input::get('locatie');
         $machine->created_at = date('Y-m-d H:i:s');
-        $machine->updated_at = '0000-00-00 00:00:00';
+		
+		if(isset($machine_id)){
+        	$machine->updated_at = date('Y-m-d H:i:s');
+		}
 
         if($machine->save() == true) {
-            return Redirect::to('/admin/machines/list')
+            return Redirect::to('/admin/klanten/edit/'.$machine->klant_id)
                 ->with('status', 'Machine opgeslagen');
         }else{
             return Redirect::back()

@@ -42,9 +42,6 @@
                                         <li>
                                         <a href="/admin/machines/list"><i class="fa fa-desktop"></i> <span class="title"> Overzicht </span></a>
                                         </li>
-                                        <li>
-                                        <a href="/admin/machines/new"><i class="fa fa-desktop"></i> <span class="title"> Machine aanmaken </span></a>
-                                        </li>
                                     </ul>
 							</li>
 
