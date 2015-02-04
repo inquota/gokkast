@@ -3,13 +3,17 @@
 @stop
 
 @section('content')
+@if(isset($machine))
+	<h1>Bewerk machine</h1>
+@else
+	<h1>Nieuwe machine</h1>
+@endif
 
 <div class="row">
 							<div class="col-sm-12">
 								<!-- start: TEXT FIELDS PANEL -->
 								<div class="panel panel-white">
 									<div class="panel-heading">
-										<h4 class="panel-title">Bewerk machine #<span class="text-bold">{{$machine->id}}</span></h4>
 										<div class="panel-tools">
 											<div class="dropdown">
 												<a class="btn btn-xs dropdown-toggle btn-transparent-grey" data-toggle="dropdown">
@@ -42,42 +46,80 @@
 										</div>
 									</div>
 									<div class="panel-body">
-											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => '/admin/machines/edit/'.$machine->id)) }}
-											<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Machine id
-												</label>
-												<div class="col-sm-9">
-													{{$machine->m_id}}
-												</div>
-											</div>
+											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' =>  Request::path() )) }}
 											
 											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
 													Machine nummer
 												</label>
 												<div class="col-sm-9">
-													{{ Form::text('machinenr', (isset($machine->machinenr)) ? $machine->machinenr : Input::old('machinenr'),  array('id' => 'machinenr', 'class' => 'form-control')) }}
+													{{ Form::text('machinenr', (isset($machine->machinenr)) ? $machine->machinenr : '',  array('id' => 'machinenr', 'class' => 'form-control')) }}
+												</div>
+											</div>
+												<div class="form-group">
+												<label for="form-field-1" class="col-sm-2 control-label">
+													Machine Types
+												</label>
+												<div class="col-sm-9">
+													@if(count($machine_types) > 0) 
+														<select name="machine_type">
+														@if(isset($machine->machine_type))
+															<option value="{{ $current_machinetype->id }}">{{ $current_machinetype->type }}</option>
+														@endif
+														@foreach($machine_types as $machine_type)
+															<option value="{{$machine_type->id}}">{{$machine_type->type}}</option>
+														@endforeach
+														</select>
+													@else
+														Er zijn nog geen Machine Types aangemaakt
+													@endif
+												</div>
+											</div>
+																						
+											<div class="form-group">
+												<label for="form-field-1" class="col-sm-2 control-label">
+													Type nummer
+												</label>
+												<div class="col-sm-9">
+												
+												
+												<label class="radio-inline">
+													@if(isset($machine->type_nummer) && $machine->type_nummer=='TH nummer')
+														<input type="radio" class="square-green" value="TH nummer" checked="checked" name="type_nummer">
+													@else
+														<input type="radio" class="square-green" value="TH nummer" name="type_nummer">
+													@endif
+													TH nummer
+												</label>
+												
+												<label class="radio-inline">
+													@if(isset($machine->type_nummer) && $machine->type_nummer=='TB nummer')
+														<input type="radio" class="square-green" value="TB nummer" checked="checked" name="type_nummer">
+													@else
+														<input type="radio" class="square-green" value="TB nummer" name="type_nummer">
+													@endif
+													TB nummer
+												</label>
 												</div>
 											</div>
 											
-															<div class="form-group">
+												<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
-													Th nummer
+													Locatie
 												</label>
 												<div class="col-sm-9">
-													{{ Form::text('th_nr', (isset($machine->th_nr)) ? $machine->th_nr : Input::old('th_nr'),  array('id' => 'th_nr', 'class' => 'form-control')) }}
+													<select name="locatie">
+														@if(isset($machine->locatie))
+															<option value="{{ $machine->locatie }}">{{ $machine->locatie }}</option>
+														@endif
+														<option value="Magazijn">Magazijn</option>
+														<option value="Sloop">Sloop</option>
+														<option value="Verkocht">Verkocht</option>
+														<option value="Klant">Klant</option>
+													</select>
 												</div>
 											</div>
-											
-															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Tb nummer
-												</label>
-												<div class="col-sm-9">
-													{{ Form::text('tb_nr', (isset($machine->tb_nr)) ? $machine->tb_nr : Input::old('tb_nr'),  array('id' => 'tb_nr', 'class' => 'form-control')) }}
-												</div>
-											</div>
+										
 											
 									</div>
 									            <div class="panel-footer">

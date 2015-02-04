@@ -33,7 +33,10 @@
 									<div class="form-group">
 										<label for="form-field-1" class="col-sm-3 control-label"> Nieuw in: </label>
 										<div class="col-sm-9">
-											3543455
+											<?php
+											$nieuw_in = 6402090;
+											echo $nieuw_in;
+											?>
 										</div>
 									</div>
 

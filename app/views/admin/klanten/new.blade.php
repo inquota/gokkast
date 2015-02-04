@@ -136,125 +136,109 @@
 <div class="col-md-6">
 <div class="panel panel-white">
 	<div class="panel-heading border-light">
-		<h4 class="panel-title">NAW Gegevens</h4>
+		<h4 class="panel-title">Overige</h4>
 	</div>
 	<div class="panel-body">
 <div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Medewerker
-												</label>
-												<div class="col-sm-9">
-													@if($medewerkers) 
-														<select name="medewerker_id">
-														@foreach($medewerkers as $medewerker)
-															<option
-															@if(isset($klant->medewerker_id) && $klant->medewerker_id == $medewerker->id)
-															    selected="selected"
-															@endif
-															value="{{$medewerker->id}}">{{$medewerker->naam}}</option>
-														@endforeach
-														</select>
-													@else
-														Er zijn nog geen Medewerkers	
-													@endif
-												</div>
-											</div>
-											
-															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Bedrag lening
-												</label>
-												<div class="col-sm-9">
-													{{ Form::text('bedrag_lening', (isset($klant->bedrag_lening)) ? $klant->bedrag_lening : '',  array('id' => 'bedrag_lening', 'class' => 'form-control')) }}
-												</div>
-											</div>
-											
-															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Bedrag plaatsing geld
-												</label>
-												<div class="col-sm-9">
-													{{ Form::text('bedrag_plaatsing_geld', (isset($klant->bedrag_plaatsing_geld)) ? $klant->bedrag_plaatsing_geld : '',  array('id' => 'bedrag_plaatsing_geld', 'class' => 'form-control')) }}
-												</div>
-											</div>
-											
-															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Geldwisselaar aanwezig
-												</label>
-												<div class="col-sm-9">
-													<select name="geldwisselaar">
-														<option
-					                                        @if(isset($klant->geldwisselaar) && $klant->geldwisselaar == 'Eigendom ondernemer')
-															    selected="selected"
-															@endif
-														value="Eigendom ondernemer">Eigendom ondernemer</option>
-														<option
-					                                        @if(isset($klant->geldwisselaar) && $klant->geldwisselaar == 'Eigendom speelautomatenbedrijf')
-															    selected="selected"
-															@endif
-														value="Eigendom speelautomatenbedrijf">Eigendom speelautomatenbedrijf</option>
-													</select>
-												</div>
-											</div>
-											
-															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Vulling machines
-												</label>
-												<div class="col-sm-9">
-													<select name="vulling_machines">
-														<option
-					                                        @if(isset($klant->vulling_machines) && $klant->vulling_machines == 1)
-															    selected="selected"
-															@endif
-														value="1">Ja</option>
-														<option
-					                                        @if(isset($klant->vulling_machines) && $klant->vulling_machines == 0)
-															    selected="selected"
-															@endif
-														value="0">Nee</option>
-													</select>
-												</div>
-											</div>
-											
-															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Bedrag vulling machines	
-												</label>
-												<div class="col-sm-9">
-													{{ Form::text('bedrag_vulling_machines', (isset($klant->bedrag_vulling_machines)) ? $klant->bedrag_vulling_machines : '',  array('id' => 'postcode', 'bedrag_vulling_machines' => 'form-control')) }}
-												</div>
-											</div>
-											
-															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Vulling geldwisselaar
-												</label>
-												<div class="col-sm-9">
-													<select name="vulling_geldwisselaar">
-														<option
-					                                        @if(isset($klant->vulling_geldwisselaar) && $klant->vulling_geldwisselaar == 1)
-															    selected="selected"
-															@endif
-														value="1">Ja</option>
-														<option
-					                                        @if(isset($klant->vulling_geldwisselaar) && $klant->vulling_geldwisselaar == 0)
-															    selected="selected"
-															@endif
-														value="0">Nee</option>
-													</select>
-												</div>
-											</div>
-											
-															<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Bedrag vulling geldwisselaar
-												</label>
-												<div class="col-sm-9">
-													{{ Form::text('bedrag_vulling_geldwisselaar', (isset($klant->bedrag_vulling_geldwisselaar)) ? $klant->bedrag_vulling_geldwisselaar : '',  array('id' => 'bedrag_vulling_geldwisselaar', 'class' => 'form-control')) }}
-												</div>
-											</div>
+<label for="form-field-1" class="col-sm-3 control-label"> Medewerker </label>
+					<div class="col-sm-9">
+						@if($medewerkers)
+						<select name="medewerker_id">
+							@foreach($medewerkers as $medewerker)
+							<option
+							@if(isset($klant->medewerker_id) && $klant->medewerker_id == $medewerker->id)
+								selected="selected"
+								@endif
+								value="{{$medewerker->id}}">{{$medewerker->naam}}</option>
+							@endforeach
+						</select>
+						@else
+						Er zijn nog geen Medewerkers
+						@endif
+					</div>
+					</div>
+
+					<div class="form-group">
+						<label for="form-field-1" class="col-sm-3 control-label"> Bedrag lening </label>
+						<div class="col-sm-3">
+							{{ Form::text('bedrag_lening', (isset($klant->bedrag_lening)) ? $klant->bedrag_lening : '',  array('id' => 'bedrag_lening', 'class' => 'form-control')) }}
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="form-field-1" class="col-sm-3 control-label"> Bedrag plaatsing geld </label>
+						<div class="col-sm-3">
+							{{ Form::text('bedrag_plaatsing_geld', (isset($klant->bedrag_plaatsing_geld)) ? $klant->bedrag_plaatsing_geld : '',  array('id' => 'bedrag_plaatsing_geld', 'class' => 'form-control')) }}
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="form-field-1" class="col-sm-3 control-label"> Geldwisselaar aanwezig </label>
+						<div class="col-sm-3">
+							<select name="geldwisselaar">
+								<option
+								@if(isset($klant->geldwisselaar) && $klant->geldwisselaar == 'Eigendom ondernemer')
+									selected="selected"
+									@endif
+									value="Eigendom ondernemer">Eigendom ondernemer</option>
+								<option
+								@if(isset($klant->geldwisselaar) && $klant->geldwisselaar == 'Eigendom speelautomatenbedrijf')
+									selected="selected"
+									@endif
+									value="Eigendom speelautomatenbedrijf">Eigendom speelautomatenbedrijf</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="form-field-1" class="col-sm-3 control-label"> Vulling machines </label>
+						<div class="col-sm-9">
+							<select name="vulling_machines">
+								<option
+								@if(isset($klant->vulling_machines) && $klant->vulling_machines == 1)
+									selected="selected"
+									@endif
+									value="1">Ja</option>
+								<option
+								@if(isset($klant->vulling_machines) && $klant->vulling_machines == 0)
+									selected="selected"
+									@endif
+									value="0">Nee</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="form-field-1" class="col-sm-3 control-label"> Bedrag vulling machines </label>
+						<div class="col-sm-3">
+							{{ Form::text('bedrag_vulling_machines', (isset($klant->bedrag_vulling_machines)) ? $klant->bedrag_vulling_machines : '',  array('id' => 'postcode', 'bedrag_vulling_machines' => 'form-control')) }}
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="form-field-1" class="col-sm-3 control-label"> Vulling geldwisselaar </label>
+						<div class="col-sm-9">
+							<select name="vulling_geldwisselaar">
+								<option
+								@if(isset($klant->vulling_geldwisselaar) && $klant->vulling_geldwisselaar == 1)
+									selected="selected"
+									@endif
+									value="1">Ja</option>
+								<option
+								@if(isset($klant->vulling_geldwisselaar) && $klant->vulling_geldwisselaar == 0)
+									selected="selected"
+									@endif
+									value="0">Nee</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="form-field-1" class="col-sm-3 control-label"> Bedrag vulling geldwisselaar </label>
+						<div class="col-sm-2">
+							{{ Form::text('bedrag_vulling_geldwisselaar', (isset($klant->bedrag_vulling_geldwisselaar)) ? $klant->bedrag_vulling_geldwisselaar : '',  array('id' => 'bedrag_vulling_geldwisselaar', 'class' => 'form-control')) }}
+						</div>
+					</div>
 	</div>
 </div>
 </div>
@@ -424,6 +408,73 @@
 	</div>
 </div>
 {{ Form::close() }}
+
+<hr />
+<div class="row">
+	<div class="col-md-6">
+<div class="panel panel-white">
+	<div class="panel-heading border-light">
+		<h4 class="panel-title">Machines</h4>
+	</div>
+	<div class="panel-body">
+		<p>
+											<a href="/admin/machines/save/{{ $klant->id }}" class="btn btn-green"><i class="glyphicon glyphicon-plus"></i> Nieuw</a>
+										</p>
+										<table id="sample-table-1" class="table table-hover">
+											<thead>
+												<tr>
+													<th class="center">#</th>
+													<th>Machine nummer</th>
+													<th class="hidden-xs">Machine type</th>
+													<th>Type nummer</th>
+													<th>Locatie</th>
+													<th>Beheer</th>
+												</tr>
+											</thead>
+											<tbody>
+												@foreach($machines as $machine)
+												<tr>
+													<td class="center">{{$machine->id}}</td>
+													<td>{{$machine->machinenr}}</td>
+													<td>{{$machine->machine_type}}</td>
+													<td>{{$machine->type_nummer}}</td>
+													<td>{{$machine->locatie}}</td>
+													<td class="center">
+													<div class="visible-md visible-lg hidden-sm hidden-xs">
+														<a data-original-title="Bekijk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/machines/save/{{ $klant->id }}/{{$machine->id}}"><i class="fa fa-edit"></i> Bewerken</a>
+														<a data-original-title="Verwijder" data-placement="top" class="btn btn-xs btn-red tooltips" href="#"><i class="fa fa-times fa fa-white"></i> Verwijderen</a>
+													</div>
+													<div class="visible-xs visible-sm hidden-md hidden-lg">
+														<div class="btn-group">
+															<a href="#" data-toggle="dropdown" class="btn btn-green dropdown-toggle btn-sm">
+																<i class="fa fa-cog"></i> <span class="caret"></span>
+															</a>
+															<ul class="dropdown-menu pull-right dropdown-dark" role="menu">
+																<li>
+																	<a href="/admin/machines/view/{{$machine->id}}" tabindex="-1" role="menuitem">
+																		<i class="fa fa-edit"></i> View
+																	</a>
+																</li>
+																<li>
+																	<a href="/admin/machines/edit/{{$machine->id}}" tabindex="-1" role="menuitem">
+																		<i class="fa fa-edit"></i> Edit
+																	</a>
+																</li>
+																<li>
+																	<a href="#" tabindex="-1" role="menuitem">
+																		<i class="fa fa-times"></i> Remove
+																	</a>
+																</li>
+															</ul>
+														</div>
+													</div></td>
+												</tr>
+												@endforeach
+											</tbody>
+	</div>
+</div>
+</div>
+</div>
 
    
 @stop

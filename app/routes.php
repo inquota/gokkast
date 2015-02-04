@@ -44,11 +44,11 @@ Route::group(array('before' => "sentryAuth"), function () {
      * Machines
      */
     Route::get('/admin/machines/list/', array('as' => 'list-machine', 'uses' => 'MachinesController@getAdminList'));
-    Route::get('/admin/machines/new/', array('as' => 'new-machine', 'uses' => 'MachinesController@getNew'));
-    Route::get('/admin/machines/edit/{machine_id}', array('as' => 'edit-machine', 'uses' => 'MachinesController@getAdminEdit'));
+    Route::get('/admin/machines/save/{klant_id}', array('as' => 'edit-machine', 'uses' => 'MachinesController@getSave'));
+	Route::get('/admin/machines/save/{klant_id}/{machine_id}', array('as' => 'edit-machine', 'uses' => 'MachinesController@getSave'));
     Route::get('/admin/machines/view/{machine_id}', array('as' => 'view-machine', 'uses' => 'MachinesController@getAdminView'));
     Route::post('/admin/machines/edit/{machine_id}', 'MachinesController@doSave');
-    Route::post('/admin/machines/new/', 'MachinesController@doSave');
+    Route::post('/admin/machines/save/{klant_id}/{machine_id}', 'MachinesController@doSave');
 	
 	/**
      * Medewerkers
