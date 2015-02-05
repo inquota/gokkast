@@ -14,7 +14,7 @@ class Medewerker extends Ardent {
 
     protected $guarded = array('id');
 
-    protected $fillable = array('naam', 'nummer', 'created_at', 'updated_at');
+    protected $fillable = array('user_id', 'naam', 'nummer', 'created_at', 'updated_at');
 
     public static $rules = array(
         'naam'                 => 'required',
@@ -25,7 +25,7 @@ class Medewerker extends Ardent {
 
     public static $relationsData = array(
         'klant'      => array(self::HAS_MANY, 'Klant'),
-        'user'      => array(self::BELONGS_TO, 'User'),
+        'user'             => array(self::BELONGS_TO, 'User', 'user_id'),
     );
 
 }

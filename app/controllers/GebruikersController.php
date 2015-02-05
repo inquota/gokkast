@@ -4,7 +4,7 @@ class GebruikersController extends BaseController {
 
 	public function getList()
 	{
-		$gebruikers = User::get();
+		$gebruikers = Medewerker::get();
         $roles = Group::lists('name', 'id');
 		
 		return View::make('admin.gebruikers.list')
@@ -35,20 +35,48 @@ class GebruikersController extends BaseController {
 
             if(isset($medewerker_id)){
                 $medewerker = Medewerker::find($medewerker_id)->firstOrFail();
+                $useritem = User::find($medewerker->user_id);
             }else {
                 $medewerker = new Medewerker();
+                $useritem = new User();
             }
 
-            $medewerker->naam = Input::get('naam');
-            $medewerker->nummer = Input::get('nummer');
+            $useritem->first_name          = Input::get('first_name');
+            $useritem->last_name           = Input::get('last_name');
+            $useritem->activated           = 1;
+            $useritem->username            = Input::get('username');
+            $useritem->password            = Hash::make(Input::get('password'));
+            $useritem->created_at       = date('Y-m-d H:i:s');
+            $useritem->updated_at       = date('Y-m-d H:i:s');
+
+            $result = $useritem->updateUniques();
+
+            if(!isset($useritem->usergroup)) {
+                $usergroup = new UserGroup;
+                $usergroup->user_id = $useritem->id;
+                $usergroup->group_id = 2;
+                $usergroup->save();
+            }
+
+            if($result != true) {
+                return Redirect::back()
+                    ->withInput()
+                    ->withErrors($useritem->errors());
+            }
+
+            $medewerker->user_id = $useritem->id;
+            $medewerker->naam = Input::get('first_name'). ' '. Input::get('last_name');
+            $medewerker->nummer = Input::get('username');
             $medewerker->created_at = date('Y-m-d H:i:s');
             $medewerker->updated_at = date('Y-m-d H:i:s');
 
             $medewerker->save();
 
             if($medewerker->save() == true){
-                return Redirect::to('/admin/medewerkers/list')
-                    ->with('status', 'Medewerker opgeslagen');
+
+                    return Redirect::to('/admin/medewerkers/list')
+                        ->with('status', 'Medewerker opgeslagen');
+
             }else{
                 return Redirect::back()
                     ->withInput()
@@ -58,6 +86,7 @@ class GebruikersController extends BaseController {
 
        }
         catch(Exception $e){
+            die(var_dump($e));
             $validator = 'Bij het opslaan is er iets misgegaan.';
             return Redirect::back()
                 ->withInput()
