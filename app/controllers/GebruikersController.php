@@ -6,7 +6,7 @@ class GebruikersController extends BaseController {
 	{
 		$gebruikers = Medewerker::get();
         $roles = Group::lists('name', 'id');
-		
+
 		return View::make('admin.gebruikers.list')
             ->with('gebruikers', $gebruikers)
             ->with('roles', $roles);

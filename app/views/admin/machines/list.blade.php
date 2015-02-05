@@ -46,6 +46,7 @@
 												</tr>
 											</thead>
 											<tbody>
+											    @if(!$machines->isEmpty())
 												@foreach($machines as $machine)
 												<tr>
 													<td class="center">{{$machine->id}}</td>
@@ -85,6 +86,7 @@
 													</div></td>
 												</tr>
 												@endforeach
+												@endif
 											</tbody>
 										</table>
 									</div>

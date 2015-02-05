@@ -21,7 +21,7 @@
 						<!-- start: MAIN NAVIGATION MENU -->
 						<ul class="main-navigation-menu">
 							<li class="active open">
-								<a href="/users/dashboard/"><i class="fa fa-home"></i> <span class="title"> Dashboard </span></a>
+								<a href="/"><i class="fa fa-home"></i> <span class="title"> Dashboard </span></a>
 							</li>
 
                             <li>
@@ -41,6 +41,9 @@
                                     <ul class="sub-menu">
                                         <li>
                                         <a href="/admin/machines/list"><i class="fa fa-desktop"></i> <span class="title"> Overzicht </span></a>
+                                        </li>
+                                        <li>
+                                        <a href="/admin/machinetypes/list"><i class="fa fa-desktop"></i> <span class="title"> Machinetypes </span></a>
                                         </li>
                                     </ul>
 							</li>

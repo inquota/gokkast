@@ -10,6 +10,15 @@
 								<div class="panel panel-white">
 									<div class="panel-heading">
 										<h4 class="panel-title">Nieuwe machine</h4>
+										    @if($errors->has())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                            @foreach($errors->all() AS $error)
+                                            <li>{{  $error }}</li>
+                                            @endforeach
+                                                </ul>
+                                            </div>
+                                            @endif
 										<div class="panel-tools">
 											<div class="dropdown">
 												<a class="btn btn-xs dropdown-toggle btn-transparent-grey" data-toggle="dropdown">
@@ -43,74 +52,21 @@
 									</div>
 									<div class="panel-body">
 											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => Request::path()  )) }}
-																						<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Machine nummer
-												</label>
-												<div class="col-sm-9">
-													{{ Form::number('machinenr', '',  array('id' => 'machinenr', 'class' => 'form-control')) }}
-												</div>
-											</div>
-											
 											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
-													Machine Types
+													Machine type
 												</label>
 												<div class="col-sm-9">
-													@if($machine_types) 
-														<select name="machine_type">
-														@foreach($machine_types as $machine_type)
-															<option value="{{$machine_type->id}}">{{$machine_type->type}}</option>
-														@endforeach
-														</select>
-													@else
-														Er zijn nog geen Machine Types aangemaakt
-													@endif
+													{{ Form::text('mtype', (isset($machine->type)) ? $machine->type : '',  array('id' => 'type', 'class' => 'form-control')) }}
 												</div>
 											</div>
-																						
-											<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Type nummer
-												</label>
-												<div class="col-sm-9">
-												
-												<label class="radio-inline">
-													<input type="radio" class="square-green" value="TH nummer" name="type_nummer">
-													TH nummer
-												</label>
-												
-												<label class="radio-inline">
-													<input type="radio" class="square-green" value="TB nummer" name="type_nummer">
-													TB nummer
-												</label>
-												</div>
-											</div>
-											
-												<div class="form-group">
-												<label for="form-field-1" class="col-sm-2 control-label">
-													Locatie
-												</label>
-												<div class="col-sm-9">
-													<select name="locatie">
-														<option value="Magazijn">Magazijn</option>
-														<option value="Sloop">Sloop</option>
-														<option value="Verkocht">Verkocht</option>
-														<option value="Klant">Klant</option>
-													</select>
-												</div>
-											</div>
-											
-											
-											
-									
-											
 
 									</div>
 									            <div class="panel-footer">
                 <div class="pull-left">
-                    {{ Form::submit('Opslaan', array('class' => 'btn btn-primary form-control')) }}
+                    {{ Form::submit('Machinetype opslaan', array('class' => 'btn btn-primary form-control')) }}
                 </div>
+                <div class="clear"></div>
             </div>
             {{ Form::close() }}
 								</div>

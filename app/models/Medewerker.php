@@ -17,15 +17,16 @@ class Medewerker extends Ardent {
     protected $fillable = array('user_id', 'naam', 'nummer', 'created_at', 'updated_at');
 
     public static $rules = array(
+        'user_id'              => 'required',
         'naam'                 => 'required',
-        'nummer'              => 'required',
+        'nummer'               => 'required',
         'created_at'           => 'required',
         'updated_at'           => 'required'
     );
 
     public static $relationsData = array(
         'klant'      => array(self::HAS_MANY, 'Klant'),
-        'user'             => array(self::BELONGS_TO, 'User', 'user_id'),
+        'user'       => array(self::BELONGS_TO, 'User', 'user_id'),
     );
 
 }

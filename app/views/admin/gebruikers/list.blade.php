@@ -49,6 +49,7 @@
 												</tr>
 											</thead>
 											<tbody>
+											    @if(!$gebruikers->isEmpty())
 												@foreach($gebruikers as $gebruiker)
 												<tr>
 													<td class="hidden-xs">{{ $roles[$gebruiker->user->usergroup->group_id] }}</td>
@@ -81,6 +82,7 @@
 													</div></td>
 												</tr>
 												@endforeach
+												@endif
 											</tbody>
 										</table>
 									</div>
