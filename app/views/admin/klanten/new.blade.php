@@ -412,6 +412,7 @@
 <hr />
 <div class="row">
 	<div class="col-md-6">
+			@if(isset($klant->id))
 <div class="panel panel-white">
 	<div class="panel-heading border-light">
 		<h4 class="panel-title">Machines</h4>
@@ -432,6 +433,7 @@
 												</tr>
 											</thead>
 											<tbody>
+											@if(!empty($machines))
 												@foreach($machines as $machine)
 												<tr>
 													<td class="center">{{$machine->id}}</td>
@@ -470,9 +472,12 @@
 													</div></td>
 												</tr>
 												@endforeach
+												@endif
 											</tbody>
 	</div>
+
 </div>
+	@endif
 </div>
 </div>
 

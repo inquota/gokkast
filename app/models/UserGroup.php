@@ -15,9 +15,8 @@ class UserGroup extends Ardent {
     protected $fillable = array('user_id','group_id');
     public $timestamps = false;
 
-    public function user()
-    {
-        return $this->belongsTo('User', 'id');
-    }
+    public static $relationsData = array(
+        'user'      => array(self::BELONGS_TO, 'User'),
+    );
 
 }
