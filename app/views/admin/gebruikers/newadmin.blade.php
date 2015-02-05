@@ -9,7 +9,7 @@
 								<!-- start: TEXT FIELDS PANEL -->
 								<div class="panel panel-white">
 									<div class="panel-heading">
-										<h4 class="panel-title">Nieuwe medewerker</h4>
+										<h4 class="panel-title">Nieuwe beheerder</h4>
 										    @if($errors->has())
                                             <div class="alert alert-danger">
                                                 <ul>
@@ -57,7 +57,7 @@
 													Voornaam
 												</label>
 												<div class="col-sm-9">
-													{{ Form::text('first_name', (isset($medewerker->user->first_name)) ? $medewerker->user->first_name : '',  array('id' => 'first_name', 'class' => 'form-control', 'required')) }}
+													{{ Form::text('first_name', (isset($beheerder->first_name)) ? $beheerder->first_name : '',  array('id' => 'first_name', 'class' => 'form-control', 'required')) }}
 												</div>
 											</div>
 
@@ -66,7 +66,7 @@
 													Achternaam
 												</label>
 												<div class="col-sm-9">
-													{{ Form::text('last_name', (isset($medewerker->user->last_name)) ? $medewerker->user->last_name : '',  array('id' => 'last_name', 'class' => 'form-control', 'required')) }}
+													{{ Form::text('last_name', (isset($beheerder->last_name)) ? $beheerder->last_name : '',  array('id' => 'last_name', 'class' => 'form-control', 'required')) }}
 												</div>
 											</div>
 
@@ -76,7 +76,7 @@
 													Gebruikersnaam / Nummer
 												</label>
 												<div class="col-sm-9">
-													{{ Form::number('username', (isset($medewerker->nummer)) ? $medewerker->nummer : '',  array('id' => 'nummer', 'class' => 'form-control', 'required')) }}
+													{{ Form::text('username', (isset($beheerder->username)) ? $beheerder->username : '',  array('id' => 'username', 'class' => 'form-control', 'required')) }}
 												</div>
 											</div>
 

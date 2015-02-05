@@ -45,13 +45,16 @@ class GebruikersController extends BaseController {
             $useritem->last_name           = Input::get('last_name');
             $useritem->activated           = 1;
             $useritem->username            = Input::get('username');
-            $useritem->password            = Hash::make(Input::get('password'));
+            $password = Input::get('password');
+            if(isset($password)) {
+                $useritem->password = Hash::make($password);
+            }
             $useritem->created_at       = date('Y-m-d H:i:s');
             $useritem->updated_at       = date('Y-m-d H:i:s');
 
             $result = $useritem->updateUniques();
 
-            if(!isset($useritem->usergroup)) {
+            if(!isset($useritem->usergroup->group_id)) {
                 $usergroup = new UserGroup;
                 $usergroup->user_id = $useritem->id;
                 $usergroup->group_id = 2;

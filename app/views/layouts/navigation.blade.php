@@ -69,6 +69,15 @@
                                     </ul>
 							</li>
 
+                            <li>
+								<a href="javascript:void(0)"><i class="fa fa-users"></i> <span class="title"> Account</span><i class="icon-arrow"></i></a>
+                                    <ul class="sub-menu">
+                                        <li>
+                                        <a href="/user/signout"><i class="fa fa-desktop"></i> <span class="title"> Uitloggen </span></a>
+                                        </li>
+                                    </ul>
+							</li>
+
 						</ul>
 						<!-- end: MAIN NAVIGATION MENU -->
 					</div>
