@@ -50,6 +50,18 @@ Route::group(array('before' => "sentryAuth"), function () {
     Route::get('/admin/machines/view/{machine_id}', array('as' => 'view-machine', 'uses' => 'MachinesController@getAdminView'));
     Route::post('/admin/machines/edit/{machine_id}', 'MachinesController@doSave');
     Route::post('/admin/machines/save/{klant_id}/{machine_id}', 'MachinesController@doSave');
+
+    /**
+     * machinetypes
+     */
+    Route::get('/admin/machinetypes/list/', array('as' => 'list-machinetype', 'uses' => 'MachineTypesController@getList'));
+    Route::get('/admin/machinetypes/save/{machine_id}', array('as' => 'edit-machinetype', 'uses' => 'MachineTypesController@getSave'));
+    Route::get('/admin/machinetypes/view/{machine_id}', array('as' => 'view-machinetype', 'uses' => 'MachineTypesController@getView'));
+    Route::post('/admin/machinetypes/save/{machine_id}', 'MachineTypesController@doSave');
+
+    Route::get('/admin/machinetypes/new/', array('as' => 'new-machinetype', 'uses' => 'MachineTypesController@getSave'));
+    Route::post('/admin/machinetypes/new/', 'MachineTypesController@doSave');
+    Route::get('/admin/machinetypes/delete/{machine_id}', array('as' => 'delete-machinetype', 'uses' => 'MachineTypesController@getDelete'));
 	
 	/**
      * Medewerkers

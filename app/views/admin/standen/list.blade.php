@@ -51,6 +51,7 @@
 												</tr>
 											</thead>
 											<tbody>
+											    @if($standen->isEmpty())
 												@foreach($standen as $stand)
 												<tr>
 													<td class="center">{{$stand->id}}</td>
@@ -85,6 +86,7 @@
 													</div></td>
 												</tr>
 												@endforeach
+												@endif
 											</tbody>
 										</table>
 									</div>
