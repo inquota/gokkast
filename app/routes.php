@@ -15,6 +15,7 @@
  * Inloggen redirect
  */
 Route::get('/', array('as' => 'login', 'uses' => 'HomeController@showIndex'));
+Route::get('/user/signout', array('as' => 'login', 'uses' => 'HomeController@showLogout'));
 Route::get('/user/login', array('as' => 'login', 'uses' => 'HomeController@showLogin'));
 Route::post('/user/login', 'AuthenticationController@doLogin');
 
@@ -63,7 +64,19 @@ Route::group(array('before' => "sentryAuth"), function () {
 
     Route::get('/admin/medewerkers/delete/{medewerker_id}', array('as' => 'delete-medewerker', 'uses' => 'GebruikersController@getDelete'));
 
-	
+    /**
+     * Beheerders
+     */
+    Route::get('/admin/beheerders/list/', array('as' => 'list-beheerder', 'uses' => 'BeheerdersController@getList'));
+
+    Route::get('/admin/beheerders/new/', array('as' => 'new-beheerder', 'uses' => 'BeheerdersController@getSave'));
+    Route::post('/admin/beheerders/new/', 'BeheerdersController@doSave');
+
+    Route::get('/admin/beheerders/edit/{userid}', array('as' => 'edit-beheerder', 'uses' => 'BeheerdersController@getSave'));
+    Route::post('/admin/beheerders/edit/{userid}', 'BeheerdersController@doSave');
+
+    Route::get('/admin/beheerders/delete/{userid}', array('as' => 'delete-beheerder', 'uses' => 'BeheerdersController@getDelete'));
+
 	/**
      * Klanten
      */

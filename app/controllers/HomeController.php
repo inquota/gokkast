@@ -31,4 +31,9 @@ class HomeController extends BaseController {
         return ( ! Sentry::check()) ? View::make('home.login') : Redirect::to('/');
     }
 
+    public function showLogout(){
+        Sentry::logout();
+        return Redirect::to('/');
+    }
+
 }

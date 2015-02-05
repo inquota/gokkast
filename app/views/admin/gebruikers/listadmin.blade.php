@@ -9,7 +9,8 @@
 								<!-- start: BASIC TABLE PANEL -->
 								<div class="panel panel-white">
 									<div class="panel-heading">
-										<h4 class="panel-title">Machines</h4>
+										<h4 class="panel-title">Beheerders</h4>
+
 										<div class="panel-tools">										
 											<div class="dropdown">
 											<a class="btn btn-xs dropdown-toggle btn-transparent-grey" data-toggle="dropdown">
@@ -34,30 +35,31 @@
 										</div>
 									</div>
 									<div class="panel-body">
+										<p>
+											<a href="/admin/beheerders/new/" class="btn btn-green"><i class="glyphicon glyphicon-plus"></i> Nieuw</a>
+										</p>
 										<table id="sample-table-1" class="table table-hover">
 											<thead>
 												<tr>
-													<th class="center">#</th>
-													<th>Machine nummer</th>
-													<th class="hidden-xs">Machine type</th>
-													<th>Type nummer</th>
-													<th>Locatie</th>
+													<th>Rol</th>
+													<th>Gebruikersnaam</th>
+													<th class="hidden-xs">Naam</th>
+													<th>Aangemaakt op</th>
 													<th>Beheer</th>
 												</tr>
 											</thead>
 											<tbody>
-												@foreach($machines as $machine)
+												@foreach($gebruikers as $gebruiker)
+												@if($gebruiker->usergroup->group_id == 1)
 												<tr>
-													<td class="center">{{$machine->id}}</td>
-													<td class="hidden-xs">{{$machine->machine_nr}}</td>
-													<td>{{$machine->machine_type}}</td>
-													<td>{{$machine->type_nummer}}</td>
-													<td>{{$machine->locatie}}</td>
+													<td class="hidden-xs">{{ $roles[$gebruiker->usergroup->group_id] }}</td>
+													<td>{{ $gebruiker->username }}</td>
+													<td>{{ $gebruiker->first_name }} {{ $gebruiker->last_name }}</td>
+													<td>{{ date('d-m-Y', strtotime($gebruiker->created_at)) }}</td>
 													<td class="center">
 													<div class="visible-md visible-lg hidden-sm hidden-xs">
-														<a data-original-title="Bekijk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/machines/view/{{$machine->id}}"><i class="fa fa-file-o"></i> Bekijken</a>
-														<a data-original-title="Bewerk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/machines/edit/{{$machine->id}}"><i class="fa fa-edit"></i> Bewerken</a>
-														<a data-original-title="Verwijder" data-placement="top" class="btn btn-xs btn-red tooltips" href="#"><i class="fa fa-times fa fa-white"></i> Verwijderen</a>
+														<a data-original-title="Edit" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/beheerders/edit/{{$gebruiker->id}}"><i class="fa fa-edit"></i> Bewerken</a>
+														<a data-original-title="Remove" data-placement="top" class="btn btn-xs btn-red tooltips" href="/admin/beheerders/delete/{{$gebruiker->id}}" onclick="confirm('Weet u zeker dat u de beheerder {{ $gebruiker->first_name }} {{ $gebruiker->last_name }} wilt verwijderden?')"><i class="fa fa-times fa fa-white"></i> Verwijderen</a>
 													</div>
 													<div class="visible-xs visible-sm hidden-md hidden-lg">
 														<div class="btn-group">
@@ -66,17 +68,12 @@
 															</a>
 															<ul class="dropdown-menu pull-right dropdown-dark" role="menu">
 																<li>
-																	<a href="/admin/machines/view/{{$machine->id}}" tabindex="-1" role="menuitem">
-																		<i class="fa fa-edit"></i> View
-																	</a>
-																</li>
-																<li>
-																	<a href="/admin/machines/edit/{{$machine->id}}" tabindex="-1" role="menuitem">
+																	<a href="/admin/beheerders/edit/{{$gebruiker->id}}" tabindex="-1" role="menuitem">
 																		<i class="fa fa-edit"></i> Edit
 																	</a>
 																</li>
 																<li>
-																	<a href="#" tabindex="-1" role="menuitem">
+																	<a href="/admin/beheerders/delete/{{$gebruiker->id}}" tabindex="-1" role="menuitem" onclick="confirm('Weet u zeker dat u de beheerder {{ $gebruiker->first_name }} {{ $gebruiker->last_name }} wilt verwijderden?')">
 																		<i class="fa fa-times"></i> Remove
 																	</a>
 																</li>
@@ -84,6 +81,7 @@
 														</div>
 													</div></td>
 												</tr>
+												@endif
 												@endforeach
 											</tbody>
 										</table>
