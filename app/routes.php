@@ -53,15 +53,15 @@ Route::group(array('before' => "sentryAuth"), function () {
 	/**
      * Medewerkers
      */
-    Route::get('/admin/medewerkers/list/', array('as' => 'list-medewerker', 'uses' => 'MedewerkersController@getList'));
+    Route::get('/admin/medewerkers/list/', array('as' => 'list-medewerker', 'uses' => 'GebruikersController@getList'));
 
-    Route::get('/admin/medewerkers/new/', array('as' => 'new-medewerker', 'uses' => 'MedewerkersController@getSave'));
-    Route::post('/admin/medewerkers/new/', 'MedewerkersController@doSave');
+    Route::get('/admin/medewerkers/new/', array('as' => 'new-medewerker', 'uses' => 'GebruikersController@getSave'));
+    Route::post('/admin/medewerkers/new/', 'GebruikersController@doSave');
 
-    Route::get('/admin/medewerkers/edit/{medewerker_id}', array('as' => 'edit-medewerker', 'uses' => 'MedewerkersController@getSave'));
-    Route::post('/admin/medewerkers/edit/{medewerker_id}', 'MedewerkersController@doSave');
+    Route::get('/admin/medewerkers/edit/{medewerker_id}', array('as' => 'edit-medewerker', 'uses' => 'GebruikersController@getSave'));
+    Route::post('/admin/medewerkers/edit/{medewerker_id}', 'GebruikersController@doSave');
 
-    Route::get('/admin/medewerkers/delete/{medewerker_id}', array('as' => 'delete-medewerker', 'uses' => 'MedewerkersController@getDelete'));
+    Route::get('/admin/medewerkers/delete/{medewerker_id}', array('as' => 'delete-medewerker', 'uses' => 'GebruikersController@getDelete'));
 
 	
 	/**

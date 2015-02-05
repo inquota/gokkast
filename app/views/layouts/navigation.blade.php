@@ -46,13 +46,19 @@
 							</li>
 
                             <li>
-								<a href="javascript:void(0)"><i class="fa fa-cogs"></i> <span class="title"> Medewerkers</span><i class="icon-arrow"></i></a>
+								<a href="javascript:void(0)"><i class="fa fa-cogs"></i> <span class="title"> Gebruikers</span><i class="icon-arrow"></i></a>
                                     <ul class="sub-menu">
                                         <li>
                                         <a href="/admin/medewerkers/list"><i class="fa fa-desktop"></i> <span class="title"> Overzicht </span></a>
                                         </li>
                                         <li>
+                                        <a href="/admin/beheerders/new"><i class="fa fa-desktop"></i> <span class="title"> Beheerder aanmaken </span></a>
+                                        </li>
+                                        <li>
                                         <a href="/admin/medewerkers/new"><i class="fa fa-desktop"></i> <span class="title"> Medewerker aanmaken </span></a>
+                                        </li>
+                                        <li>
+                                        <a href="/admin/klanten/new"><i class="fa fa-desktop"></i> <span class="title"> Klant aanmaken </span></a>
                                         </li>
                                     </ul>
 							</li>

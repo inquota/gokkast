@@ -1,12 +1,15 @@
 <?php
 
-class MedewerkersController extends BaseController {
+class GebruikersController extends BaseController {
 
 	public function getList()
 	{
-		$medewerkers = Medewerker::all();
+		$gebruikers = User::get();
+        $roles = Group::lists('name', 'id');
 		
-		return View::make('admin.medewerkers.list')->with('medewerkers', $medewerkers);
+		return View::make('admin.gebruikers.list')
+            ->with('gebruikers', $gebruikers)
+            ->with('roles', $roles);
 	}
 
 	
@@ -15,11 +18,11 @@ class MedewerkersController extends BaseController {
         if(isset($medewerker_id)) {
             $medewerker = Medewerker::find($medewerker_id);
 
-            return View::make('admin.medewerkers.new')
+            return View::make('admin.gebruikers.new')
                 ->with('medewerker', $medewerker);
         }
 
-       return View::make('admin.medewerkers.new');
+       return View::make('admin.gebruikers.new');
     }
 	
 	public function doSave($medewerker_id = null) {
