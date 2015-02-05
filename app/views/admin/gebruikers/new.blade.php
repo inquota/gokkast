@@ -104,7 +104,7 @@
 									</div>
 									            <div class="panel-footer">
                 <div class="pull-left">
-                    {{ Form::submit('Maak medewerker aan', array('class' => 'btn btn-primary form-control')) }}
+                    {{ Form::submit('Medewerker opslaan', array('class' => 'btn btn-primary form-control')) }}
                 </div>
                 <div style="clear:both;"></div>
             </div>

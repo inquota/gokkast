@@ -9,7 +9,7 @@
 								<!-- start: BASIC TABLE PANEL -->
 								<div class="panel panel-white">
 									<div class="panel-heading">
-										<h4 class="panel-title">Machines</h4>
+										<h4 class="panel-title">Machinetypes</h4>
 										<div class="panel-tools">										
 											<div class="dropdown">
 											<a class="btn btn-xs dropdown-toggle btn-transparent-grey" data-toggle="dropdown">

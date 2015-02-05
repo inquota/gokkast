@@ -34,6 +34,9 @@
 										</div>
 									</div>
 									<div class="panel-body">
+									<p>
+                                    	<a href="/admin/machines/new/" class="btn btn-green"><i class="glyphicon glyphicon-plus"></i> Nieuw</a>
+                                    </p>
 										<table id="sample-table-1" class="table table-hover">
 											<thead>
 												<tr>
@@ -50,14 +53,14 @@
 												@foreach($machines as $machine)
 												<tr>
 													<td class="center">{{$machine->id}}</td>
-													<td class="hidden-xs">{{$machine->machine_nr}}</td>
-													<td>{{$machine->machine_type}}</td>
+													<td class="hidden-xs">{{$machine->machinenr}}</td>
+													<td>{{@$machinetypes[$machine->machine_type]}}</td>
 													<td>{{$machine->type_nummer}}</td>
 													<td>{{$machine->locatie}}</td>
 													<td class="center">
 													<div class="visible-md visible-lg hidden-sm hidden-xs">
 														<a data-original-title="Bekijk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/machines/view/{{$machine->id}}"><i class="fa fa-file-o"></i> Bekijken</a>
-														<a data-original-title="Bewerk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/machines/edit/{{$machine->id}}"><i class="fa fa-edit"></i> Bewerken</a>
+														<a data-original-title="Bewerk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/machines/save/{{$machine->id}}"><i class="fa fa-edit"></i> Bewerken</a>
 														<a data-original-title="Verwijder" data-placement="top" class="btn btn-xs btn-red tooltips" href="#"><i class="fa fa-times fa fa-white"></i> Verwijderen</a>
 													</div>
 													<div class="visible-xs visible-sm hidden-md hidden-lg">

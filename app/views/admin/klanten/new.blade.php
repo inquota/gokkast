@@ -413,7 +413,7 @@
 
 <div class="row">
 	<div class="col-sm-2">
-		{{ Form::submit('Opslaan', array('class' => 'btn btn-primary form-control')) }}
+		{{ Form::submit('Klant opslaan', array('class' => 'btn btn-primary form-control')) }}
 	</div>
 </div>
 {{ Form::close() }}

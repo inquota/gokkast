@@ -6,11 +6,14 @@ class MachinesController extends BaseController {
 	public function getAdminList()
 	{
 		$machines = Machine::all();
+        $machinetypes = MachineType::lists('type','id');
 		
-		return View::make('admin.machines.list')->with('machines', $machines);
+		return View::make('admin.machines.list')
+            ->with('machines', $machines)
+            ->with('machinetypes', $machinetypes);
 	}
 	
-	public function getSave($klant_id, $machine_id = null)
+	public function getSave($machine_id = null)
 	{
 		$machine_types = MachineType::all();
 		
@@ -39,7 +42,7 @@ class MachinesController extends BaseController {
 	public function doSave($machine_id = null) {
 		
 		if(isset($machine_id)){
-            $machine = Machine::find($machine_id)->firstOrFail();
+            $machine = Machine::find($machine_id);
         }else {
             $machine = new Machine();
         }
@@ -55,7 +58,7 @@ class MachinesController extends BaseController {
 		}
 
         if($machine->save() == true) {
-            return Redirect::to('/admin/klanten/edit/'.$machine->klant_id)
+            return Redirect::to('/admin/machines/list')
                 ->with('status', 'Machine opgeslagen');
         }else{
             return Redirect::back()
