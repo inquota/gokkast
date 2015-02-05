@@ -63,7 +63,7 @@
 												<div class="col-sm-9">
 													@if(count($machine_types) > 0) 
 														<select name="machine_type">
-														@if(isset($machine->machine_type))
+														@if(isset($machine->machine_type) && (isset($current_machinetype)))
 															<option value="{{ $current_machinetype->id }}">{{ $current_machinetype->type }}</option>
 														@endif
 														@foreach($machine_types as $machine_type)

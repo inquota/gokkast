@@ -48,7 +48,7 @@
 													Machine nummer
 												</label>
 												<div class="col-sm-9">
-													{{ Form::number('machinenr', '',  array('id' => 'machinenr', 'class' => 'form-control')) }}
+													{{ Form::number('machinenr', (isset($machine->machinenr)) ? $machine->machinenr : '',  array('id' => 'machinenr', 'class' => 'form-control')) }}
 												</div>
 											</div>
 											
@@ -109,8 +109,9 @@
 									</div>
 									            <div class="panel-footer">
                 <div class="pull-left">
-                    {{ Form::submit('Opslaan', array('class' => 'btn btn-primary form-control')) }}
+                    {{ Form::submit('Machine Opslaan', array('class' => 'btn btn-primary form-control')) }}
                 </div>
+                <div class="clear"></div>
             </div>
             {{ Form::close() }}
 								</div>

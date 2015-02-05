@@ -9,7 +9,7 @@
 								<!-- start: TEXT FIELDS PANEL -->
 								<div class="panel panel-white">
 									<div class="panel-heading">
-										<h4 class="panel-title">Nieuwe machine</h4>
+										<h4 class="panel-title">Machinetype</h4>
 										    @if($errors->has())
                                             <div class="alert alert-danger">
                                                 <ul>
