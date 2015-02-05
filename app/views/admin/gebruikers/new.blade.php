@@ -54,19 +54,47 @@
 											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => Request::path())) }}
 											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
-													Naam
+													Voornaam
 												</label>
 												<div class="col-sm-9">
-													{{ Form::text('naam', (isset($medewerker->naam)) ? $medewerker->naam : '',  array('id' => 'naam', 'class' => 'form-control')) }}
+													{{ Form::text('first_name', (isset($medewerker->user->first_name)) ? $medewerker->user->first_name : '',  array('id' => 'first_name', 'class' => 'form-control', 'required')) }}
 												</div>
 											</div>
+
+											<div class="form-group">
+												<label for="form-field-1" class="col-sm-2 control-label">
+													Achternaam
+												</label>
+												<div class="col-sm-9">
+													{{ Form::text('last_name', (isset($medewerker->user->last_name)) ? $medewerker->user->last_name : '',  array('id' => 'last_name', 'class' => 'form-control', 'required')) }}
+												</div>
+											</div>
+
 											
 											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
-													Nummer
+													Gebruikersnaam / Nummer
 												</label>
 												<div class="col-sm-9">
-													{{ Form::text('nummer', (isset($medewerker->nummer)) ? $medewerker->nummer : '',  array('id' => 'nummer', 'class' => 'form-control')) }}
+													{{ Form::number('username', (isset($medewerker->nummer)) ? $medewerker->nummer : '',  array('id' => 'nummer', 'class' => 'form-control', 'required')) }}
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label for="form-field-1" class="col-sm-2 control-label">
+													Wachtwoord
+												</label>
+												<div class="col-sm-9">
+													{{ Form::password('password', array('id' => 'password', 'class' => 'form-control', 'required')) }}
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label for="form-field-1" class="col-sm-2 control-label">
+													Wachtwoord bevestigen
+												</label>
+												<div class="col-sm-9">
+													{{ Form::password('password_confirmation', array('id' => 'password_confirmation', 'class' => 'form-control', 'required')) }}
 												</div>
 											</div>
 											
@@ -76,7 +104,7 @@
 									</div>
 									            <div class="panel-footer">
                 <div class="pull-left">
-                    {{ Form::submit('Opslaan', array('class' => 'btn btn-primary form-control')) }}
+                    {{ Form::submit('Maak medewerker aan', array('class' => 'btn btn-primary form-control')) }}
                 </div>
                 <div style="clear:both;"></div>
             </div>

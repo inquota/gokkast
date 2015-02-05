@@ -14,9 +14,10 @@ class Klant extends Ardent {
 
     protected $guarded = array('id');
 
-    protected $fillable = array('naam', 'bedrijf', 'adres', 'postcode', 'woonplaats', 'telefoon_vast', 'telefoon_mobiel', 'email', 'website', 'medewerker_id', 'bedrag_lening', 'bedrag_plaatsing_geld', 'geldwisselaar', 'vulling_machines', 'bedrag_vulling_machines', 'vulling_geldwisselaar', 'bedrag_vulling_geldwisselaar', 'vergunning_nummer', 'vergunning_verl_door', 'verg_geldig_vanaf', 'verg_geldig_tot', 'contract', 'contr_geldig_vanaf', 'contr_geldig_tot', 'nettowinst_verdeling', 'afr_freq', 'datum_laatste_verr', 'created_at', 'updated_at');
+    protected $fillable = array('user_id', 'naam', 'bedrijf', 'adres', 'postcode', 'woonplaats', 'telefoon_vast', 'telefoon_mobiel', 'email', 'website', 'medewerker_id', 'bedrag_lening', 'bedrag_plaatsing_geld', 'geldwisselaar', 'vulling_machines', 'bedrag_vulling_machines', 'vulling_geldwisselaar', 'bedrag_vulling_geldwisselaar', 'vergunning_nummer', 'vergunning_verl_door', 'verg_geldig_vanaf', 'verg_geldig_tot', 'contract', 'contr_geldig_vanaf', 'contr_geldig_tot', 'nettowinst_verdeling', 'afr_freq', 'datum_laatste_verr', 'created_at', 'updated_at');
 
     public static $rules = array(
+        'user_id' => 'required',
         'naam' => 'required',
         'bedrijf' => 'required',
         'adres' => 'required',
@@ -49,6 +50,7 @@ class Klant extends Ardent {
     );
 
     public static $relationsData = array(
+        'user'             => array(self::BELONGS_TO, 'User', 'user_id'),
         'medewerker'      => array(self::BELONGS_TO, 'Medewerker'),
         'machine'      => array(self::HAS_MANY, 'Machine'),
         'bon'           => array(self::HAS_MANY, 'Bon'),

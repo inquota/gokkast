@@ -9,7 +9,7 @@
 								<!-- start: BASIC TABLE PANEL -->
 								<div class="panel panel-white">
 									<div class="panel-heading">
-										<h4 class="panel-title">Gebruikers</h4>
+										<h4 class="panel-title">Medewerkers</h4>
 
 										<div class="panel-tools">										
 											<div class="dropdown">
@@ -51,9 +51,9 @@
 											<tbody>
 												@foreach($gebruikers as $gebruiker)
 												<tr>
-													<td class="hidden-xs">{{ $roles[$gebruiker->usergroup->group_id] }}</td>
-													<td>{{ $gebruiker->username }}</td>
-													<td>{{ $gebruiker->first_name }} {{ $gebruiker->last_name }}</td>
+													<td class="hidden-xs">{{ $roles[$gebruiker->user->usergroup->group_id] }}</td>
+													<td>{{ $gebruiker->user->username }}</td>
+													<td>{{ $gebruiker->user->first_name }} {{ $gebruiker->user->last_name }}</td>
 													<td>{{ date('d-m-Y', strtotime($gebruiker->created_at)) }}</td>
 													<td class="center">
 													<div class="visible-md visible-lg hidden-sm hidden-xs">

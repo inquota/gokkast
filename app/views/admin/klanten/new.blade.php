@@ -42,10 +42,19 @@
 	
 	<div class="form-group">
 		<label for="form-field-1" class="col-sm-2 control-label">
-			Naam
+			Voornaam
 		</label>
 		<div class="col-sm-9">
-			{{ Form::text('naam', (isset($klant->naam)) ? $klant->naam : '',  array('id' => 'naam', 'class' => 'form-control')) }}
+			{{ Form::text('first_name', (isset($klant->user->first_name)) ? $klant->user->first_name : '',  array('id' => 'first_name', 'class' => 'form-control')) }}
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="form-field-1" class="col-sm-2 control-label">
+			Achternaam
+		</label>
+		<div class="col-sm-9">
+{{ Form::text('last_name', (isset($klant->user->last_name)) ? $klant->user->last_name : '',  array('id' => 'last_name', 'class' => 'form-control')) }}
 		</div>
 	</div>
 	
