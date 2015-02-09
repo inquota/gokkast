@@ -50,6 +50,7 @@
 												</tr>
 											</thead>
 											<tbody>
+											    @if(!$klanten->isEmpty())
 												@foreach($klanten as $klant)
 												<tr>
 													<td class="center">{{$klant->id}}</td>
@@ -62,7 +63,7 @@
 													<div class="visible-md visible-lg hidden-sm hidden-xs">
 														<a data-original-title="Klik hier om een Bon aan te maken" data-placement="top" class="btn btn-xs btn-primary tooltips" href="/admin/bonnen/new/{{$klant->id}}"><i class="fa fa-money"></i> Bon aanmaken</a>
 														<a data-original-title="Edit" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/klanten/edit/{{$klant->id}}"><i class="fa fa-edit"></i> Bewerken</a>
-														<a data-original-title="Remove" data-placement="top" class="btn btn-xs btn-red tooltips" href="/admin/klanten/delete/{{$klant->id}}" onclick="confirm('Weet u zeker dat u de klant {{ $klant->naam }} wilt verwijderden?')"><i class="fa fa-times fa fa-white"></i> Verwijderen</a>
+														<a onclick="confirm('Weet u zeker dat u de klant {{ $klant->naam }} wilt verwijderden?')" data-original-title="Remove" data-placement="top" class="btn btn-xs btn-red tooltips" href="/admin/klanten/delete/{{$klant->id}}"><i class="fa fa-times fa fa-white"></i> Verwijderen</a>
 													</div>
 													<div class="visible-xs visible-sm hidden-md hidden-lg">
 														<div class="btn-group">
@@ -76,7 +77,7 @@
 																	</a>
 																</li>
 																<li>
-																	<a href="#" tabindex="-1" role="menuitem">
+																	<a href="/admin/klanten/delete/{{$klant->id}}" tabindex="-1" role="menuitem" onclick="confirm('Weet u zeker dat u de klant {{ $klant->naam }} wilt verwijderden?')">
 																		<i class="fa fa-times"></i> Verwijderen
 																	</a>
 																</li>
@@ -85,6 +86,7 @@
 													</div></td>
 												</tr>
 												@endforeach
+												@endif
 											</tbody>
 										</table>
 									</div>

@@ -35,14 +35,54 @@ class KlantenController extends BaseController {
              * Create new shop
              */
 
-        if(isset($klant_id)){
-            $klant = Klant::find($klant_id)->firstOrFail();
-        }else {
-            $klant = new Klant();
+        /***
+         * random password
+         */
+
+        $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
         }
 
+        $randompassword = implode($pass);
+
+        if(isset($klant_id)){
+            $klant = Klant::find($klant_id)->firstOrFail();
+            if(isset($klant->user_id) && $klant->user_id != 0) {
+                $useritem = User::find($klant->user_id);
+            }else{
+                $useritem = new User();
+                $useritem->password = Hash::make($randompassword);
+            }
+        }else {
+            $klant = new Klant();
+            $useritem = new User();
+            $useritem->password = Hash::make($randompassword);
+        }
+
+        // set user details
+        $useritem->first_name          = Input::get('first_name');
+        $useritem->last_name           = Input::get('last_name');
+        $useritem->activated           = 1;
+        $useritem->username            = Input::get('email');
+
+        $useritem->created_at       = date('Y-m-d H:i:s');
+        $useritem->updated_at       = date('Y-m-d H:i:s');
+        $result = $useritem->updateUniques();
+
+        if(!isset($useritem->usergroup)) {
+            $usergroup = new UserGroup;
+            $usergroup->user_id = $useritem->id;
+            $usergroup->group_id = 3;
+            $usergroup->save();
+        }
+
+        $klant->user_id = $useritem->id;
         $klant->bedrijf = Input::get('bedrijf');
-        $klant->naam = Input::get('naam');
+        $klant->naam = Input::get('first_name').' '.Input::get('last_name');
         $klant->adres = Input::get('adres');
         $klant->postcode = Input::get('postcode');
         $klant->woonplaats = Input::get('woonplaats');
@@ -72,8 +112,15 @@ class KlantenController extends BaseController {
         $klant->updated_at = '0000-00-00 00:00:00';
 
             if($klant->save() == true) {
-                return Redirect::to('/admin/klanten/list')
-                    ->with('status', 'Klant opgeslagen');
+                if($result == true){
+                    return Redirect::to('/admin/klanten/list')
+                        ->with('status', 'Klant opgeslagen');
+                }else{
+                    return Redirect::back()
+                        ->withInput()
+                        ->withErrors($useritem->errors());
+                }
+
             }else{
                 return Redirect::back()
                     ->withInput()

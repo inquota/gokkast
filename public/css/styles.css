@@ -302,6 +302,9 @@ h1, h2, h3, h4 {
   left: 0;
   padding-top: 36px;
 }
+.clear {
+    clear:both;
+}
 .right-sidebar-open #pageslide-left {
   left: -260px;
 }

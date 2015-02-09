@@ -9,7 +9,7 @@
 								<!-- start: TEXT FIELDS PANEL -->
 								<div class="panel panel-white">
 									<div class="panel-heading">
-										<h4 class="panel-title">Nieuwe medewerker</h4>
+										<h4 class="panel-title">Nieuwe beheerder</h4>
 										    @if($errors->has())
                                             <div class="alert alert-danger">
                                                 <ul>
@@ -54,19 +54,47 @@
 											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => Request::path())) }}
 											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
-													Naam
+													Voornaam
 												</label>
 												<div class="col-sm-9">
-													{{ Form::text('naam', (isset($medewerker->naam)) ? $medewerker->naam : '',  array('id' => 'naam', 'class' => 'form-control')) }}
+													{{ Form::text('first_name', (isset($beheerder->first_name)) ? $beheerder->first_name : '',  array('id' => 'first_name', 'class' => 'form-control', 'required')) }}
 												</div>
 											</div>
+
+											<div class="form-group">
+												<label for="form-field-1" class="col-sm-2 control-label">
+													Achternaam
+												</label>
+												<div class="col-sm-9">
+													{{ Form::text('last_name', (isset($beheerder->last_name)) ? $beheerder->last_name : '',  array('id' => 'last_name', 'class' => 'form-control', 'required')) }}
+												</div>
+											</div>
+
 											
 											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
-													Nummer
+													Gebruikersnaam / Nummer
 												</label>
 												<div class="col-sm-9">
-													{{ Form::text('nummer', (isset($medewerker->nummer)) ? $medewerker->nummer : '',  array('id' => 'nummer', 'class' => 'form-control')) }}
+													{{ Form::text('username', (isset($beheerder->username)) ? $beheerder->username : '',  array('id' => 'username', 'class' => 'form-control', 'required')) }}
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label for="form-field-1" class="col-sm-2 control-label">
+													Wachtwoord
+												</label>
+												<div class="col-sm-9">
+													{{ Form::password('password', array('id' => 'password', 'class' => 'form-control')) }}
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label for="form-field-1" class="col-sm-2 control-label">
+													Wachtwoord bevestigen
+												</label>
+												<div class="col-sm-9">
+													{{ Form::password('password_confirmation', array('id' => 'password_confirmation', 'class' => 'form-control')) }}
 												</div>
 											</div>
 											
@@ -76,7 +104,7 @@
 									</div>
 									            <div class="panel-footer">
                 <div class="pull-left">
-                    {{ Form::submit('Opslaan', array('class' => 'btn btn-primary form-control')) }}
+                    {{ Form::submit('Beheerder opslaan', array('class' => 'btn btn-primary form-control')) }}
                 </div>
                 <div style="clear:both;"></div>
             </div>

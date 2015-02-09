@@ -9,7 +9,7 @@
 								<!-- start: BASIC TABLE PANEL -->
 								<div class="panel panel-white">
 									<div class="panel-heading">
-										<h4 class="panel-title">Medewerkers</h4>
+										<h4 class="panel-title">Beheerders</h4>
 
 										<div class="panel-tools">										
 											<div class="dropdown">
@@ -36,27 +36,31 @@
 									</div>
 									<div class="panel-body">
 										<p>
-											<a href="/admin/medewerkers/new/" class="btn btn-green"><i class="glyphicon glyphicon-plus"></i> Nieuw</a>
+											<a href="/admin/beheerders/new/" class="btn btn-green"><i class="glyphicon glyphicon-plus"></i> Nieuw</a>
 										</p>
 										<table id="sample-table-1" class="table table-hover">
 											<thead>
 												<tr>
-													<th>Medewerker nummer</th>
+													<th>Rol</th>
+													<th>Gebruikersnaam</th>
 													<th class="hidden-xs">Naam</th>
 													<th>Aangemaakt op</th>
 													<th>Beheer</th>
 												</tr>
 											</thead>
 											<tbody>
-												@foreach($medewerkers as $medewerker)
+											    @if(!$gebruikers->isEmpty())
+												@foreach($gebruikers as $gebruiker)
+												@if($gebruiker->usergroup->group_id == 1)
 												<tr>
-													<td class="hidden-xs">{{$medewerker->nummer}}</td>
-													<td>{{$medewerker->naam}}</td>
-													<td>{{ date('d-m-Y', strtotime($medewerker->created_at)) }}</td>
+													<td class="hidden-xs">{{ $roles[$gebruiker->usergroup->group_id] }}</td>
+													<td>{{ $gebruiker->username }}</td>
+													<td>{{ $gebruiker->first_name }} {{ $gebruiker->last_name }}</td>
+													<td>{{ date('d-m-Y', strtotime($gebruiker->created_at)) }}</td>
 													<td class="center">
 													<div class="visible-md visible-lg hidden-sm hidden-xs">
-														<a data-original-title="Edit" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/medewerkers/edit/{{$medewerker->id}}"><i class="fa fa-edit"></i> Bewerken</a>
-														<a data-original-title="Remove" data-placement="top" class="btn btn-xs btn-red tooltips" href="/admin/medewerkers/delete/{{$medewerker->id}}" onclick="confirm('Weet u zeker dat u de medewerker {{ $medewerker->naam }} wilt verwijderden?')"><i class="fa fa-times fa fa-white"></i> Verwijderen</a>
+														<a data-original-title="Edit" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/beheerders/edit/{{$gebruiker->id}}"><i class="fa fa-edit"></i> Bewerken</a>
+														<a data-original-title="Remove" data-placement="top" class="btn btn-xs btn-red tooltips" href="/admin/beheerders/delete/{{$gebruiker->id}}" onclick="confirm('Weet u zeker dat u de beheerder {{ $gebruiker->first_name }} {{ $gebruiker->last_name }} wilt verwijderden?')"><i class="fa fa-times fa fa-white"></i> Verwijderen</a>
 													</div>
 													<div class="visible-xs visible-sm hidden-md hidden-lg">
 														<div class="btn-group">
@@ -65,12 +69,12 @@
 															</a>
 															<ul class="dropdown-menu pull-right dropdown-dark" role="menu">
 																<li>
-																	<a href="/admin/medewerkers/edit/{{$medewerker->id}}" tabindex="-1" role="menuitem">
+																	<a href="/admin/beheerders/edit/{{$gebruiker->id}}" tabindex="-1" role="menuitem">
 																		<i class="fa fa-edit"></i> Edit
 																	</a>
 																</li>
 																<li>
-																	<a href="/admin/medewerkers/delete/{{$medewerker->id}}" tabindex="-1" role="menuitem" onclick="confirm('Weet u zeker dat u de medewerker {{ $medewerker->naam }} wilt verwijderden?')">
+																	<a href="/admin/beheerders/delete/{{$gebruiker->id}}" tabindex="-1" role="menuitem" onclick="confirm('Weet u zeker dat u de beheerder {{ $gebruiker->first_name }} {{ $gebruiker->last_name }} wilt verwijderden?')">
 																		<i class="fa fa-times"></i> Remove
 																	</a>
 																</li>
@@ -78,7 +82,9 @@
 														</div>
 													</div></td>
 												</tr>
+												@endif
 												@endforeach
+												@endif
 											</tbody>
 										</table>
 									</div>

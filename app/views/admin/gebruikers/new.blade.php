@@ -9,7 +9,16 @@
 								<!-- start: TEXT FIELDS PANEL -->
 								<div class="panel panel-white">
 									<div class="panel-heading">
-										<h4 class="panel-title">Nieuwe machine</h4>
+										<h4 class="panel-title">Nieuwe medewerker</h4>
+										    @if($errors->has())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                            @foreach($errors->all() AS $error)
+                                            <li>{{  $error }}</li>
+                                            @endforeach
+                                                </ul>
+                                            </div>
+                                            @endif
 										<div class="panel-tools">
 											<div class="dropdown">
 												<a class="btn btn-xs dropdown-toggle btn-transparent-grey" data-toggle="dropdown">
@@ -42,76 +51,62 @@
 										</div>
 									</div>
 									<div class="panel-body">
-											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => Request::path()  )) }}
-																						<div class="form-group">
+											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => Request::path())) }}
+											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
-													Machine nummer
+													Voornaam
 												</label>
 												<div class="col-sm-9">
-													{{ Form::number('machinenr', (isset($machine->machinenr)) ? $machine->machinenr : '',  array('id' => 'machinenr', 'class' => 'form-control')) }}
+													{{ Form::text('first_name', (isset($medewerker->user->first_name)) ? $medewerker->user->first_name : '',  array('id' => 'first_name', 'class' => 'form-control', 'required')) }}
 												</div>
 											</div>
+
+											<div class="form-group">
+												<label for="form-field-1" class="col-sm-2 control-label">
+													Achternaam
+												</label>
+												<div class="col-sm-9">
+													{{ Form::text('last_name', (isset($medewerker->user->last_name)) ? $medewerker->user->last_name : '',  array('id' => 'last_name', 'class' => 'form-control', 'required')) }}
+												</div>
+											</div>
+
 											
 											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
-													Machine Types
+													Gebruikersnaam / Nummer
 												</label>
 												<div class="col-sm-9">
-													@if($machine_types) 
-														<select name="machine_type">
-														@foreach($machine_types as $machine_type)
-															<option value="{{$machine_type->id}}">{{$machine_type->type}}</option>
-														@endforeach
-														</select>
-													@else
-														Er zijn nog geen Machine Types aangemaakt
-													@endif
+													{{ Form::number('username', (isset($medewerker->nummer)) ? $medewerker->nummer : '',  array('id' => 'nummer', 'class' => 'form-control', 'required')) }}
 												</div>
 											</div>
-																						
+
 											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
-													Type nummer
+													Wachtwoord
 												</label>
 												<div class="col-sm-9">
-												
-												<label class="radio-inline">
-													<input type="radio" class="square-green" value="TH nummer" name="type_nummer">
-													TH nummer
-												</label>
-												
-												<label class="radio-inline">
-													<input type="radio" class="square-green" value="TB nummer" name="type_nummer">
-													TB nummer
-												</label>
+													{{ Form::password('password', array('id' => 'password', 'class' => 'form-control')) }}
 												</div>
 											</div>
-											
-												<div class="form-group">
+
+											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
-													Locatie
+													Wachtwoord bevestigen
 												</label>
 												<div class="col-sm-9">
-													<select name="locatie">
-														<option value="Magazijn">Magazijn</option>
-														<option value="Sloop">Sloop</option>
-														<option value="Verkocht">Verkocht</option>
-														<option value="Klant">Klant</option>
-													</select>
+													{{ Form::password('password_confirmation', array('id' => 'password_confirmation', 'class' => 'form-control')) }}
 												</div>
 											</div>
 											
-											
-											
-									
+	
 											
 
 									</div>
 									            <div class="panel-footer">
                 <div class="pull-left">
-                    {{ Form::submit('Machine Opslaan', array('class' => 'btn btn-primary form-control')) }}
+                    {{ Form::submit('Medewerker opslaan', array('class' => 'btn btn-primary form-control')) }}
                 </div>
-                <div class="clear"></div>
+                <div style="clear:both;"></div>
             </div>
             {{ Form::close() }}
 								</div>

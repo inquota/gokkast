@@ -42,10 +42,19 @@
 	
 	<div class="form-group">
 		<label for="form-field-1" class="col-sm-2 control-label">
-			Naam
+			Voornaam
 		</label>
 		<div class="col-sm-9">
-			{{ Form::text('naam', (isset($klant->naam)) ? $klant->naam : '',  array('id' => 'naam', 'class' => 'form-control')) }}
+			{{ Form::text('first_name', (isset($klant->user->first_name)) ? $klant->user->first_name : '',  array('id' => 'first_name', 'class' => 'form-control')) }}
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="form-field-1" class="col-sm-2 control-label">
+			Achternaam
+		</label>
+		<div class="col-sm-9">
+{{ Form::text('last_name', (isset($klant->user->last_name)) ? $klant->user->last_name : '',  array('id' => 'last_name', 'class' => 'form-control')) }}
 		</div>
 	</div>
 	
@@ -404,7 +413,7 @@
 
 <div class="row">
 	<div class="col-sm-2">
-		{{ Form::submit('Opslaan', array('class' => 'btn btn-primary form-control')) }}
+		{{ Form::submit('Klant opslaan', array('class' => 'btn btn-primary form-control')) }}
 	</div>
 </div>
 {{ Form::close() }}
@@ -412,6 +421,7 @@
 <hr />
 <div class="row">
 	<div class="col-md-6">
+			@if(isset($klant->id))
 <div class="panel panel-white">
 	<div class="panel-heading border-light">
 		<h4 class="panel-title">Machines</h4>
@@ -432,6 +442,7 @@
 												</tr>
 											</thead>
 											<tbody>
+											@if(!empty($machines))
 												@foreach($machines as $machine)
 												<tr>
 													<td class="center">{{$machine->id}}</td>
@@ -470,9 +481,12 @@
 													</div></td>
 												</tr>
 												@endforeach
+												@endif
 											</tbody>
 	</div>
+
 </div>
+	@endif
 </div>
 </div>
 

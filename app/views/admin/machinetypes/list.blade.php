@@ -9,7 +9,7 @@
 								<!-- start: BASIC TABLE PANEL -->
 								<div class="panel panel-white">
 									<div class="panel-heading">
-										<h4 class="panel-title">Machines</h4>
+										<h4 class="panel-title">Machinetypes</h4>
 										<div class="panel-tools">										
 											<div class="dropdown">
 											<a class="btn btn-xs dropdown-toggle btn-transparent-grey" data-toggle="dropdown">
@@ -35,33 +35,27 @@
 									</div>
 									<div class="panel-body">
 									<p>
-                                    	<a href="/admin/machines/new/" class="btn btn-green"><i class="glyphicon glyphicon-plus"></i> Nieuw</a>
+                                    	<a href="/admin/machinetypes/new/" class="btn btn-green"><i class="glyphicon glyphicon-plus"></i> Nieuw</a>
                                     </p>
 										<table id="sample-table-1" class="table table-hover">
 											<thead>
 												<tr>
 													<th class="center">#</th>
-													<th>Machine nummer</th>
-													<th class="hidden-xs">Machine type</th>
-													<th>Type nummer</th>
-													<th>Locatie</th>
+													<th>Machine type</th>
 													<th>Beheer</th>
 												</tr>
 											</thead>
 											<tbody>
-											    @if(!$machines->isEmpty())
-												@foreach($machines as $machine)
+											    @if(!$machinetypes->isEmpty())
+												@foreach($machinetypes as $mtype)
 												<tr>
-													<td class="center">{{$machine->id}}</td>
-													<td class="hidden-xs">{{$machine->machinenr}}</td>
-													<td>{{@$machinetypes[$machine->machine_type]}}</td>
-													<td>{{$machine->type_nummer}}</td>
-													<td>{{$machine->locatie}}</td>
+													<td class="center">{{$mtype->id}}</td>
+													<td class="hidden-xs">{{$mtype->type}}</td>
+													<td>{{$mtype->machine_type}}</td>
 													<td class="center">
 													<div class="visible-md visible-lg hidden-sm hidden-xs">
-														<a data-original-title="Bekijk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/machines/view/{{$machine->id}}"><i class="fa fa-file-o"></i> Bekijken</a>
-														<a data-original-title="Bewerk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/machines/save/{{$machine->id}}"><i class="fa fa-edit"></i> Bewerken</a>
-														<a data-original-title="Verwijder" data-placement="top" class="btn btn-xs btn-red tooltips" href="#"><i class="fa fa-times fa fa-white"></i> Verwijderen</a>
+														<a data-original-title="Bewerk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/machinetypes/save/{{$mtype->id}}"><i class="fa fa-edit"></i> Bewerken</a>
+														<a data-original-title="Verwijder" data-placement="top" class="btn btn-xs btn-red tooltips" href="/admin/machinetypes/delete/{{$mtype->id}}" onclick="confirm('Weet u zeker dat u de machinetype {{ $mtype->type }} wilt verwijderden?')"><i class="fa fa-times fa fa-white"></i> Verwijderen</a>
 													</div>
 													<div class="visible-xs visible-sm hidden-md hidden-lg">
 														<div class="btn-group">
@@ -70,12 +64,12 @@
 															</a>
 															<ul class="dropdown-menu pull-right dropdown-dark" role="menu">
 																<li>
-																	<a href="/admin/machines/view/{{$machine->id}}" tabindex="-1" role="menuitem">
+																	<a href="/admin/machines/view/{{$mtype->id}}" tabindex="-1" role="menuitem">
 																		<i class="fa fa-edit"></i> View
 																	</a>
 																</li>
 																<li>
-																	<a href="/admin/machines/edit/{{$machine->id}}" tabindex="-1" role="menuitem">
+																	<a href="/admin/machines/edit/{{$mtype->id}}" tabindex="-1" role="menuitem">
 																		<i class="fa fa-edit"></i> Edit
 																	</a>
 																</li>
