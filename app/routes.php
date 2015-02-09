@@ -53,7 +53,7 @@ Route::group(array('before' => "sentryAuth"), function () {
     Route::post('/admin/machines/new/', 'MachinesController@doSave');
 
     /**
-     * machinetypes
+     * Machinetypes
      */
     Route::get('/admin/machinetypes/list/', array('as' => 'list-machinetype', 'uses' => 'MachineTypesController@getList'));
     Route::get('/admin/machinetypes/save/{machine_id}', array('as' => 'edit-machinetype', 'uses' => 'MachineTypesController@getSave'));
@@ -63,6 +63,7 @@ Route::group(array('before' => "sentryAuth"), function () {
     Route::get('/admin/machinetypes/new/', array('as' => 'new-machinetype', 'uses' => 'MachineTypesController@getSave'));
     Route::post('/admin/machinetypes/new/', 'MachineTypesController@doSave');
     Route::get('/admin/machinetypes/delete/{machine_id}', array('as' => 'delete-machinetype', 'uses' => 'MachineTypesController@getDelete'));
+	
 	
 	/**
      * Medewerkers
@@ -108,8 +109,9 @@ Route::group(array('before' => "sentryAuth"), function () {
      */
     Route::get('/admin/bonnen/list/', array('as' => 'list-bon', 'uses' => 'BonnenController@getAdminList'));
     Route::get('/admin/bonnen/new/{klant_id}', array('as' => 'new-bon', 'uses' => 'BonnenController@getNew'));
+	Route::get('/admin/bonnen/view/{bon_id}/{klant_id}', array('as' => 'view-bon', 'uses' => 'BonnenController@getAdminView'));
     Route::get('/admin/bonnen/edit/{bon_id}', array('as' => 'edit-bon', 'uses' => 'BonnenController@getAdminEdit'));
     Route::post('/admin/bonnen/edit/{bon_id}', 'BonnenController@doEdit');
-    Route::post('/admin/bonnen/new/', 'BonnenController@doNew');
+    Route::post('/admin/bonnen/new/{klant_id}', 'BonnenController@doSaveTemp');
 	
 });

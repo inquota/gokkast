@@ -21,7 +21,7 @@
 						<!-- start: MAIN NAVIGATION MENU -->
 						<ul class="main-navigation-menu">
 							<li class="active open">
-								<a href="/"><i class="fa fa-home"></i> <span class="title"> Dashboard </span></a>
+								<a href="/users/dashboard/"><i class="fa fa-home"></i> <span class="title"> Dashboard </span></a>
 							</li>
 
                             <li>
@@ -32,6 +32,15 @@
                                         </li>
                                         <li>
                                         <a href="/admin/klanten/new"><i class="fa fa-users"></i> <span class="title"> Klant aanmaken </span></a>
+                                        </li>
+                                    </ul>
+							</li>
+							
+							<li>
+								<a href="javascript:void(0)"><i class="fa fa-users"></i> <span class="title"> Bonnen</span><i class="icon-arrow"></i></a>
+                                    <ul class="sub-menu">
+                                        <li>
+                                        <a href="/admin/bonnen/list"><i class="fa fa-desktop"></i> <span class="title"> Overzicht </span></a>
                                         </li>
                                     </ul>
 							</li>

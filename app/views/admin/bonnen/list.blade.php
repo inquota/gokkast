@@ -9,7 +9,7 @@
 								<!-- start: BASIC TABLE PANEL -->
 								<div class="panel panel-white">
 									<div class="panel-heading">
-										<h4 class="panel-title">Machines</h4>
+										<h4 class="panel-title">Bonnen</h4>
 										<div class="panel-tools">										
 											<div class="dropdown">
 											<a class="btn btn-xs dropdown-toggle btn-transparent-grey" data-toggle="dropdown">
@@ -34,34 +34,22 @@
 										</div>
 									</div>
 									<div class="panel-body">
-										<p>
-											<a href="/admin/machines/new/">Nieuw</a>
-											Hier vind je alle machines.
-										</p>
 										<table id="sample-table-1" class="table table-hover">
 											<thead>
 												<tr>
-													<th class="center">#</th>
-													<th>Machine nummer</th>
-													<th class="hidden-xs">Machine type</th>
-													<th>Thr nummer</th>
-													<th class="hidden-xs">Tb nummer</th>
-													<th>Locatie</th>
+													<th>Bon nr</th>
+													<th>Klant</th>
 													<th>Acties</th>
 												</tr>
 											</thead>
 											<tbody>
-												@foreach($machines as $machine)
+												@foreach($bonnen as $machine)
 												<tr>
-													<td class="center">{{$machine->id}}</td>
-													<td class="hidden-xs">{{$machine->machine_nr}}</td>
-													<td>{{$machine->machine_type}}</td>
-													<td>{{$machine->th_nr}}</td>
-													<td>{{$machine->tb_nr}}</td>
-													<td>{{$machine->locatie}}</td>
+													<td>{{$machine->bon_id}}</td>
+													<td class="hidden-xs">{{$machine->klant->bedrijf}}</td>
 													<td class="center">
 													<div class="visible-md visible-lg hidden-sm hidden-xs">
-														<a data-original-title="Bekijk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/machines/view/{{$machine->id}}"><i class="fa fa-file-o"></i></a>
+														<a data-original-title="Bekijk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/bonnen/view/{{$machine->id}}/{{$machine->klant_id}}"><i class="fa fa-file-o"></i></a>
 														<a data-original-title="Bewerk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/machines/edit/{{$machine->id}}"><i class="fa fa-edit"></i></a>
 														<a data-original-title="Verwijder" data-placement="top" class="btn btn-xs btn-red tooltips" href="#"><i class="fa fa-times fa fa-white"></i></a>
 													</div>
@@ -72,12 +60,12 @@
 															</a>
 															<ul class="dropdown-menu pull-right dropdown-dark" role="menu">
 																<li>
-																	<a href="/admin/machines/view/{{$machine->id}}" tabindex="-1" role="menuitem">
+																	<a href="/admin/bonnen/view/{{$machine->bon_id}}" tabindex="-1" role="menuitem">
 																		<i class="fa fa-edit"></i> View
 																	</a>
 																</li>
 																<li>
-																	<a href="/admin/machines/edit/{{$machine->id}}" tabindex="-1" role="menuitem">
+																	<a href="/admin/bonnen/edit/{{$machine->bon_id}}" tabindex="-1" role="menuitem">
 																		<i class="fa fa-edit"></i> Edit
 																	</a>
 																</li>
