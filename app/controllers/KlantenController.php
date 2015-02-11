@@ -54,6 +54,7 @@ class KlantenController extends BaseController {
             if(isset($klant->user_id) && $klant->user_id != 0) {
                 $useritem = User::find($klant->user_id);
             }else{
+
                 $useritem = new User();
                 $useritem->password = Hash::make($randompassword);
             }
@@ -73,7 +74,7 @@ class KlantenController extends BaseController {
         $useritem->updated_at       = date('Y-m-d H:i:s');
         $result = $useritem->updateUniques();
 
-        if(!isset($useritem->usergroup)) {
+        if(!isset($useritem->usergroup->user_id)) {
             $usergroup = new UserGroup;
             $usergroup->user_id = $useritem->id;
             $usergroup->group_id = 3;
@@ -100,14 +101,14 @@ class KlantenController extends BaseController {
         $klant->bedrag_vulling_geldwisselaar = Input::get('bedrag_vulling_geldwisselaar');
         $klant->vergunning_nummer = Input::get('vergunning_nummer');
         $klant->vergunning_verl_door = Input::get('vergunning_verl_door');
-        $klant->verg_geldig_vanaf = Input::get('verg_geldig_vanaf');
-        $klant->verg_geldig_tot = Input::get('verg_geldig_tot');
+        $klant->verg_geldig_vanaf = date('Y-m-d', strtotime(Input::get('verg_geldig_vanaf')));
+        $klant->verg_geldig_tot = date('Y-m-d', strtotime(Input::get('verg_geldig_tot')));
         $klant->contract = Input::get('contract');
-        $klant->contr_geldig_vanaf = Input::get('contr_geldig_vanaf');
-        $klant->contr_geldig_tot = Input::get('contr_geldig_tot');
+        $klant->contr_geldig_vanaf = date('Y-m-d', strtotime(Input::get('contr_geldig_vanaf')));
+        $klant->contr_geldig_tot = date('Y-m-d', strtotime(Input::get('contr_geldig_tot')));
         $klant->nettowinst_verdeling = Input::get('nettowinst_verdeling');
         $klant->afr_freq = Input::get('afr_freq');
-        $klant->datum_laatste_verr = Input::get('datum_laatste_verr');
+        $klant->datum_laatste_verr = date('Y-m-d', strtotime(Input::get('datum_laatste_verr')));
         $klant->created_at = date('Y-m-d H:i:s');
         $klant->updated_at = '0000-00-00 00:00:00';
 
