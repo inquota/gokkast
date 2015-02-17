@@ -113,5 +113,6 @@ Route::group(array('before' => "sentryAuth"), function () {
     Route::get('/admin/bonnen/edit/{bon_id}', array('as' => 'edit-bon', 'uses' => 'BonnenController@getAdminEdit'));
     Route::post('/admin/bonnen/edit/{bon_id}', 'BonnenController@doEdit');
     Route::post('/admin/bonnen/new/{klant_id}', 'BonnenController@doSaveTemp');
+	Route::post('/admin/bonnen/update/{bon_id}', 'BonnenController@doUpdate');
 	
 });
