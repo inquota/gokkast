@@ -4,6 +4,10 @@
 
 @section('content')
 
+<?php
+	$statusarray = array('new' => 'Openstaand', 'approved' => 'Goedgekeurd', 'rejected'=> 'Afgewezen');
+        ?>
+
 <div class="row">
 							<div class="col-md-12">
 								<!-- start: BASIC TABLE PANEL -->
@@ -39,6 +43,7 @@
 												<tr>
 													<th>Bon nr</th>
 													<th>Klant</th>
+													<th>Status</th>
 													<th>Acties</th>
 												</tr>
 											</thead>
@@ -47,9 +52,10 @@
 												<tr>
 													<td>{{$machine->bon_id}}</td>
 													<td class="hidden-xs">{{$machine->klant->bedrijf}}</td>
+													<td class="hidden-xs">{{ $statusarray[$machine->status] }}</td>
 													<td class="center">
 													<div class="visible-md visible-lg hidden-sm hidden-xs">
-														<a data-original-title="Bekijk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/bonnen/view/{{$machine->id}}/{{$machine->klant_id}}"><i class="fa fa-file-o"></i></a>
+														<a data-original-title="Bekijk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/bonnen/view/{{$machine->bon_id}}/{{$machine->klant_id}}"><i class="fa fa-file-o"></i></a>
 														<a data-original-title="Bewerk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/machines/edit/{{$machine->id}}"><i class="fa fa-edit"></i></a>
 														<a data-original-title="Verwijder" data-placement="top" class="btn btn-xs btn-red tooltips" href="#"><i class="fa fa-times fa fa-white"></i></a>
 													</div>
