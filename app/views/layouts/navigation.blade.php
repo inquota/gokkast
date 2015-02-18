@@ -28,10 +28,10 @@
 								<a href="javascript:void(0)"><i class="fa fa-users"></i> <span class="title"> Klanten</span><i class="icon-arrow"></i></a>
                                     <ul class="sub-menu">
                                         <li>
-                                        <a href="/admin/klanten/list"><i class="fa fa-desktop"></i> <span class="title"> Overzicht </span></a>
+                                        	<a href="/admin/klanten/list"><i class="fa fa-desktop"></i> <span class="title"> Overzicht </span></a>
                                         </li>
                                         <li>
-                                        <a href="/admin/klanten/new"><i class="fa fa-users"></i> <span class="title"> Klant aanmaken </span></a>
+                                        	<a href="/admin/klanten/new"><i class="fa fa-users"></i> <span class="title"> Klant aanmaken </span></a>
                                         </li>
                                     </ul>
 							</li>
