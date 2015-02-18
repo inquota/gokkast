@@ -4,7 +4,7 @@
 
 @section('content')
 
-{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => '/admin/bonnen/update/'.$bon_id )) }}
+{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => '/admin/bonnen/update/'.$bon_id . '/'. $klant->id )) }}
 <div class="row">
 
 <div class="col-md-7">
@@ -38,8 +38,9 @@
 												</tr>
 												
 												<tr>
-													<td>{{ date('d-m-Y', strtotime(Stand::where('m_id', '=', $machine->id)->firstOrFail()->created_at)) }}</td>
-													<td class="hidden-xs">&euro; {{ number_format( Stand::where('m_id', '=', $machine->id)->firstOrFail()->e_stand, 2, ',', '.' ) }}</td>
+													
+													<td>{{ date('d-m-Y', strtotime(Stand::where('m_id', '=', $machine->machine_id)->firstOrFail()->created_at)) }}</td>
+													<td class="hidden-xs">&euro; {{ number_format( Stand::where('m_id', '=', $machine->machine_id)->firstOrFail()->e_stand, 2, ',', '.' ) }}</td>
 												</tr>
 												
 												<tr>
@@ -48,7 +49,7 @@
 														
 														&euro;											
 														<?php
-														 $in = ( ($machine->nieuw_in - Stand::where('m_id', '=', $machine->id)->firstOrFail()->e_stand) * 0.1 );
+														 $in = ( ($machine->nieuw_in - Stand::where('m_id', '=', $machine->machine_id)->firstOrFail()->e_stand) * 0.1 );
 														$totaal_in= number_format( $in, 2, ',', '.' );
 														echo $totaal_in;	
 														?> 
