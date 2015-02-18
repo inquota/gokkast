@@ -90,29 +90,55 @@ class BonnenController extends BaseController {
 	}
 	
 
-	public function doUpdate($bon_id) {
+	public function doUpdate($bon_id = null, $klant_id = null) {
+		
+		if($bon_id==null&&$klant_id==null){
+			return Redirect::back();
+		}
+		
+		
 
         try{
-
+			$klant = Klant::where('id', '=', $klant_id)->firstOrFail();
+			
             /**
              * Update Bon
              */
 
             $bonnen = Bon::where('bon_id', '=', $bon_id)->get();
+			$bon_single = Bon::where('bon_id', '=', $bon_id)->firstOrFail();
 			
 			foreach($bonnen as $bon){
 				$bon = Bon::where('id', '=', $bon->id)->firstOrFail();
 				$bon->status = 'approved';
             	$bon->save();
 			}
-			
 
-			// create PDF and send E-mail to Klant
+
+			// create PDF
 			
+			
+			//  send E-mail to Klant
+			$addTo = $klant->email;
+			$bon_id = $bon_single->bon_id;
+			
+			$body = 'Beste ' . $klant->naam . "\n";
+			$body .= 'Bij deze sturen wij u de afreken bon '. "\n\n";
+			$body .= 'Met vriendelijke groet, '. "\n";
+			$body .= 'Gokkasten CRM'. "\n";
+			
+			$attachment = null;
+			$data = array();
+			/*Mail::send('emails.default', $data, function($message) use ($body, $addTo, $bon_id, $attachment) {
+					$message -> data = $body;
+					$message -> from('noreply@codekiller.nl', 'Gokkast CRM');
+					$message -> subject('Afreken opdracht #' . $bon_id);
+					$message -> to($addTo);
+			});*/	
        
 
             return Redirect::to('/admin/bonnen/list')
-                ->with('status', 'Bon goedgekeurd');
+                ->with('status', 'Bon goedgekeurd, er is een e-mail gestuurd naar ');
         }
         catch(Exception $e){
             $validator = 'Bij het opslaan is er iets misgegaan.';
