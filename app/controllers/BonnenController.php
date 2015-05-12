@@ -43,6 +43,7 @@ class BonnenController extends BaseController {
 	/* Do functions */
 	public function doSaveTemp($klant_id) {
 		$machines = Machine::where('klant_id', '=', $klant_id)->get();
+		$klant = Klant::find($klant_id);
 		
 		if(Input::get('calculate'))
 		{
@@ -79,10 +80,35 @@ class BonnenController extends BaseController {
 				$bon->nieuw_uit 	= 	Session::get('nieuw_uit'.$machine->id );
 				$bon->tikken_uit 	= 	Session::get('tikken_uit'.$machine->id);
 				$bon->in1 			= 	Session::get('in'.$machine->id);
-				$bon->uit 		= 	1605; //Session::get('uit'.$machine->id) produces error
+				// @todo: //Session::get('uit'.$machine->id) produces error
+				$bon->uit 		= 	1605; 
 				$bon->created_at = date('Y-m-d H:i:s');
             	$bon->save();
+				
+				$in = Session::get('in'.$machine->id);
+				$uit = 1605;
+				$subtotals[] = ($in - $uit);
 			}
+			$totaal_subs = array_sum($subtotals);
+			
+			// Save all totals in another table, so we can easily use this data to sum.
+			$latest_bon = Bon::orderBy('bon_id', 'desc')->skip(0)->take(1)->first();
+			
+			$bonTotal = new BonTotal();
+			$bonTotal->klant_id = $klant_id; 
+			$bonTotal->bon_id = $latest_bon->id;
+			$bonTotal->subtotal = array_sum($subtotals);
+			$bonTotal->with_tax = (array_sum($subtotals) / 100 * 29);
+			
+			$bonTotal->share = ($totaal_subs - ($totaal_subs / 100 * 29) );
+			
+			$nettowinst_verdeling = ( ( $totaal_subs - ($totaal_subs / 100 * 29)  ) / 100 * $klant->nettowinst_verdeling );
+			$bonTotal->net_profit = $nettowinst_verdeling;
+			
+			$delen = ($totaal_subs - ($totaal_subs / 100 * 29) );
+			$bonTotal->operator = ( $delen - $nettowinst_verdeling );
+			$bonTotal->save();
+			
         	return Redirect::back();    
 		}
 		

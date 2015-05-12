@@ -43,9 +43,9 @@
 													<th class="center">#</th>
 													<th>Bedrijf</th>
 													<th class="hidden-xs">Naam</th>
-													<th class="hidden-xs">E-mail</th>
 													<th>Medewerker</th>
-													<th>Aangemaakt op</th>
+													<th>Totaal omzet subtaal</th>
+													<th>Totaal omzet incl. kansspel</th>
 													<th>Beheer</th>
 												</tr>
 											</thead>
@@ -56,9 +56,9 @@
 													<td class="center">{{$klant->id}}</td>
 													<td class="hidden-xs">{{$klant->bedrijf}}</td>
 													<td class="hidden-xs">{{$klant->naam}}</td>
-													<td>{{$klant->email}}</td>
 													<td>{{$klant->medewerker_id}}</td>
-													<td>{{$klant->created_at}}</td>
+													<th>&euro; {{ number_format( BonTotal::where('klant_id', '=', $klant->id)->where('status', '=', 'approved')->sum('subtotal') , 2, ',', '.' ) }}</th>
+													<th>&euro; {{ number_format( BonTotal::where('klant_id', '=', $klant->id)->where('status', '=', 'approved')->sum('with_tax') , 2, ',', '.' ) }}</th>
 													<td class="center">
 													<div class="visible-md visible-lg hidden-sm hidden-xs">
 														<a data-original-title="Klik hier om een Bon aan te maken" data-placement="top" class="btn btn-xs btn-primary tooltips" href="/admin/bonnen/new/{{$klant->id}}"><i class="fa fa-money"></i> Bon aanmaken</a>
