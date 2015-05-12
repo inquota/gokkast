@@ -4,6 +4,7 @@
 
 @section('content')
 
+{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => '/admin/bonnen/update/'.$bon_id . '/'. $klant->id )) }}
 <div class="row">
 
 <div class="col-md-7">
@@ -24,71 +25,85 @@
 						<div class="col-md-12">
 							<div class="panel panel-white">
 								<div class="panel-heading border-light">
-									<h4 class="panel-title"><strong>{{ $machine->type_nummer }}</strong><label class="label label-inverse">{{ $machine->nummer }}</label> {{ $machine->machinenr }}</h4>
+									<h4 class="panel-title"><strong>{{ $machine->machine->type_nummer }}</strong><label class="label label-inverse">{{ $machine->machine->nummer }}</label> {{ $machine->machine->machinenr }}</h4>
 								</div>
 								<div class="panel-body">
-
-									<div class="form-group">
-										<label for="form-field-1" class="col-sm-4 control-label"> Nieuw in: </label>
-										<div class="col-sm-5">
-											&euro; {{ $machine->nieuw_in }}
-										</div>
-									</div>
 									
-									<div class="form-group">
-										<label for="form-field-1" class="col-sm-4 control-label"> {{ date('d-m-Y', strtotime(Stand::where('m_id', '=', $machine->id)->firstOrFail()->created_at)) }} </label>
-										<div class="col-sm-8">
-											&euro; {{ number_format( Stand::where('m_id', '=', $machine->id)->firstOrFail()->e_stand, 2, ',', '.' ) }}
-											x 0,1 = 
-											&euro;
-											<?php
-											$in[$machine->id] = Session::get('in'.$machine->id);
-											$totaal_in= number_format( $in[$machine->id], 2, ',', '.' );
-											echo $totaal_in;	
-											?> 
-										</div>
-
-									</div>
-									
-									<hr />
-									
-
-								<div class="form-group">
-										<label for="form-field-1" class="col-sm-4 control-label"> Nieuw uit: </label>
-										<div class="col-sm-5">
-											&euro; {{ $machine->nieuw_uit }}
-										</div>
-									</div>
-									
-									<div class="form-group">
-										<label for="form-field-1" class="col-sm-4 control-label"> Tikken uit: </label>
-										<div class="col-sm-5">
-											{{ Form::number('tikken_uit'. $machine->id, Input::old('tikken_uit'),  array('id' => 'tikken_uit', 'class' => 'form-control')) }}
-										</div>
-									</div>
-								
-																<div class="form-group">
-										<label for="form-field-1" class="col-sm-4 control-label">  </label>
-										<div class="col-sm-5">
-																		x 0,1 = 
-											&euro;
-											<?php
-											$uit[$machine->id] = Session::get('uit'.$machine->id);
-											$totaal_uit= number_format( $uit[$machine->id], 2, ',', '.' );
+									<table class="table table-hover">
+											<tbody>
+												
+												<tr>
+													<td>Nieuw in:</td>
+													<td class="hidden-xs">&euro; {{ number_format( $machine->nieuw_in, 2, ',', '.' ) }}</td>
+												</tr>
+												
+												<tr>
+													
+													<td>{{ date('d-m-Y', strtotime(Stand::where('m_id', '=', $machine->machine_id)->firstOrFail()->created_at)) }}</td>
+													<td class="hidden-xs">&euro; {{ number_format( Stand::where('m_id', '=', $machine->machine_id)->firstOrFail()->e_stand, 2, ',', '.' ) }}</td>
+												</tr>
+												
+												<tr>
+													<td style="border-bottom: 1px solid #000;">Tikken in (x 0.1):</td>
+													<td class="hidden-xs" style="border-bottom: 1px solid #000;">
+														
+														&euro;											
+														<?php
+														 $in = ( ($machine->nieuw_in - Stand::where('m_id', '=', $machine->machine_id)->firstOrFail()->e_stand) * 0.1 );
+														$totaal_in= number_format( $in, 2, ',', '.' );
+														echo $totaal_in;	
+														?> 
+													</td>
+												</tr>
+												
+											</tbody>
+										</table>						
+							
+							
+										<table class="table table-hover" style="margin-top: 20px;">
+											<tbody>
+												
+												<tr>
+													<td>Nieuw uit:</td>
+													<td class="hidden-xs">&euro; {{ number_format( $machine->nieuw_uit, 2, ',', '.' ) }}</td>
+												</tr>
+												
+												<tr>
+													<td></td>
+													<td class="hidden-xs">&euro; {{ number_format( $machine->tikken_uit, 2, ',', '.' ) }}</td>
+												</tr>
+												
+												<tr>
+													<td style="border-bottom: 1px solid #000;">Tikken uit (x 0.1):</td>
+													<td class="hidden-xs" style="border-bottom: 1px solid #000;">
+														
+														&euro;											
+																	<?php
+					
+											$uit = ( ($machine->nieuw_uit - $machine->tikken_uit) * 0.1 );
+											$totaal_uit= number_format( $uit, 2, ',', '.' );
 											echo $totaal_uit;	
 											?> 
-
-										</div>
-									</div>	
-									<hr />
-									
-									<div class="col-sm-12 right">
-										<?php
-										$subtotals[] = ($in[$machine->id] - $uit[$machine->id]);
-										?>
-										&euro; <?php echo number_format($in[$machine->id] - $uit[$machine->id], 2, ',', '.' ); ?>
+													</td>
+												</tr>
+																			<tr>
+													<td>Over</td>
+													<td class="hidden-xs">
+														
+														&euro;	{{ number_format( ($in - $uit), 2, ',', '.' ) }}
 										
-									</div>
+													</td>
+												</tr>
+												
+											</tbody>
+										</table>
+							
+					
+											<?php
+										$subtotals[] = ($in - $uit);
+										?>
+									
+
 							
 								</div>
 							</div>
@@ -112,68 +127,42 @@
 				<h4 class="panel-title">Afreken opdracht</h4>
 			</div>
 			<div class="panel-body">
-
-				<div class="form-group">
-					<label for="form-field-1" class="col-sm-5 control-label">Sub totaal </label>
-					<div class="col-sm-5">
-						<?php
-						$totaal_subs = 2233.2;
-						?>
-						&euro; {{ array_sum($subtotals) }}
-					</div>
-				</div>
 				
-								<div class="form-group">
-					<label for="form-field-1" class="col-sm-5 control-label">29% kansspelbelasting </label>
-					<div class="col-sm-5">
-						&euro; {{ ($totaal_subs / 100 * 29) }}
-					</div>
-				</div>
-				
-								<div class="form-group">
-					<label for="form-field-1" class="col-sm-5 control-label">Delen</label>
-					<div class="col-sm-5">
-						<?php
+			<table class="table table-hover">
+				<tbody>
+					<tr>
+						<td>Sub totaal</td>
+						<td class="hidden-xs"><?php $totaal_subs = array_sum($subtotals); ?>
+						&euro; {{ number_format( array_sum($subtotals) , 2, ',', '.' )}}</td>
+					</tr>
+					<tr>
+						<td>29% kansspelbelasting</td>
+						<td>&euro; {{ number_format( (array_sum($subtotals) / 100 * 29) , 2, ',', '.' )}}</td>
+					</tr>
+					<tr>
+						<td>Delen</td>
+						<td>						<?php
 						$delen = (array_sum($subtotals) - ($totaal_subs / 100 * 29) );
 						?>
-						&euro; 
-						
-						{{ $delen  }}
-						
-						
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label for="form-field-1" class="col-sm-5 control-label">{{ $klant->bedrijf }}</label>
-					<div class="col-sm-5">
-						<?php
+						&euro; {{ number_format( $delen , 2, ',', '.' )}}</td>
+					</tr>
+					<tr>
+						<td>{{ $klant->bedrijf }}</td>
+						<td><?php
 						$nettowinst_verdeling = ( ( array_sum($subtotals) - ($totaal_subs / 100 * 29)  ) / 100 * $klant->nettowinst_verdeling ); 
 						?>
 						&euro; 
-						{{ $nettowinst_verdeling  }}
-					</div>
-				</div>
+						{{ number_format( $nettowinst_verdeling , 2, ',', '.' ) }}</td>
+					</tr>
+					<tr>
+						<td>Exploitant</td>
+						<td>&euro; {{ number_format( ( $delen - $nettowinst_verdeling ) , 2, ',', '.' )  }}</td>
+					</tr>
+				</tbody>
+			</table>
 				
 				<div class="form-group">
-					<label for="form-field-1" class="col-sm-5 control-label">Exploitant</label>
-					<div class="col-sm-5">
-						
-						&euro; 
-						{{ ( $delen - $nettowinst_verdeling )  }}
-					</div>
-				</div>
-				
-				<div class="form-group">
-				<input type="submit" value="Berekenen" name="calculate" class="btn btn-primary form-control">
-				<?php
-				$calculate = Session::get('calculate');
-				
-				if($calculate==true) :
-				?>
-				of
-				<input type="submit" value="Indienen" name="save" class="btn btn-primary form-control">
-				<?php endif; ?>
+				<input type="submit" value="Goedkeuren" name="calculate" class="btn btn-primary form-control">
 			</div>
 
 			</div>
@@ -181,15 +170,8 @@
 		</div>
 	</div>
 		
-		
-		
-		
-		
+			
 </div>
-
-
-<p>
-	Uw afreken opdracht, wordt nog goedgekeurd. Bij goedkeuring wordt de afreken opdracht naar de klant opgestuurd.
-</p>
+{{ Form::close() }}		
 					
 @stop

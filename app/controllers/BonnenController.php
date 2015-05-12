@@ -24,7 +24,8 @@ class BonnenController extends BaseController {
 		
        return View::make('admin.bonnen.view')
        		->with('klant', $klant)
-			->with('bon', $bon);
+			->with('bon', $bon)
+			->with('bon_id', $bon_id);
 	}
 	
 	public function getNew($klant_id) {
@@ -69,10 +70,10 @@ class BonnenController extends BaseController {
 		if(Input::get('save')){
 			
 			foreach( $machines as $machine ){
-				
+				$time = time();
 				$bon = new Bon();
 	            $bon->klant_id = $klant_id;
-	            $bon->bon_id = 2;
+	            $bon->bon_id = $time;
 				$bon->machine_id = $machine->id;	
 				$bon->nieuw_in 		= 	Session::get('nieuw_in'.$machine->id);
 				$bon->nieuw_uit 	= 	Session::get('nieuw_uit'.$machine->id );
@@ -88,94 +89,60 @@ class BonnenController extends BaseController {
 		return Redirect::back();
 	}
 	
-	
-	
-	
-	public function doNew() {
-        $rules = array(
-            'machine_type'   => 'required',
-            'machinenr'   => 'required',
-            'th_nr'   => 'required',
-            'tb_nr'   => 'required',
-            'locatie'   => 'required',
-        );
 
-        // Create a new validator instance from our validation rules
-        $validator = Validator::make(Input::all(), $rules);
-
-        // If validation fails, we'll exit the operation now.
-        if ($validator->fails()) {
-            return Redirect::back()
-                ->withInput()
-                ->withErrors($validator);
-        }
+	public function doUpdate($bon_id = null, $klant_id = null) {
+		
+		if($bon_id==null&&$klant_id==null){
+			return Redirect::back();
+		}
+		
+		
 
         try{
-
-            /**
-             * Create new shop
-             */
-
-            $info = array(
-                'machine_type'      => Input::get('machine_type'),
-                'machinenr'      => Input::get('machinenr'),
-                'th_nr'      => Input::get('th_nr'),
-                'tb_nr'      => Input::get('tb_nr'),
-                'b_stand'      => Input::get('b_stand'),
-                'created_at'  => date('Y-m-d H:i:s'),
-            );
-
-            Machine::create($info);
-
-            return Redirect::to('/admin/machines/list')
-                ->with('status', 'Machine opgeslagen');
-        }
-        catch(Exception $e){
-            $validator = 'Bij het opslaan is er iets misgegaan.';
-            return Redirect::back()
-                ->withInput()
-                ->withErrors($validator);
-        }
-    }
-	
-	public function doEdit($machine_id) {
-        $rules = array(
-            'machine_type'   => 'required',
-            'machinenr'   => 'required',
-            'th_nr'   => 'required',
-            'tb_nr'   => 'required',
-        );
-
-        // Create a new validator instance from our validation rules
-        $validator = Validator::make(Input::all(), $rules);
-
-        // If validation fails, we'll exit the operation now.
-        if ($validator->fails()) {
-            return Redirect::back()
-                ->withInput()
-                ->withErrors($validator);
-        }
-
-        try{
-
-            /**
-             * Update Machine
-             */
-
-            $machine = Machine::where('id', '=', $machine_id)->firstOrFail();
+			$klant = Klant::where('id', '=', $klant_id)->firstOrFail();
 			
-            $machine->machinenr = Input::get('machinenr');
-            $machine->th_nr = Input::get('th_nr');
-			$machine->tb_nr = Input::get('tb_nr');
-            $machine->save();
+            /**
+             * Update Bon
+             */
 
-            return Redirect::to('/admin/machines/list')
-                ->with('status', 'Machine opgeslagen');
+            $bonnen = Bon::where('bon_id', '=', $bon_id)->get();
+			$bon_single = Bon::where('bon_id', '=', $bon_id)->firstOrFail();
+			
+			foreach($bonnen as $bon){
+				$bon = Bon::where('id', '=', $bon->id)->firstOrFail();
+				$bon->status = 'approved';
+            	$bon->save();
+			}
+
+
+			// create PDF
+			
+			
+			//  send E-mail to Klant
+			$addTo = $klant->email;
+			$bon_id = $bon_single->bon_id;
+			
+			$body = 'Beste ' . $klant->naam . "\n";
+			$body .= 'Bij deze sturen wij u de afreken bon '. "\n\n";
+			$body .= 'Met vriendelijke groet, '. "\n";
+			$body .= 'Gokkasten CRM'. "\n";
+			
+			$attachment = null;
+			$data = array();
+			/*Mail::send('emails.default', $data, function($message) use ($body, $addTo, $bon_id, $attachment) {
+					$message -> data = $body;
+					$message -> from('noreply@codekiller.nl', 'Gokkast CRM');
+					$message -> subject('Afreken opdracht #' . $bon_id);
+					$message -> to($addTo);
+			});*/	
+       
+
+            return Redirect::to('/admin/bonnen/list')
+                ->with('status', 'Bon goedgekeurd, er is een e-mail gestuurd naar ');
         }
         catch(Exception $e){
             $validator = 'Bij het opslaan is er iets misgegaan.';
             return Redirect::back()
-                ->withInput()
                 ->withErrors($validator);
         }
     }
