@@ -94,7 +94,7 @@ return array(
 	*/
 
 	'providers' => array(
-        'Barryvdh\Debugbar\ServiceProvider',
+        'Nitmedia\Wkhtml2pdf\Wkhtml2pdfServiceProvider',
         'Cartalyst\Sentry\SentryServiceProvider',
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'Illuminate\Auth\AuthServiceProvider',
@@ -150,8 +150,8 @@ return array(
 	*/
 
 	'aliases' => array(
+        'PDF'    => 'Nitmedia\Wkhtml2pdf\Facades\Wkhtml2pdf',
         'Sentry'            => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
-        'Debugbar'          => 'Barryvdh\Debugbar\Facade',
 		'App'               => 'Illuminate\Support\Facades\App',
 		'Artisan'           => 'Illuminate\Support\Facades\Artisan',
 		'Auth'              =>  'Illuminate\Support\Facades\Auth',

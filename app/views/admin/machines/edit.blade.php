@@ -118,6 +118,36 @@
 														<option value="Klant">Klant</option>
 													</select>
 												</div>
+
+												<div class="form-group">
+												<label for="form-field-1" class="col-sm-2 control-label">
+													Klant
+												</label>
+												<div class="col-sm-9">
+													<select name="klant_id">
+
+                            <?php
+                            if(isset($machine->klant_id)){
+                            try{
+                            $client = Klant::where('id', '=', $machine->klant_id)->firstOrFail();
+                            }catch(Exception $e){
+                            $machine->klant_id = NULL;
+                            }
+                            }
+                            ?>
+                                                    @if(isset($machine->klant_id))
+                                                    <option value="{{ $machine->klant_id }}" selected>{{ $klantenlijst[$machine->klant_id] }}</option>
+                                                    @else
+                                                    <option value="">Geen klant</option>
+                                                    @endif
+                                                                                                        <option value="">Geen klant</option>
+													@foreach($klanten as $klant)
+													<option value="{{ $klant->id }}">{{ $klant->bedrijf }} {{ $klant->id }}</option>
+													@endforeach
+
+													</select>
+												</div>
+											</div>
 											</div>
 										
 											

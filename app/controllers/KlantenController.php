@@ -10,6 +10,24 @@ class KlantenController extends BaseController {
             ->with('klanten', $klanten);
 	}
 
+    public function getMachines($klant_id = null)
+    {
+        $medewerkers = Medewerker::get();
+
+        if(isset($klant_id)){
+
+            $machine_types = MachineType::all();
+            $klant = Klant::find($klant_id)->firstOrFail();
+            $machines = Machine::where('klant_id', '=', $klant_id)->get();
+
+            return View::make('admin.klanten.machines')
+                ->with('machines', $machines)
+                ->with('klant', $klant)
+                ->with('machine_types', $machine_types);
+        }
+
+    }
+
 	public function getSave($klant_id = null) {
 
         $medewerkers = Medewerker::get();
