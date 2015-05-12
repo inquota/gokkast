@@ -40,12 +40,12 @@
 										<table id="sample-table-1" class="table table-hover">
 											<thead>
 												<tr>
-													<th class="center">#</th>
 													<th>Bedrijf</th>
 													<th class="hidden-xs">Naam</th>
 													<th>Medewerker</th>
-													<th>Totaal omzet subtaal</th>
-													<th>Totaal omzet incl. kansspel</th>
+													<th>Totaal openstaand <a href="#" data-toggle="tooltip" data-placement="top" data-original-title="Totaal openstaand inclusief 29% kansspel belasting"><i class="fa fa-info-circle"></i></a></th>
+													<th>Totaal <a href="#" data-toggle="tooltip" data-placement="top" data-original-title="Totaal omzet exclusief kansspel belasting"><i class="fa fa-info-circle"></i></a></th>
+													<th>Totaal incl. kansspel <a href="#" data-toggle="tooltip" data-placement="top" data-original-title="Totaal omzet inclusief 29% kansspel belasting"><i class="fa fa-info-circle"></i></a></th>
 													<th>Beheer</th>
 												</tr>
 											</thead>
@@ -53,10 +53,10 @@
 											    @if(!$klanten->isEmpty())
 												@foreach($klanten as $klant)
 												<tr>
-													<td class="center">{{$klant->id}}</td>
 													<td class="hidden-xs">{{$klant->bedrijf}}</td>
 													<td class="hidden-xs">{{$klant->naam}}</td>
 													<td>{{$klant->medewerker_id}}</td>
+													<th>&euro; {{ number_format( BonTotal::where('klant_id', '=', $klant->id)->where('status', '=', 'unpaid')->sum('with_tax') , 2, ',', '.' ) }}</th>
 													<th>&euro; {{ number_format( BonTotal::where('klant_id', '=', $klant->id)->where('status', '=', 'approved')->sum('subtotal') , 2, ',', '.' ) }}</th>
 													<th>&euro; {{ number_format( BonTotal::where('klant_id', '=', $klant->id)->where('status', '=', 'approved')->sum('with_tax') , 2, ',', '.' ) }}</th>
 													<td class="center">

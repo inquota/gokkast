@@ -110,7 +110,7 @@
 		{{ HTML::script('/plugins/jQuery/jquery-2.1.1.min.js') }}
 		<!--<![endif]-->
 		{{ HTML::script('/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js') }}
-		{{ HTML::script('/plugins/bootstrap/js/bootstrap.min.js') }}
+		{{ HTML::script('//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js') }}
 		{{ HTML::script('/plugins/blockUI/jquery.blockUI.js') }}
 		{{ HTML::script('/plugins/iCheck/jquery.icheck.min.js') }}
 		{{ HTML::script('/plugins/moment/min/moment.min.js') }}
@@ -139,6 +139,9 @@
 			jQuery(document).ready(function() {
 				Main.init();
 				Index.init();
+				
+				jQuery('[data-toggle="tooltip"]').tooltip();
+				
 			});
 		</script>
 	</body>
