@@ -27,8 +27,24 @@ class BonnenController extends BaseController {
 			->with('bon', $bon)
 			->with('bon_id', $bon_id);
 	}
-	
-	public function getNew($klant_id) {
+
+    public function getAdminPDF($bon_id=null,$klant_id=null)
+    {
+        $bon = Bon::where('bon_id','=',$bon_id)->get();
+        $klant = Klant::where('id','=',$klant_id)->firstOrFail();
+
+        return View::make('admin.bonnen.pdf')
+            ->with('klant', $klant)
+            ->with('bon', $bon)
+            ->with('bon_id', $bon_id);
+    }
+
+    public function getAdminPDFgen(){
+        PDF::url('http://bellamypark.nl/admin/bonnen/pdf/1/1'); // Pdf from url
+    }
+
+
+    public function getNew($klant_id) {
 			
 		$klant = Klant::find($klant_id);
 		$machines = Machine::where('klant_id', '=', $klant->id)->get();
