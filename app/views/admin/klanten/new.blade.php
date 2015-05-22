@@ -398,7 +398,7 @@
 												<div class="col-sm-9">
 								                    <div class="input-group">
 
-                                                    @if(date('Y-m-d') <= date('Y-m-d',strtotime($klant->datum_laatste_verr.' + '.$klant->afr_freq * 7 .' days')))
+                                                    @if(isset($klant->datum_laatste_verr) && date('Y-m-d') <= date('Y-m-d',strtotime($klant->datum_laatste_verr.' + '.$klant->afr_freq * 7 .' days')))
                                                     {{ Form::text('datum_laatste_verr', (isset($klant->datum_laatste_verr)) ? date('d-m-Y', strtotime($klant->datum_laatste_verr)) : '',  array('id' => 'datum_laatste_verr', 'class' => 'form-control date-picker', 'data-date-viewmode'=>'years', 'data-date-format'=>'dd-mm-yyyy', 'readonly')) }}
                                                     @else
                                                     {{ Form::text('datum_laatste_verr', (isset($klant->datum_laatste_verr)) ? date('d-m-Y', strtotime($klant->datum_laatste_verr)) : '',  array('id' => 'datum_laatste_verr', 'class' => 'form-control date-picker', 'data-date-viewmode'=>'years', 'data-date-format'=>'dd-mm-yyyy')) }}

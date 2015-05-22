@@ -48,16 +48,17 @@
 												</tr>
 											</thead>
 											<tbody>
-												@foreach($bonnen as $machine)
+											@if(!empty($bonnen))
+												@foreach($bonnen as $bon)
 												<tr>
-													<td>{{$machine->bon_id}}</td>
-													<td class="hidden-xs">{{$machine->klant->bedrijf}}</td>
-													<td class="hidden-xs">{{ $statusarray[$machine->status] }}</td>
+													<td>{{$bon->bon_id}}</td>
+													<td class="hidden-xs">{{(!empty($klanten)) ? $klanten[$bon->klant_id] : 'Geen klant beschikbaar'}}</td>
+													<td class="hidden-xs">{{ $statusarray[$bon->status] }}</td>
 													<td class="center">
 													<div class="visible-md visible-lg hidden-sm hidden-xs">
-														<a data-original-title="Bekijk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/bonnen/view/{{$machine->bon_id}}/{{$machine->klant_id}}"><i class="fa fa-file-o"></i></a>
-														<a data-original-title="Bewerk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/machines/edit/{{$machine->id}}"><i class="fa fa-edit"></i></a>
-														<a data-original-title="Verwijder" data-placement="top" class="btn btn-xs btn-red tooltips" href="#"><i class="fa fa-times fa fa-white"></i></a>
+														<a data-original-title="Bekijk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/bonnen/view/{{$bon->bon_id}}/{{$bon->klant_id}}"><i class="fa fa-file-o"></i></a>
+														<a data-original-title="Bewerk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/bonnen/edit/{{$bon->bon_id}}"><i class="fa fa-edit"></i></a>
+														<a data-original-title="Verwijder" data-placement="top" class="btn btn-xs btn-red tooltips" href="/admin/bonnen/delete/{{$bon->bon_id}}"><i class="fa fa-times fa fa-white"></i></a>
 													</div>
 													<div class="visible-xs visible-sm hidden-md hidden-lg">
 														<div class="btn-group">
@@ -66,17 +67,17 @@
 															</a>
 															<ul class="dropdown-menu pull-right dropdown-dark" role="menu">
 																<li>
-																	<a href="/admin/bonnen/view/{{$machine->bon_id}}" tabindex="-1" role="menuitem">
+																	<a href="/admin/bonnen/view/{{$bon->bon_id}}/{{$bon->klant_id}}" tabindex="-1" role="menuitem">
 																		<i class="fa fa-edit"></i> View
 																	</a>
 																</li>
 																<li>
-																	<a href="/admin/bonnen/edit/{{$machine->bon_id}}" tabindex="-1" role="menuitem">
+																	<a href="/admin/bonnen/edit/{{$bon->bon_id}}" tabindex="-1" role="menuitem">
 																		<i class="fa fa-edit"></i> Edit
 																	</a>
 																</li>
 																<li>
-																	<a href="#" tabindex="-1" role="menuitem">
+																	<a href="/admin/bonnen/delete/{{$bon->id}}" tabindex="-1" role="menuitem">
 																		<i class="fa fa-times"></i> Remove
 																	</a>
 																</li>
@@ -85,6 +86,7 @@
 													</div></td>
 												</tr>
 												@endforeach
+												@endif
 											</tbody>
 										</table>
 									</div>
