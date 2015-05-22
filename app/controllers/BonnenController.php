@@ -5,28 +5,48 @@ class BonnenController extends BaseController {
 	/* Get functions */
 	public function getAdminList()
 	{
+        $klanten = Klant::lists('bedrijf', 'id');
+        $machines = Machine::lists('machinenr', 'id');
 		$bonnen = Bon::groupBy('bon_id')->get();
 		
-		return View::make('admin.bonnen.list')->with('bonnen', $bonnen);
+		return View::make('admin.bonnen.list')->with('bonnen', $bonnen)->with('klanten', $klanten)->with('machines', $machines);
 	}
 	
 	public function getAdminEdit($machine_id)
 	{
 		$machine = Machine::find($machine_id);
+        $machine_types = MachineType::get();
+        $klantenlijst = Klant::lists('bedrijf', 'id');
+        $klanten = Klant::get();
 		
-		return View::make('admin.machines.edit')->with('machine', $machine);
+		return View::make('admin.bonnen.edit')->with('machine', $machine)->with('machine_types',$machine_types)->with('klantenlijst', $klantenlijst)->with('klanten', $klanten);
 	}
 	
 	public function getAdminView($bon_id=null,$klant_id=null)
 	{
 		$bon = Bon::where('bon_id','=',$bon_id)->get();
-		$klant = Klant::where('id','=',$klant_id)->firstOrFail();
+
+        try {
+            $klant = Klant::where('id', '=', $klant_id)->firstOrFail();
+        }catch(Exception $e){
+            $klant = null;
+        }
 		
        return View::make('admin.bonnen.view')
        		->with('klant', $klant)
 			->with('bon', $bon)
 			->with('bon_id', $bon_id);
 	}
+
+    public function getRemove($bon_id)
+    {
+        $bon = Bon::find($bon_id);
+
+        $bon->delete();
+
+        return Redirect::back()
+            ->with('status', 'Bon verwijderd.');
+    }
 
     public function getAdminPDF($bon_id=null,$klant_id=null)
     {

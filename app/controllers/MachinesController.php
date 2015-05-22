@@ -83,6 +83,15 @@ class MachinesController extends BaseController {
                 ->withErrors($machine->errors());
 		}
     }
+
+    public function getDelete($machine_id)
+    {
+        $machine = Machine::find($machine_id);
+        $machine->delete();
+
+        return Redirect::back()
+            ->with('status', 'Machine verwijderd');
+    }
 	
 	public function doEdit($machine_id) {
         $rules = array(

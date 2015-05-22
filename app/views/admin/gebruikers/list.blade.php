@@ -11,7 +11,7 @@
 									<div class="panel-heading">
 										<h4 class="panel-title">Medewerkers</h4>
 
-										<div class="panel-tools">										
+										<div class="panel-tools">
 											<div class="dropdown">
 											<a class="btn btn-xs dropdown-toggle btn-transparent-grey" data-toggle="dropdown">
 												<i class="fa fa-cog"></i>
@@ -28,7 +28,7 @@
 												</li>
 												<li>
 													<a href="#" class="panel-expand"> <i class="fa fa-expand"></i> <span>Fullscreen</span></a>
-												</li>										
+												</li>
 											</ul>
 											</div>
 											<a href="#" class="btn btn-xs btn-link panel-close"> <i class="fa fa-times"></i> </a>
@@ -73,9 +73,11 @@
 																	</a>
 																</li>
 																<li>
+																@if($gebruiker->username != 'admin')
 																	<a href="/admin/medewerkers/delete/{{$gebruiker->id}}" tabindex="-1" role="menuitem" onclick="confirm('Weet u zeker dat u de medewerker {{ $gebruiker->first_name }} {{ $gebruiker->last_name }} wilt verwijderden?')">
 																		<i class="fa fa-times"></i> Remove
 																	</a>
+																	@endif
 																</li>
 															</ul>
 														</div>

@@ -11,7 +11,7 @@
 									<div class="panel-heading">
 										<h4 class="panel-title">Beheerders</h4>
 
-										<div class="panel-tools">										
+										<div class="panel-tools">
 											<div class="dropdown">
 											<a class="btn btn-xs dropdown-toggle btn-transparent-grey" data-toggle="dropdown">
 												<i class="fa fa-cog"></i>
@@ -28,7 +28,7 @@
 												</li>
 												<li>
 													<a href="#" class="panel-expand"> <i class="fa fa-expand"></i> <span>Fullscreen</span></a>
-												</li>										
+												</li>
 											</ul>
 											</div>
 											<a href="#" class="btn btn-xs btn-link panel-close"> <i class="fa fa-times"></i> </a>
@@ -60,7 +60,9 @@
 													<td class="center">
 													<div class="visible-md visible-lg hidden-sm hidden-xs">
 														<a data-original-title="Edit" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/beheerders/edit/{{$gebruiker->id}}"><i class="fa fa-edit"></i> Bewerken</a>
+														@if($gebruiker->username != 'admin')
 														<a data-original-title="Remove" data-placement="top" class="btn btn-xs btn-red tooltips" href="/admin/beheerders/delete/{{$gebruiker->id}}" onclick="confirm('Weet u zeker dat u de beheerder {{ $gebruiker->first_name }} {{ $gebruiker->last_name }} wilt verwijderden?')"><i class="fa fa-times fa fa-white"></i> Verwijderen</a>
+														@endif
 													</div>
 													<div class="visible-xs visible-sm hidden-md hidden-lg">
 														<div class="btn-group">
@@ -74,9 +76,11 @@
 																	</a>
 																</li>
 																<li>
+																@if($gebruiker->username != 'admin')
 																	<a href="/admin/beheerders/delete/{{$gebruiker->id}}" tabindex="-1" role="menuitem" onclick="confirm('Weet u zeker dat u de beheerder {{ $gebruiker->first_name }} {{ $gebruiker->last_name }} wilt verwijderden?')">
 																		<i class="fa fa-times"></i> Remove
 																	</a>
+															    @endif
 																</li>
 															</ul>
 														</div>

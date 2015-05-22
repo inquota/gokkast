@@ -48,6 +48,7 @@ Route::group(array('before' => "sentryAuth"), function () {
     Route::get('/admin/machines/save/{machine_id}/{klant_id}', array('as' => 'edit-machine', 'uses' => 'MachinesController@getSave'));
     Route::get('/admin/machines/view/{machine_id}', array('as' => 'view-machine', 'uses' => 'MachinesController@getAdminView'));
     Route::post('/admin/machines/save/{machine_id}/{klant_id}', 'MachinesController@doSave');
+    Route::get('/admin/machines/delete/{machine_id}', array('as' => 'view-machinetype', 'uses' => 'MachinesController@getDelete'));
 
     Route::get('/admin/machines/new/', array('as' => 'new-machinetype', 'uses' => 'MachinesController@getNew'));
     Route::get('/admin/machines/new/{klant_id}', array('as' => 'new-machinetype', 'uses' => 'MachinesController@getNew'));
@@ -61,6 +62,7 @@ Route::group(array('before' => "sentryAuth"), function () {
     Route::get('/admin/machinetypes/save/{machine_id}', array('as' => 'edit-machinetype', 'uses' => 'MachineTypesController@getSave'));
     Route::get('/admin/machinetypes/view/{machine_id}', array('as' => 'view-machinetype', 'uses' => 'MachineTypesController@getView'));
     Route::post('/admin/machinetypes/save/{machine_id}', 'MachineTypesController@doSave');
+
 
     Route::get('/admin/machinetypes/new/', array('as' => 'new-machinetype', 'uses' => 'MachineTypesController@getSave'));
     Route::post('/admin/machinetypes/new/', 'MachineTypesController@doSave');
@@ -113,6 +115,7 @@ Route::group(array('before' => "sentryAuth"), function () {
      */
     Route::get('/admin/bonnen/list/', array('as' => 'list-bon', 'uses' => 'BonnenController@getAdminList'));
     Route::get('/admin/bonnen/new/{klant_id}', array('as' => 'new-bon', 'uses' => 'BonnenController@getNew'));
+    Route::get('/admin/bonnen/delete/{bon_id}', array('as' => 'new-bon', 'uses' => 'BonnenController@getRemove'));
 	Route::get('/admin/bonnen/view/{bon_id}/{klant_id}', array('as' => 'view-bon', 'uses' => 'BonnenController@getAdminView'));
     Route::get('/admin/bonnen/pdf/{bon_id}/{klant_id}', array('as' => 'view-bon', 'uses' => 'BonnenController@getAdminPDF'));
     Route::get('/admin/bonnen/pdfgen/{bon_id}/{klant_id}', array('as' => 'view-bon', 'uses' => 'BonnenController@getAdminPDFgen'));

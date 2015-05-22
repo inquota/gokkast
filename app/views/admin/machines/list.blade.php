@@ -63,7 +63,7 @@
 													<div class="visible-md visible-lg hidden-sm hidden-xs">
 														<a data-original-title="Bekijk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/machines/view/{{$machine->id}}"><i class="fa fa-file-o"></i> Bekijken</a>
 														<a data-original-title="Bewerk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/machines/save/{{$machine->id}}/{{ $machine->klant_id }}"><i class="fa fa-edit"></i> Bewerken</a>
-														<a data-original-title="Verwijder" data-placement="top" class="btn btn-xs btn-red tooltips" href="#"><i class="fa fa-times fa fa-white"></i> Verwijderen</a>
+														<a data-original-title="Verwijder" data-placement="top" class="btn btn-xs btn-red tooltips" href="/admin/machines/delete/{{ $machine->id }}"><i class="fa fa-times fa fa-white"></i> Verwijderen</a>
 													</div>
 													<div class="visible-xs visible-sm hidden-md hidden-lg">
 														<div class="btn-group">
@@ -82,7 +82,7 @@
 																	</a>
 																</li>
 																<li>
-																	<a href="#" tabindex="-1" role="menuitem">
+																	<a href="/admin/machines/delete/{{$machine->id}}" tabindex="-1" role="menuitem">
 																		<i class="fa fa-times"></i> Remove
 																	</a>
 																</li>
