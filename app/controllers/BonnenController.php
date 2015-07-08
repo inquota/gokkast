@@ -59,8 +59,8 @@ class BonnenController extends BaseController {
             ->with('bon_id', $bon_id);
     }
 
-    public function getAdminPDFgen(){
-        PDF::url('http://bellamypark.nl/admin/bonnen/pdf/1/1'); // Pdf from url
+    public function getAdminPDFgen($bon_id = null, $klant_id = null){
+        PDF::url('http://'.$_SERVER['HTTP_HOST'].'/admin/bonnen/pdf/'.$bon_id.'/'.$klant_id); // Pdf from url
     }
 
 
@@ -251,12 +251,12 @@ class BonnenController extends BaseController {
 			
 			$attachment = null;
 			$data = array();
-			/*Mail::send('emails.default', $data, function($message) use ($body, $addTo, $bon_id, $attachment) {
+			Mail::send('emails.default', $data, function($message) use ($body, $addTo, $bon_id, $attachment) {
 					$message -> data = $body;
 					$message -> from('noreply@codekiller.nl', 'Gokkast CRM');
 					$message -> subject('Afreken opdracht #' . $bon_id);
 					$message -> to($addTo);
-			});*/	
+			});	
        
 
             return Redirect::to('/admin/bonnen/list')
