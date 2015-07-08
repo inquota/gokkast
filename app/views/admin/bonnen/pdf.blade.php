@@ -11,7 +11,7 @@ $klant_id = $parts[4];
 
 $klant = Klant::find($klant_id);
 $machines = Machine::where('klant_id', '=', $klant->id)->get();
-$bon_id = 1436382723;
+$bon_id = $parts[3];
 $bonnen = Bon::where('klant_id', '=', $klant->id)->where('bon_id', '=', $bon_id)->get();
 $bonTotal = BonTotal::where('klant_id', '=', $klant->id)->where('bon_id', '=', $bon_id)->firstOrFail();
 ?>
