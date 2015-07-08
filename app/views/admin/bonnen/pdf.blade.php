@@ -2,6 +2,20 @@
 
 @section('content')
 
+
+
+<?php
+$uri = Request::path();
+$parts = explode('/',$uri);
+$klant_id = $parts[4];
+
+$klant = Klant::find($klant_id);
+$machines = Machine::where('klant_id', '=', $klant->id)->get();
+$bon_id = 1436382723;
+$bonnen = Bon::where('klant_id', '=', $klant->id)->where('bon_id', '=', $bon_id)->get();
+$bonTotal = BonTotal::where('klant_id', '=', $klant->id)->where('bon_id', '=', $bon_id)->firstOrFail();
+?>
+
 <div class="panel panel-white">
 			<div class="panel-body">
 <table style="float: left;">
@@ -66,16 +80,18 @@
 				<h4 class="panel-title">Afreken opdracht</h4>
 			</div>
 			<div class="panel-body">
-					@if(count($bon) == 0)
+					@if(count($machines) == 0)
 					De klant heeft nog geen Machines.
 					@else
-					@foreach($bon as $machine)
+					@foreach($bonnen as $bon)
 
 					<div class="row">
 						<div class="col-md-12">
 							<div class="panel panel-white">
 								<div class="panel-heading border-light">
-									<h4 class="panel-title"><strong>{{ $machine->machine->type_nummer }}</strong><label class="label label-inverse">{{ $machine->machine->nummer }}</label> {{ $machine->machine->machinenr }}</h4>
+									<h4 class="panel-title"><strong>{{ $bon->machine->type_nummer }}</strong><label class="label label-inverse">{{ $bon->machine->nummer }}</label> {{ $bon->machine->machinenr }}</h4>
+									
+									
 								</div>
 								<div class="panel-body">
 
@@ -84,25 +100,23 @@
 
 												<tr>
 													<td>Nieuw in:</td>
-													<td >&euro; {{ number_format( $machine->nieuw_in, 2, ',', '.' ) }}</td>
+													<td>&euro; {{ number_format( $bon->nieuw_in, 2, ',', '.' ) }}</td>
 												</tr>
 
 												<tr>
 
-													<td>{{ date('d-m-Y', strtotime(Stand::where('m_id', '=', $machine->machine_id)->firstOrFail()->created_at)) }}</td>
-													<td >&euro; {{ number_format( Stand::where('m_id', '=', $machine->machine_id)->firstOrFail()->e_stand, 2, ',', '.' ) }}</td>
+													<td>{{ date('d-m-Y', strtotime($bon->stand_date)) }}</td>
+													<td>&euro; {{ number_format( $bon->stand_eind, 2, ',', '.' ) }}</td>
 												</tr>
 
 												<tr>
 													<td style="border-bottom: 1px solid #000;">Tikken in (x 0.1):</td>
 													<td  style="border-bottom: 1px solid #000;">
-
-														&euro;
 														<?php
-														 $in = ( ($machine->nieuw_in - Stand::where('m_id', '=', $machine->machine_id)->firstOrFail()->e_stand) * 0.1 );
-														$totaal_in= number_format( $in, 2, ',', '.' );
-														echo $totaal_in;
+														$in = ($bon->nieuw_in - $bon->stand_eind) * 0.1;
 														?>
+														&euro;
+													{{ number_format( $in, 2, ',', '.' ) }}
 													</td>
 												</tr>
 
@@ -115,12 +129,12 @@
 
 												<tr>
 													<td>Nieuw uit:</td>
-													<td >&euro; {{ number_format( $machine->nieuw_uit, 2, ',', '.' ) }}</td>
+													<td >&euro; {{ number_format( $bon->nieuw_uit, 2, ',', '.' ) }}</td>
 												</tr>
 
 												<tr>
 													<td></td>
-													<td >&euro; {{ number_format( $machine->tikken_uit, 2, ',', '.' ) }}</td>
+													<td >&euro; {{ number_format( $bon->tikken_uit, 2, ',', '.' ) }}</td>
 												</tr>
 
 												<tr>
@@ -130,7 +144,7 @@
 														&euro;
 																	<?php
 
-											$uit = ( ($machine->nieuw_uit - $machine->tikken_uit) * 0.1 );
+											$uit = ( ($bon->nieuw_uit - $bon->tikken_uit) * 0.1 );
 											$totaal_uit= number_format( $uit, 2, ',', '.' );
 											echo $totaal_uit;
 											?>
@@ -138,10 +152,9 @@
 												</tr>
 																			<tr>
 													<td>Over</td>
-													<td >
-
-														&euro;	{{ number_format( ($in - $uit), 2, ',', '.' ) }}
-
+													<td>
+														&euro; {{ number_format( ($in - $uit), 2, ',', '.' ) }}
+													
 													</td>
 												</tr>
 
@@ -149,11 +162,7 @@
 										</table>
 
 
-											<?php
-										$subtotals[] = ($in - $uit);
-										?>
-
-
+							
 
 								</div>
 							</div>
@@ -173,44 +182,51 @@
 			<div class="panel-heading border-light">
 				<h4 class="panel-title">Afreken opdracht</h4>
 			</div>
-			<div class="panel-body">
-
-			<table class="table table-hover">
-				<tbody>
-					<tr>
-						<td>Sub totaal</td>
-						<td ><?php $totaal_subs = array_sum($subtotals); ?>
-						&euro; {{ number_format( array_sum($subtotals) , 2, ',', '.' )}}</td>
-					</tr>
-					<tr>
-						<td>29% kansspelbelasting</td>
-						<td>&euro; {{ number_format( (array_sum($subtotals) / 100 * 29) , 2, ',', '.' )}}</td>
-					</tr>
-					<tr>
-						<td>Delen</td>
-						<td>						<?php
-						$delen = (array_sum($subtotals) - ($totaal_subs / 100 * 29) );
-						?>
-						&euro; {{ number_format( $delen , 2, ',', '.' )}}</td>
-					</tr>
-					<tr>
-						<td>{{ $klant->bedrijf }}</td>
-						<td><?php
-						$nettowinst_verdeling = ( ( array_sum($subtotals) - ($totaal_subs / 100 * 29)  ) / 100 * $klant->nettowinst_verdeling );
-						?>
-						&euro;
-						{{ number_format( $nettowinst_verdeling , 2, ',', '.' ) }}</td>
-					</tr>
-					<tr>
-						<td>Exploitant</td>
-						<td>&euro; {{ number_format( ( $delen - $nettowinst_verdeling ) , 2, ',', '.' )  }}</td>
-					</tr>
-				</tbody>
-			</table>
+<div class="panel-body">
+	
+	
 
 				<div class="form-group">
-			</div>
-
+					<label for="form-field-1" class="col-lg-8 control-label">Sub totaal </label>
+					<div class="col-sm-2">
+						<span class="subtotal"></span>
+						&euro; {{ $bonTotal->subtotal }}
+					</div>
+				</div>
+				
+								<div class="form-group">
+					<label for="form-field-1" class="col-lg-8 control-label">29% kansspelbelasting </label>
+					<div class="col-sm-2">
+						<span class="tax"></span>
+						&euro; {{ $bonTotal->with_tax }}
+					</div>
+				</div>
+				
+								<div class="form-group">
+					<label for="form-field-1" class="col-lg-8 control-label">Delen</label>
+					<div class="col-sm-2">
+						<span class="share"></span>
+						&euro; {{ $bonTotal->share }}
+						
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="form-field-1" class="col-lg-8 control-label">{{ $klant->bedrijf }}</label>
+					<div class="col-sm-2">
+						<span class="net_profit"></span>
+						&euro; {{ $bonTotal->net_profit }}
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="form-field-1" class="col-lg-8 control-label">Exploitant</label>
+					<div class="col-sm-2">
+						<span class="exploitant"></span>
+						&euro; {{ $bonTotal->operator }}
+					</div>
+				</div>
+			
 			</div>
 
 		</div>
