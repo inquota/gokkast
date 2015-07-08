@@ -75,6 +75,61 @@ class BonnenController extends BaseController {
     }
 	
 	
+	public function doSave($klant_id = null){
+			
+		$machines 			= 	Machine::where('klant_id', '=', $klant_id)->get();
+		$klant 				= 	Klant::find($klant_id);
+	
+		// POST data
+		$array_machine_id	=	Input::get('machne_id');
+		$array_nieuw_in 	= 	Input::get('nieuw_in');
+		$array_nieuw_uit 	= 	Input::get('nieuw_uit');
+		$array_tikken_uit 	= 	Input::get('tikken_uit');
+		$array_tikken_in 	= 	Input::get('tikken_in');
+		$array_tikken_in_result 	= 	Input::get('tikken_in_result');
+		$array_tikken_uit_result 	= 	Input::get('tikken_uit_result');
+		
+		foreach( $machines as $key => $machine ){
+			
+			$time 				= 	time();
+			$bon				= 	new Bon();
+            $bon->klant_id 		= 	$klant_id;
+            $bon->bon_id 		= 	$time;
+			$bon->machine_id 	= 	$machine->id;	
+			$bon->nieuw_in 		= 	$array_nieuw_in[$key];
+			$bon->nieuw_uit 	= 	$array_nieuw_uit[$key];
+			$bon->tikken_uit 	= 	$array_tikken_uit[$key];
+			$bon->in1 			= 	$array_tikken_in_result[$key];
+			$bon->uit 			= 	$array_tikken_uit_result[$key]; 
+			$bon->created_at	= 	date('Y-m-d H:i:s');
+			
+        	$bon->save();
+		}
+		
+
+			// Save all totals in another table, so we can easily use this data to sum.
+			$latest_bon = Bon::orderBy('bon_id', 'desc')->skip(0)->take(1)->first();
+			
+			$bonTotal = new BonTotal();
+			$bonTotal->klant_id = $klant_id; 
+			$bonTotal->bon_id = $latest_bon->id;
+			$bonTotal->subtotal = Input::get('subtotal');
+			$bonTotal->with_tax = Input::get('tax');
+			
+			$bonTotal->share = Input::get('share');
+			
+			$nettowinst_verdeling = Input::get('net_profit');
+			$bonTotal->net_profit = $nettowinst_verdeling;
+			
+			$delen = Input::get('share');
+			$bonTotal->operator = ( $delen - $nettowinst_verdeling );
+			$bonTotal->save();
+			
+        	return Redirect::back();    
+	
+	}
+	
+	
 	
 	/* Do functions */
 	public function doSaveTemp($klant_id) {
