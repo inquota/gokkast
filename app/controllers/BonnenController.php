@@ -89,6 +89,9 @@ class BonnenController extends BaseController {
 		$array_tikken_in_result 	= 	Input::get('tikken_in_result');
 		$array_tikken_uit_result 	= 	Input::get('tikken_uit_result');
 		
+		$array_stand_date 			= 	Input::get('stand_date');
+		$array_stand_eind 			= 	Input::get('stand_eind');
+		
 		foreach( $machines as $key => $machine ){
 			
 			$time 				= 	time();
@@ -97,6 +100,8 @@ class BonnenController extends BaseController {
             $bon->bon_id 		= 	$time;
 			$bon->machine_id 	= 	$machine->id;	
 			$bon->nieuw_in 		= 	$array_nieuw_in[$key];
+			$bon->stand_date 	= 	$array_stand_date[$key];
+			$bon->stand_eind 	= 	$array_stand_eind[$key];
 			$bon->nieuw_uit 	= 	$array_nieuw_uit[$key];
 			$bon->tikken_uit 	= 	$array_tikken_uit[$key];
 			$bon->in1 			= 	$array_tikken_in_result[$key];
@@ -112,7 +117,7 @@ class BonnenController extends BaseController {
 			
 			$bonTotal = new BonTotal();
 			$bonTotal->klant_id = $klant_id; 
-			$bonTotal->bon_id = $latest_bon->id;
+			$bonTotal->bon_id = $latest_bon->bon_id;
 			$bonTotal->subtotal = Input::get('subtotal');
 			$bonTotal->with_tax = Input::get('tax');
 			

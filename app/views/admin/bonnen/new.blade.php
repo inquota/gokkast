@@ -46,6 +46,9 @@
 											<input type="hidden" class="tikken_in_old" id="tikken_in_old<?php echo $machine->id ?>" value="{{ Stand::where('m_id', '=', $machine->id)->firstOrFail()->e_stand }}" />
 											<span class="tikken_in" id="tikken_in_span<?php echo $machine->id ?>"></span> 
 											<input type="hidden" name="tikken_in_result[]" class="tikken_in_clean" id="tikken_in_clean_hidden<?php echo $machine->id ?>" value="" />
+											
+											<input type="hidden" name="stand_date[]" value="{{ Stand::where('m_id', '=', $machine->id)->firstOrFail()->created_at }}" />
+											<input type="hidden" name="stand_eind[]" value="{{ Stand::where('m_id', '=', $machine->id)->firstOrFail()->e_stand }}" />
 										</div>
 
 									</div>
