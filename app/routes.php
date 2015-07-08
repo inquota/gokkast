@@ -121,7 +121,7 @@ Route::group(array('before' => "sentryAuth"), function () {
     Route::get('/admin/bonnen/pdfgen/{bon_id}/{klant_id}', array('as' => 'view-bon', 'uses' => 'BonnenController@getAdminPDFgen'));
     Route::get('/admin/bonnen/edit/{bon_id}', array('as' => 'edit-bon', 'uses' => 'BonnenController@getAdminEdit'));
     Route::post('/admin/bonnen/edit/{bon_id}', 'BonnenController@doEdit');
-    Route::post('/admin/bonnen/new/{klant_id}', 'BonnenController@doSaveTemp');
+    Route::post('/admin/bonnen/new/{klant_id}', 'BonnenController@doSave');
 	Route::post('/admin/bonnen/update/{bon_id}/{klant_id}', 'BonnenController@doUpdate');
 	
 });
