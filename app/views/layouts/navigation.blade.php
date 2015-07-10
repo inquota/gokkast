@@ -21,7 +21,7 @@
 						<!-- start: MAIN NAVIGATION MENU -->
 						<ul class="main-navigation-menu">
 							<li class="active open">
-								<a href="/users/dashboard/"><i class="fa fa-home"></i> <span class="title"> Dashboard </span></a>
+								<a href="/user/dashboard/"><i class="fa fa-home"></i> <span class="title"> Dashboard </span></a>
 							</li>
 
                             <li>
