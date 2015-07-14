@@ -57,6 +57,14 @@ class KlantenController extends BaseController {
          * random password
          */
 
+        $validator = Validator::make(Input::all(),Klant::$rules);
+
+        if($validator->fails()){
+            return Redirect::back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
         $pass = array(); //remember to declare $pass as an array
         $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
