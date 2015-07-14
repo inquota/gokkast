@@ -37,21 +37,17 @@
 		{{ HTML::style('/css/plugins.css') }}
 		{{ HTML::style('/css/themes/theme-default.css') }}
 		{{ HTML::style('/css/print.css') }}
-		
-		{{ HTML::script('/plugins/jQuery/jquery-2.1.1.min.js') }}
 		<!-- end: CORE CSS -->
 		<link rel="shortcut icon" href="favicon.ico" />
 	</head>
 	<!-- end: HEAD -->
 	<!-- start: BODY -->
-	<body>
+	<body style="background: #fff;">
 		<div class="main-wrapper">
-			@include('layouts.header')
-			
-			
-			@include('layouts.navigation')
+
+
 			<!-- start: MAIN CONTAINER -->
-			<div class="main-container inner">
+
 				<!-- start: PAGE -->
 				<div class="main-content">
 					<div class="container">
@@ -99,7 +95,7 @@
 				<!-- end: PAGE -->
 			</div>
 			<!-- end: MAIN CONTAINER -->
-        </div>
+
 
 		</div>
 		<!-- start: MAIN JAVASCRIPTS -->
@@ -109,10 +105,10 @@
 		{{ HTML::script('/plugins/jQuery/jquery-1.11.1.min.js') }}
 		<![endif]-->
 		<!--[if gte IE 9]><!-->
-		
+		{{ HTML::script('/plugins/jQuery/jquery-2.1.1.min.js') }}
 		<!--<![endif]-->
 		{{ HTML::script('/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js') }}
-		{{ HTML::script('//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js') }}
+		{{ HTML::script('/plugins/bootstrap/js/bootstrap.min.js') }}
 		{{ HTML::script('/plugins/blockUI/jquery.blockUI.js') }}
 		{{ HTML::script('/plugins/iCheck/jquery.icheck.min.js') }}
 		{{ HTML::script('/plugins/moment/min/moment.min.js') }}
@@ -139,13 +135,8 @@
 		<!-- end: CORE JAVASCRIPTS  -->
 		<script>
 			jQuery(document).ready(function() {
-							
-				
 				Main.init();
 				Index.init();
-				
-				jQuery('[data-toggle="tooltip"]').tooltip();
-				
 			});
 		</script>
 	</body>

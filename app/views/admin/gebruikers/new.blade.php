@@ -70,7 +70,7 @@
 												</div>
 											</div>
 
-											
+
 											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
 													Gebruikersnaam / Nummer
@@ -97,9 +97,9 @@
 													{{ Form::password('password_confirmation', array('id' => 'password_confirmation', 'class' => 'form-control')) }}
 												</div>
 											</div>
-											
-	
-											
+
+
+
 
 									</div>
 									            <div class="panel-footer">
@@ -113,5 +113,5 @@
 								<!-- end: TEXT FIELDS PANEL -->
 							</div>
 						</div>
-						
+
 @stop

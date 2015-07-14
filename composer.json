@@ -8,7 +8,7 @@
 		"laravel/framework": "4.2.*",
         "cartalyst/sentry": "2.1.*",
         "laravelbook/ardent": "2.*",
-        "barryvdh/laravel-debugbar": "1.*"
+        "nitmedia/wkhtml2pdf": "1.0.*@dev"
 	},
 	"autoload": {
 		"classmap": [

@@ -100,6 +100,23 @@
 													</select>
 												</div>
 											</div>
+
+												<div class="form-group">
+												<label for="form-field-1" class="col-sm-2 control-label">
+													Klant
+												</label>
+												<div class="col-sm-9">
+													<select name="klant_id">
+
+                                                    <option value="">Geen klant</option>
+
+													@foreach($klanten as $klant)
+													<option value="{{ $klant->id }}">{{ $klant->bedrijf }} {{ $klant->id }}</option>
+													@endforeach
+
+													</select>
+												</div>
+											</div>
 											
 											
 											

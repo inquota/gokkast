@@ -61,6 +61,7 @@
 													<th>&euro; {{ number_format( BonTotal::where('klant_id', '=', $klant->id)->where('status', '=', 'approved')->sum('with_tax') , 2, ',', '.' ) }}</th>
 													<td class="center">
 													<div class="visible-md visible-lg hidden-sm hidden-xs">
+														<a data-original-title="Klik hier voor het machine overzicht" data-placement="top" class="btn btn-xs btn-primary tooltips" href="/admin/klanten/machines/{{$klant->id}}"><i class="fa fa-ticket"></i> Machines</a>
 														<a data-original-title="Klik hier om een Bon aan te maken" data-placement="top" class="btn btn-xs btn-primary tooltips" href="/admin/bonnen/new/{{$klant->id}}"><i class="fa fa-money"></i> Bon aanmaken</a>
 														<a data-original-title="Edit" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/klanten/edit/{{$klant->id}}"><i class="fa fa-edit"></i> Bewerken</a>
 														<a onclick="confirm('Weet u zeker dat u de klant {{ $klant->naam }} wilt verwijderden?')" data-original-title="Remove" data-placement="top" class="btn btn-xs btn-red tooltips" href="/admin/klanten/delete/{{$klant->id}}"><i class="fa fa-times fa fa-white"></i> Verwijderen</a>
@@ -71,6 +72,11 @@
 																<i class="fa fa-cog"></i> <span class="caret"></span>
 															</a>
 															<ul class="dropdown-menu pull-right dropdown-dark" role="menu">
+																<li>
+																	<a href="/admin/klanten/machines/{{$klant->id}}" tabindex="-1" role="menuitem">
+																		<i class="fa fa-edit"></i> Machines
+																	</a>
+																</li>
 																<li>
 																	<a href="/admin/klanten/edit/{{$klant->id}}" tabindex="-1" role="menuitem">
 																		<i class="fa fa-edit"></i> Bewerken

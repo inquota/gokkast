@@ -3,8 +3,9 @@
 @stop
 
 @section('content')
-
+@if(isset($klant->id))
 {{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => '/admin/bonnen/update/'.$bon_id . '/'. $klant->id )) }}
+@endif
 <div class="row">
 
 <div class="col-md-7">
@@ -25,7 +26,7 @@
 						<div class="col-md-12">
 							<div class="panel panel-white">
 								<div class="panel-heading border-light">
-									<h4 class="panel-title"><strong>{{ $machine->machine->type_nummer }}</strong><label class="label label-inverse">{{ $machine->machine->nummer }}</label> {{ $machine->machine->machinenr }}</h4>
+									<h4 class="panel-title"><strong>{{ (isset($machine->machine->type_nummer)) ? $machine->machine->type_nummer: 'Machine onbekend' }}</strong><label class="label label-inverse">{{ (isset($machine->machine->nummer)) ? $machine->machine->nummer : 'Machine onbekend' }}</label> {{ (isset($machine->machine->machinenr)) ? $machine->machine->machinenr : 'Machine onbekend' }}</h4>
 								</div>
 								<div class="panel-body">
 									
@@ -147,22 +148,46 @@
 						&euro; {{ number_format( $delen , 2, ',', '.' )}}</td>
 					</tr>
 					<tr>
-						<td>{{ $klant->bedrijf }}</td>
-						<td><?php
+						<td>{{ (isset($klant->bedrijf)) ? $klant->bedrijf : 'Klant onbekend' }}</td>
+						<td>
+						@if(isset($klant->nettowinst_verdeling))
+						<?php
 						$nettowinst_verdeling = ( ( array_sum($subtotals) - ($totaal_subs / 100 * 29)  ) / 100 * $klant->nettowinst_verdeling ); 
 						?>
 						&euro; 
-						{{ number_format( $nettowinst_verdeling , 2, ',', '.' ) }}</td>
+						{{ number_format( $nettowinst_verdeling , 2, ',', '.' ) }}
+						@else
+						Verdeling onbekend ivm ontbreken klant
+						@endif
+						</td>
 					</tr>
 					<tr>
 						<td>Exploitant</td>
-						<td>&euro; {{ number_format( ( $delen - $nettowinst_verdeling ) , 2, ',', '.' )  }}</td>
+						<td>@if(isset($klant->nettowinst_verdeling))
+						&euro; {{ number_format( ( $delen - $nettowinst_verdeling ) , 2, ',', '.' )  }}
+						@else
+                        Verdeling onbekend ivm ontbreken klant
+						@endif</td>
 					</tr>
 				</tbody>
 			</table>
 				
 				<div class="form-group">
-				<input type="submit" value="Goedkeuren" name="calculate" class="btn btn-primary form-control">
+					<?php
+                        $statusTypes = array('nieuw' => 'Nieuw', 'approved' => 'Goedgekeurd', 'paid' => 'Betaald', 'rejected' => 'Afgekeurd');
+                    ?>
+                    <select class="form-control" name="status">
+                    @foreach($statusTypes as $key => $stype)
+                    <option value="{{ $key }}">{{ $stype }}</option>
+                    @endforeach
+                    </select>
+					
+				<input type="submit" value="Opslaan" class="btn btn-primary form-control">
+				@if(isset($klant->id))
+				<br /><br /><a target="_blank" href="/admin/bonnen/pdfgen/{{ $bon_id }}/{{ $klant->id }}" class="btn btn-primary form-control">PDF</a>
+				@else
+				Pdf niet beschikbaar ivm ontbreken klant
+				@endif
 			</div>
 
 			</div>

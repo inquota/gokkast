@@ -9,7 +9,11 @@
 								<!-- start: TEXT FIELDS PANEL -->
 								<div class="panel panel-white">
 									<div class="panel-heading">
-										<h4 class="panel-title">Bewerk machine #<span class="text-bold">{{$machine->id}}</span></h4>
+										<h4 class="panel-title">@if(isset($machine->id))
+										Bewerk machine #<span class="text-bold">{{$machine->id}}</span>
+										@else
+										Geen machine beschikbaar
+										@endif</h4>
 										<div class="panel-tools">
 											<div class="dropdown">
 												<a class="btn btn-xs dropdown-toggle btn-transparent-grey" data-toggle="dropdown">
@@ -42,6 +46,7 @@
 										</div>
 									</div>
 									<div class="panel-body">
+									@if(isset($machine->id))
 											{{ Form::open(array('class'=>'form-horizontal','role'=>'form','url' => '/admin/machines/edit/'.$machine->id)) }}
 											<div class="form-group">
 												<label for="form-field-1" class="col-sm-2 control-label">
@@ -86,6 +91,9 @@
                 </div>
             </div>
             {{ Form::close() }}
+            @else
+            Geen machine beschikbaar, bon kan niet gewijzigd worden.
+            @endif
 								</div>
 								<!-- end: TEXT FIELDS PANEL -->
 							</div>
