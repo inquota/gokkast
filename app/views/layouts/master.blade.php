@@ -37,6 +37,8 @@
 		{{ HTML::style('/css/plugins.css') }}
 		{{ HTML::style('/css/themes/theme-default.css') }}
 		{{ HTML::style('/css/print.css') }}
+		
+		{{ HTML::script('/plugins/jQuery/jquery-2.1.1.min.js') }}
 		<!-- end: CORE CSS -->
 		<link rel="shortcut icon" href="favicon.ico" />
 	</head>
@@ -107,7 +109,7 @@
 		{{ HTML::script('/plugins/jQuery/jquery-1.11.1.min.js') }}
 		<![endif]-->
 		<!--[if gte IE 9]><!-->
-		{{ HTML::script('/plugins/jQuery/jquery-2.1.1.min.js') }}
+		
 		<!--<![endif]-->
 		{{ HTML::script('/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js') }}
 		{{ HTML::script('//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js') }}
@@ -137,6 +139,8 @@
 		<!-- end: CORE JAVASCRIPTS  -->
 		<script>
 			jQuery(document).ready(function() {
+							
+				
 				Main.init();
 				Index.init();
 				

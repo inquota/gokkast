@@ -173,7 +173,16 @@
 			</table>
 				
 				<div class="form-group">
-				<input type="submit" value="Goedkeuren" name="calculate" class="btn btn-primary form-control">
+					<?php
+                        $statusTypes = array('nieuw' => 'Nieuw', 'approved' => 'Goedgekeurd', 'paid' => 'Betaald', 'rejected' => 'Afgekeurd');
+                    ?>
+                    <select class="form-control" name="status">
+                    @foreach($statusTypes as $key => $stype)
+                    <option value="{{ $key }}">{{ $stype }}</option>
+                    @endforeach
+                    </select>
+					
+				<input type="submit" value="Opslaan" class="btn btn-primary form-control">
 				@if(isset($klant->id))
 				<br /><br /><a target="_blank" href="/admin/bonnen/pdfgen/{{ $bon_id }}/{{ $klant->id }}" class="btn btn-primary form-control">PDF</a>
 				@else

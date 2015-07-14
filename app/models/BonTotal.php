@@ -14,7 +14,7 @@ class BonTotal extends Ardent {
 
     protected $guarded = array('id');
 
-    protected $fillable = array('bon_id', 'subtotal', 'with_tax', 'share', 'net_profit', 'operator', 'created_at', 'updated_at');
+    protected $fillable = array('bon_id', 'secret', 'subtotal', 'with_tax', 'share', 'net_profit', 'operator', 'status', 'created_at', 'updated_at');
 	
     public static $relationsData = array(
         'bon_id'      => array(self::BELONGS_TO, 'Bon')
