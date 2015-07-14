@@ -22,6 +22,8 @@ Route::post('/user/login', 'AuthenticationController@doLogin');
 Route::get('/user/forgot-password', array('as'=> 'forgot-password', 'uses' => 'AuthenticationController@getForgotPassword'));
 Route::post('/user/forgot-password', 'AuthenticationController@doForgotPassword');
 
+Route::get('/bon/pdf/{secret}/{bon_id}/{klant_id}', array('as' => 'view-bon', 'uses' => 'BonnenController@getPDF'));
+
 /*
  * Filter to redirect not logged in users.
  */

@@ -47,12 +47,36 @@ class BonnenController extends BaseController {
         return Redirect::back()
             ->with('status', 'Bon verwijderd.');
     }
+	
+	/**
+	 * Get PDF file for Customer
+	 * 
+	 * @param String $secret|null
+	 * @param Integer $bon_id|null
+	 * @param Integer $klant_id|null
+	 */
+	public function getPDF($secret = null, $bon_id=null, $klant_id=null)
+    {
+    	try
+    	{
+    		$bon = Bon::where('bon_id','=',$bon_id)->get();
+        	$klant = Klant::where('id','=',$klant_id)->firstOrFail();
+			$bonTotal = BonTotal::where('bon_id', '=', $bon_id)->where('secret', '=', $secret)->where('klant_id', '=', $klant_id)->firstOrFail();	
+    	}catch(Exception $e){
+    		exit('Invalid data');
+    	}
+        
+        return View::make('admin.bonnen.pdf')
+            ->with('klant', $klant)
+            ->with('bon', $bon)
+            ->with('bon_id', $bon_id);
+    }
 
     public function getAdminPDF($bon_id=null,$klant_id=null)
     {
         $bon = Bon::where('bon_id','=',$bon_id)->get();
         $klant = Klant::where('id','=',$klant_id)->firstOrFail();
-
+		
         return View::make('admin.bonnen.pdf')
             ->with('klant', $klant)
             ->with('bon', $bon)
@@ -111,6 +135,8 @@ class BonnenController extends BaseController {
         	$bon->save();
 		}
 		
+			$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    		$secret = substr(str_shuffle($chars),0,32);
 
 			// Save all totals in another table, so we can easily use this data to sum.
 			$latest_bon = Bon::orderBy('bon_id', 'desc')->skip(0)->take(1)->first();
@@ -128,139 +154,66 @@ class BonnenController extends BaseController {
 			
 			$delen = Input::get('share');
 			$bonTotal->operator = ( $delen - $nettowinst_verdeling );
+			$bonTotal->secret = $secret;
 			$bonTotal->save();
 			
         	return Redirect::back();    
 	
 	}
-	
-	
 	
 	/* Do functions */
-	public function doSaveTemp($klant_id) {
-		$machines = Machine::where('klant_id', '=', $klant_id)->get();
-		$klant = Klant::find($klant_id);
-		
-		if(Input::get('calculate'))
-		{
-			Session::put('calculate', true );
+	public function doUpdate($bon_id = null, $klant_id = null)
+	{
+		$message_extra = '';
 			
-			foreach( $machines as $machine ){
-				
-				$nieuw_in=Input::get('nieuw_in'.$machine->id);
-				
-				$nieuw_uit=Input::get('nieuw_uit'.$machine->id);
-				
-				$tikken_uit=Input::get('tikken_uit'.$machine->id);
-				
-				$stand = Stand::where('m_id', '=', $machine->id)->firstOrFail();
-				
-				Session::put('nieuw_in'.$machine->id, $nieuw_in );
-				Session::put('nieuw_uit'.$machine->id, $nieuw_uit );
-				Session::put('tikken_uit'.$machine->id, $tikken_uit );
-				
-				Session::put('in'.$machine->id, ( ($nieuw_in-$stand->e_stand) * 0.1));
-				Session::put('uit'.$machine->id, ( ($nieuw_uit-$tikken_uit) * 0.1));
-			}
-		}
-		
-		if(Input::get('save')){
-			
-			foreach( $machines as $machine ){
-				$time = time();
-				$bon = new Bon();
-	            $bon->klant_id = $klant_id;
-	            $bon->bon_id = $time;
-				$bon->machine_id = $machine->id;	
-				$bon->nieuw_in 		= 	Session::get('nieuw_in'.$machine->id);
-				$bon->nieuw_uit 	= 	Session::get('nieuw_uit'.$machine->id );
-				$bon->tikken_uit 	= 	Session::get('tikken_uit'.$machine->id);
-				$bon->in1 			= 	Session::get('in'.$machine->id);
-				// @todo: //Session::get('uit'.$machine->id) produces error
-				$bon->uit 		= 	1605; 
-				$bon->created_at = date('Y-m-d H:i:s');
-            	$bon->save();
-				
-				$in = Session::get('in'.$machine->id);
-				$uit = 1605;
-				$subtotals[] = ($in - $uit);
-			}
-			$totaal_subs = array_sum($subtotals);
-			
-			// Save all totals in another table, so we can easily use this data to sum.
-			$latest_bon = Bon::orderBy('bon_id', 'desc')->skip(0)->take(1)->first();
-			
-			$bonTotal = new BonTotal();
-			$bonTotal->klant_id = $klant_id; 
-			$bonTotal->bon_id = $latest_bon->id;
-			$bonTotal->subtotal = array_sum($subtotals);
-			$bonTotal->with_tax = (array_sum($subtotals) / 100 * 29);
-			
-			$bonTotal->share = ($totaal_subs - ($totaal_subs / 100 * 29) );
-			
-			$nettowinst_verdeling = ( ( $totaal_subs - ($totaal_subs / 100 * 29)  ) / 100 * $klant->nettowinst_verdeling );
-			$bonTotal->net_profit = $nettowinst_verdeling;
-			
-			$delen = ($totaal_subs - ($totaal_subs / 100 * 29) );
-			$bonTotal->operator = ( $delen - $nettowinst_verdeling );
-			$bonTotal->save();
-			
-        	return Redirect::back();    
-		}
-		
-		return Redirect::back();
-	}
-	
-
-	public function doUpdate($bon_id = null, $klant_id = null) {
-		
 		if($bon_id==null&&$klant_id==null){
 			return Redirect::back();
 		}
 		
-		
-
         try{
 			$klant = Klant::where('id', '=', $klant_id)->firstOrFail();
 			
+			$status = Input::get('status');
+					
             /**
              * Update Bon
              */
 
             $bonnen = Bon::where('bon_id', '=', $bon_id)->get();
 			$bon_single = Bon::where('bon_id', '=', $bon_id)->firstOrFail();
+			$bonTotal = BonTotal::where('bon_id', '=', $bon_id)->firstOrFail();
+			$bonTotal->status =  $status;
+			$bonTotal->save();
 			
 			foreach($bonnen as $bon){
 				$bon = Bon::where('id', '=', $bon->id)->firstOrFail();
-				$bon->status = 'approved';
+				$bon->status = $status;
             	$bon->save();
 			}
-
-
-			// create PDF
 			
-			
-			//  send E-mail to Klant
-			$addTo = $klant->email;
-			$bon_id = $bon_single->bon_id;
-			
-			$body = 'Beste ' . $klant->naam . "\n";
-			$body .= 'Bij deze sturen wij u de afreken bon '. "\n\n";
-			$body .= 'Met vriendelijke groet, '. "\n";
-			$body .= 'Gokkasten CRM'. "\n";
-			
-			$attachment = null;
-			$data = array();
-			Mail::send('emails.default', $data, function($message) use ($body, $addTo, $bon_id, $attachment) {
-					$message -> data = $body;
-					$message -> from('noreply@codekiller.nl', 'Gokkast CRM');
-					$message -> subject('Afreken opdracht #' . $bon_id);
-					$message -> to($addTo);
-			});	
-       
+			if($status == 'approved'){
+				//  when status approved, send E-mail to Klant
+				$addTo = $klant->email;
+				$bon_id = $bon_single->bon_id;
+				
+				$body = 'Beste ' . $klant->naam . "\n";
+				$body .= 'Bij deze sturen wij u de afreken bon '. "\n\n";
+				$body .= 'http://'.$_SERVER['HTTP_HOST']. '/bon/pdf/'.$bonTotal->secret.'/'.$bon_id.'/'.$klant_id. "\n\n";
+				$body .= 'Met vriendelijke groet, '. "\n";
+				$body .= 'Gokkasten CRM'. "\n";
+				
+				$data = array();
+				Mail::send('emails.default', $data, function($message) use ($body, $addTo, $bon_id) {
+						$message -> data = $body;
+						$message -> from('noreply@codekiller.nl', 'Gokkast CRM');
+						$message -> subject('Afreken opdracht #' . $bon_id);
+						$message -> to($addTo);
+				});	
+				$message_extra .= 'Er is een e-mail gestuurd naar de klant.';
+			}
 
             return Redirect::to('/admin/bonnen/list')
-                ->with('status', 'Bon goedgekeurd, er is een e-mail gestuurd naar ');
+                ->with('status', 'Bon opgeslagen.'.$message_extra);
         }
         catch(Exception $e){
             $validator = 'Bij het opslaan is er iets misgegaan.';
@@ -268,4 +221,5 @@ class BonnenController extends BaseController {
                 ->withErrors($validator);
         }
     }
+
 }

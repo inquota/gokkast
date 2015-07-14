@@ -5,7 +5,7 @@
 @section('content')
 
 <?php
-	$statusarray = array('new' => 'Openstaand', 'approved' => 'Goedgekeurd', 'rejected'=> 'Afgewezen');
+	$statusTypes = array('nieuw' => 'Nieuw', 'approved' => 'Goedgekeurd', 'paid' => 'Betaald', 'rejected' => 'Afgekeurd');
         ?>
 
 <div class="row">
@@ -53,7 +53,7 @@
 												<tr>
 													<td>{{$bon->bon_id}}</td>
 													<td class="hidden-xs">{{(!empty($klanten)) ? $klanten[$bon->klant_id] : 'Geen klant beschikbaar'}}</td>
-													<td class="hidden-xs">{{ $statusarray[$bon->status] }}</td>
+													<td class="hidden-xs">{{ $statusTypes[$bon->status] }}</td>
 													<td class="center">
 													<div class="visible-md visible-lg hidden-sm hidden-xs">
 														<a data-original-title="Bekijk" data-placement="top" class="btn btn-xs btn-blue tooltips" href="/admin/bonnen/view/{{$bon->bon_id}}/{{$bon->klant_id}}"><i class="fa fa-file-o"></i></a>
